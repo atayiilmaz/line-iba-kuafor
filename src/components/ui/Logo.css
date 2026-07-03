@@ -1,0 +1,27 @@
+.logo-img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Tipografik fallback (yalnızca görsel yüklenmezse) */
+.logo-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  white-space: nowrap;
+  font-size: 1.4rem;
+}
+.logo-wordmark__amp {
+  font-weight: 400;
+}
+.logo-wordmark--light {
+  color: var(--paper);
+}
+.logo-wordmark--dark {
+  color: var(--black);
+}

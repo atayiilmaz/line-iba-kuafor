@@ -1,0 +1,48 @@
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.section-header--center {
+  align-items: center;
+  text-align: center;
+}
+
+.section-header__meta {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
+  color: var(--smoke);
+}
+
+.section-header--center .section-header__meta {
+  justify-content: center;
+}
+
+.section-header__eyebrow {
+  color: var(--smoke);
+  flex-shrink: 0;
+}
+
+.section-header__rule {
+  height: 1px;
+  flex: 1;
+  min-width: 2rem;
+  background: var(--hair);
+}
+.section--dark .section-header__rule {
+  background: var(--hair-dark);
+}
+.section-header--center .section-header__rule {
+  display: none;
+}
+
+.section-header__title {
+  font-size: var(--fs-h2);
+  max-width: 20ch;
+}
+.section-header--center .section-header__title {
+  max-width: 22ch;
+}

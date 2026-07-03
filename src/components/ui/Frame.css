@@ -1,0 +1,34 @@
+.frame {
+  position: relative;
+  isolation: isolate;
+}
+
+.frame__square {
+  position: absolute;
+  border: 1px solid var(--black);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.frame--light .frame__square {
+  border-color: var(--paper);
+}
+
+/* back square, offset up-left */
+.frame__square--back {
+  inset: -16px 16px 16px -16px;
+}
+
+/* front square, offset down-right */
+.frame__square--front {
+  inset: 16px -16px -16px 16px;
+}
+
+@media (max-width: 640px) {
+  .frame__square--back {
+    inset: -10px 10px 10px -10px;
+  }
+  .frame__square--front {
+    inset: 10px -10px -10px 10px;
+  }
+}

@@ -1,0 +1,22 @@
+.works__grid {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  columns: 3;
+  column-gap: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+.works__grid > .work {
+  break-inside: avoid;
+  margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .works__grid {
+    columns: 2;
+  }
+}
+@media (max-width: 560px) {
+  .works__grid {
+    columns: 1;
+  }
+}
