@@ -20,14 +20,14 @@ export type NavLink = { label: string; href: string }
 
 export const nav = {
   left: [
-    { label: 'Ana Sayfa', href: '#ana-sayfa' },
-    { label: 'Hakkımızda', href: '#hakkimizda' },
-    { label: 'Hizmetler', href: '#hizmetler' },
+    { label: 'Ana Sayfa', href: '/' },
+    { label: 'Hakkımızda', href: '/hakkimizda' },
+    { label: 'Hizmetler', href: '/hizmetler' },
   ] as NavLink[],
   right: [
-    { label: 'Çalışmalar', href: '#calismalar' },
-    { label: 'Yorumlar', href: '#yorumlar' },
-    { label: 'İletişim', href: '#iletisim' },
+    { label: 'Çalışmalar', href: '/calismalar' },
+    { label: 'Yorumlar', href: '/yorumlar' },
+    { label: 'İletişim', href: '/iletisim' },
   ] as NavLink[],
 }
 
@@ -38,7 +38,7 @@ export const hero = {
   subtitle:
     'Line & İba Kuaför; saç kesimi, renklendirme, bakım, tırnak, makyaj ve ağda hizmetlerini modern, şık ve profesyonel bir salon atmosferinde sunar.',
   badges: ['Kadın & Erkek Kuaförü', 'Caddebostan / Göztepe', 'Saç • Tırnak • Makyaj • Bakım'],
-  ctaPrimary: { label: 'Hizmetleri İncele', href: '#hizmetler' },
+  ctaPrimary: { label: 'Hizmetleri İncele', href: '/hizmetler' },
   ctaSecondary: { label: 'Yol Tarifi Al', href: '' }, // href contact.mapsUrl ile doldurulur
   reviewCard: {
     rating: '4.9',

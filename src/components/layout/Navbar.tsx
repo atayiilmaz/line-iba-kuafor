@@ -60,7 +60,7 @@ export function Navbar() {
           ))}
         </ul>
 
-        <a href="#ana-sayfa" className="navbar__brand" aria-label="Line & İba Kuaför — ana sayfa">
+        <a href="/" className="navbar__brand" aria-label="Line & İba Kuaför — ana sayfa">
           <img className="navbar__logo" src={brand.logoDark} alt="Line & İba Kuaför" />
         </a>
 

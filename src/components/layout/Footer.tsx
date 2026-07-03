@@ -10,7 +10,7 @@ export function Footer() {
     <footer className="footer section--dark">
       <div className="container">
         <AnimatedReveal className="footer__top">
-          <a href="#ana-sayfa" className="footer__brand" aria-label={`${brand.name} — ana sayfa`}>
+          <a href="/" className="footer__brand" aria-label={`${brand.name} — ana sayfa`}>
             <Logo variant="light" className="footer__logo" />
           </a>
           <p className="footer__sentence lead">{footer.sentence}</p>
