@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { gsap } from 'gsap'
 import { LanguageProvider, useLang } from './lib/i18n'
-import { contactInfo, social, type Lang } from './data/site'
+import { brand, contactInfo, social, type Lang } from './data/site'
 
 type RouteKey = 'home' | 'services' | 'about' | 'partner' | 'gallery' | 'contact'
 type PartnerKey = 'ahmet' | 'elif' | 'merve'
@@ -450,7 +450,7 @@ function LineIbaSite() {
       </main>
       <SiteFooter t={t} lang={lang} setLang={setLang} nav={nav} />
       <a className="whatsapp" href={social.whatsappUrl('Merhaba, Line & İba Kuaför için randevu almak istiyorum.')} target="_blank" rel="noreferrer" aria-label="WhatsApp">
-        WhatsApp
+        <WhatsAppIcon />
       </a>
     </>
   )
@@ -492,7 +492,7 @@ function SiteHeader({
       </div>
       <nav className="masthead" aria-label="Main">
         <a className="brand" href="/" onClick={nav('/')}>
-          <span className="wordmark">Line & İba</span>
+          <img className="brand-logo brand-logo--dark" src={brand.logoLight} alt="Line & İba Kuaför" />
         </a>
         <div className="desktop-nav">
           {links.map(([href, label]) => (
@@ -501,9 +501,6 @@ function SiteHeader({
             </a>
           ))}
         </div>
-        <a className="book-link" href="/iletisim" onClick={nav('/iletisim')}>
-          {t.book}
-        </a>
         <button className="menu-toggle" type="button" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
           <span>{open ? t.close : t.menu}</span>
           <i />
@@ -534,7 +531,6 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
         <img className="hero__image js-page-in" src={images.hero} alt="" />
         <div className="hero__scrim" />
         <div className="hero__copy">
-          <p className="eyebrow js-page-in">{t.hero.eyebrow}</p>
           <h1 className="js-page-in">{t.hero.title}</h1>
           <p className="hero__subtitle js-page-in">{t.hero.subtitle}</p>
           <div className="hero__actions js-page-in">
@@ -547,7 +543,7 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
           </div>
         </div>
         <div className="hero__mark js-page-in">
-          <span className="wordmark wordmark--light">Line & İba</span>
+          <img className="hero__mark-logo" src={brand.logoLight} alt="" />
           <span>{t.hero.mark}</span>
         </div>
       </section>
@@ -555,7 +551,6 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
       <section className="philosophy section-pad">
         <div className="split container">
           <div className="copy-block js-reveal">
-            <p className="section-index">01</p>
             <h2>{t.philosophy.title}</h2>
             {t.philosophy.body.map((item) => (
               <p key={item}>{item}</p>
@@ -621,7 +616,7 @@ function ServicesStrip({ t, nav }: { t: Copy; nav: (href: string) => (event: Rea
 function ServicesPage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void }) {
   return (
     <>
-      <PageHero eyebrow={t.services.eyebrow} title={t.services.title} image={images.wash} />
+      <PageHero title={t.services.title} image={images.wash} />
       <ServicesStrip t={t} nav={nav} />
       <section className="featured-service section-pad">
         <div className="container feature-box js-reveal">
@@ -644,7 +639,7 @@ function ServicesPage({ t, nav }: { t: Copy; nav: (href: string) => (event: Reac
 function AboutPage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void }) {
   return (
     <>
-      <PageHero eyebrow={t.about.eyebrow} title={t.about.title} image={images.salon} />
+      <PageHero title={t.about.title} image={images.salon} />
       <section className="about-intro section-pad">
         <div className="container narrow-copy js-reveal">
           <p className="eyebrow">{t.about.eyebrow}</p>
@@ -693,8 +688,8 @@ function PartnerPage({
         <img src={partner.image} alt={partner.name} />
       </div>
       <div className="partner-detail__copy">
-        <p className="eyebrow js-page-in">{partner.role}</p>
         <h1 className="js-page-in">{partner.name}</h1>
+        <p className="partner-role js-page-in">{partner.role}</p>
         <p className="lead js-page-in">{partner.intro}</p>
         <blockquote className="js-page-in">{partner.quote}</blockquote>
         <ul className="experience-list js-reveal">
@@ -713,7 +708,7 @@ function PartnerPage({
 function GalleryPage({ t }: { t: Copy }) {
   return (
     <>
-      <PageHero eyebrow={t.gallery.eyebrow} title={t.gallery.title} image={images.portrait} />
+      <PageHero title={t.gallery.title} image={images.portrait} />
       <GalleryTeaser t={t} />
     </>
   )
@@ -742,7 +737,7 @@ function GalleryTeaser({ t }: { t: Copy }) {
 function ContactPage({ t }: { t: Copy }) {
   return (
     <>
-      <PageHero eyebrow={t.contact.eyebrow} title={t.contact.title} image={images.salon} />
+      <PageHero title={t.contact.title} image={images.salon} />
       <section className="contact-page section-pad">
         <div className="container contact-grid">
           <div className="js-reveal">
@@ -774,12 +769,11 @@ function ContactPage({ t }: { t: Copy }) {
   )
 }
 
-function PageHero({ eyebrow, title, image }: { eyebrow: string; title: string; image: string }) {
+function PageHero({ title, image }: { title: string; image: string }) {
   return (
     <section className="page-hero">
       <img className="js-page-in" src={image} alt="" />
       <div className="page-hero__copy">
-        <p className="eyebrow js-page-in">{eyebrow}</p>
         <h1 className="js-page-in">{title}</h1>
       </div>
     </section>
@@ -818,12 +812,20 @@ function SiteFooter({
   return (
     <footer className="site-footer">
       <a href="/" onClick={nav('/')} className="footer-logo">
-        <span className="wordmark">Line & İba</span>
+        <img className="footer-logo__image" src={brand.logoLight} alt="Line & İba Kuaför" />
       </a>
       <div className="footer-cols">
         {t.footer.cols.map((col) => (
           <p key={col}>{col}</p>
         ))}
+      </div>
+      <div className="footer-social">
+        <a href={social.instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram">
+          <InstagramIcon />
+        </a>
+        <a href={social.whatsappUrl('Merhaba, Line & İba Kuaför için randevu almak istiyorum.')} target="_blank" rel="noreferrer" aria-label="WhatsApp">
+          <WhatsAppIcon />
+        </a>
       </div>
       <div className="footer-lang">
         <button className={lang === 'tr' ? 'is-active' : ''} type="button" onClick={() => setLang('tr')}>
@@ -837,6 +839,22 @@ function SiteFooter({
         © {year} Line & İba Kuaför. {t.footer.copyright}
       </small>
     </footer>
+  )
+}
+
+function WhatsAppIcon() {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M16.02 4.25c-6.42 0-11.64 5.1-11.64 11.38 0 2.13.61 4.19 1.76 5.99L4.25 28l6.6-1.81a11.87 11.87 0 0 0 5.17 1.18c6.42 0 11.64-5.1 11.64-11.38S22.44 4.25 16.02 4.25Zm0 20.95c-1.65 0-3.27-.42-4.7-1.22l-.34-.19-3.91 1.07 1.1-3.71-.22-.36a9.3 9.3 0 0 1-1.41-4.86c0-5.08 4.25-9.21 9.48-9.21s9.48 4.13 9.48 9.21-4.25 9.27-9.48 9.27Zm5.2-6.94c-.28-.14-1.69-.82-1.95-.91-.26-.1-.45-.14-.64.14-.19.27-.73.91-.9 1.09-.16.18-.33.2-.61.07-.28-.14-1.19-.43-2.27-1.37-.84-.73-1.4-1.64-1.57-1.91-.16-.27-.02-.42.12-.56.13-.13.28-.33.42-.49.14-.16.19-.27.28-.45.09-.18.05-.34-.02-.48-.07-.14-.64-1.52-.87-2.08-.23-.55-.47-.47-.64-.48h-.55c-.19 0-.5.07-.76.34-.26.27-1 1-1 2.43s1.03 2.81 1.17 3c.14.18 2.03 3.03 4.92 4.25.69.29 1.22.47 1.64.6.69.21 1.31.18 1.81.11.55-.08 1.69-.68 1.93-1.34.24-.66.24-1.23.16-1.34-.07-.12-.26-.19-.55-.33Z" />
+    </svg>
+  )
+}
+
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M10.4 4.5h11.2c3.25 0 5.9 2.65 5.9 5.9v11.2c0 3.25-2.65 5.9-5.9 5.9H10.4a5.91 5.91 0 0 1-5.9-5.9V10.4c0-3.25 2.65-5.9 5.9-5.9Zm0 2.45a3.45 3.45 0 0 0-3.45 3.45v11.2a3.45 3.45 0 0 0 3.45 3.45h11.2a3.45 3.45 0 0 0 3.45-3.45V10.4a3.45 3.45 0 0 0-3.45-3.45H10.4Zm5.6 4.45a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2Zm0 2.45a2.15 2.15 0 1 0 0 4.3 2.15 2.15 0 0 0 0-4.3Zm6.2-3.65a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z" />
+    </svg>
   )
 }
 

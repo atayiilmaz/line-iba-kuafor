@@ -12,6 +12,7 @@
   --ease: cubic-bezier(0.19, 1, 0.22, 1);
   --container: 1210px;
   --gutter: 72px;
+  --header-h: 94px;
 }
 
 *,
@@ -33,7 +34,7 @@ html {
 body {
   min-width: 320px;
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.62;
   color: var(--black);
   background: var(--paper);
@@ -75,15 +76,15 @@ h3 {
 }
 
 h1 {
-  font-size: 76px;
+  font-size: 84px;
 }
 
 h2 {
-  font-size: 45px;
+  font-size: 50px;
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 26px;
 }
 
 p {
@@ -99,8 +100,7 @@ p {
   padding-block: 112px;
 }
 
-.eyebrow,
-.section-index {
+.eyebrow {
   color: var(--black);
   font-size: 10px;
   font-weight: 800;
@@ -110,12 +110,12 @@ p {
 
 .button {
   display: inline-flex;
-  min-height: 42px;
+  min-height: 48px;
   align-items: center;
   justify-content: center;
   padding: 0 24px;
   border: 1px solid currentColor;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -146,7 +146,7 @@ p {
 }
 
 .lead {
-  font-size: 20px;
+  font-size: 21px;
   line-height: 1.45;
 }
 
@@ -198,39 +198,34 @@ p {
 
 .masthead {
   display: grid;
-  height: 58px;
-  grid-template-columns: 180px 1fr auto auto;
+  height: 72px;
+  grid-template-columns: 180px 1fr 180px;
   align-items: center;
   gap: 24px;
   padding-inline: 34px;
 }
 
-.wordmark {
-  display: inline-block;
-  color: #000;
-  font-size: 25px;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: 0;
-  text-transform: lowercase;
+.brand-logo {
+  display: block;
+  width: auto;
+  height: 68px;
+  object-fit: contain;
 }
 
-.wordmark--light {
-  color: #fff;
-  font-size: 50px;
+.brand-logo--dark {
+  filter: invert(1);
 }
 
 .desktop-nav {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: clamp(34px, 4.2vw, 64px);
 }
 
 .desktop-nav a,
-.book-link,
 .menu-toggle {
   color: #111;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -295,7 +290,7 @@ p {
 .hero {
   position: relative;
   min-height: 760px;
-  padding-top: 80px;
+  padding-top: var(--header-h);
   overflow: hidden;
   color: #fff;
   background: #111;
@@ -304,9 +299,9 @@ p {
 .hero__image,
 .page-hero img {
   position: absolute;
-  inset: 80px 0 0;
+  inset: var(--header-h) 0 0;
   width: 100%;
-  height: calc(100% - 80px);
+  height: calc(100% - var(--header-h));
   object-fit: cover;
   filter: grayscale(1) contrast(1.08);
 }
@@ -314,7 +309,7 @@ p {
 .hero__scrim,
 .page-hero::after {
   position: absolute;
-  inset: 80px 0 0;
+  inset: var(--header-h) 0 0;
   background:
     linear-gradient(90deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15) 38%, rgba(0, 0, 0, 0.66) 100%),
     linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
@@ -334,27 +329,21 @@ p {
   text-align: left;
 }
 
-.hero__copy .eyebrow {
-  width: min(460px, 100%);
-  margin-bottom: 24px;
-  color: #fff;
-}
-
 .hero h1 {
-  width: min(460px, 100%);
+  width: min(560px, 100%);
   color: #fff;
-  font-size: 54px;
+  font-size: 64px;
 }
 
 .hero__subtitle {
-  width: min(460px, 100%);
+  width: min(590px, 100%);
   margin-top: 22px;
   color: rgba(255, 255, 255, 0.74);
 }
 
 .hero__actions {
   display: flex;
-  width: min(460px, 100%);
+  width: min(590px, 100%);
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 34px;
@@ -363,24 +352,24 @@ p {
 .hero__mark {
   position: absolute;
   z-index: 3;
-  right: 16%;
-  bottom: 96px;
+  top: calc(var(--header-h) + 34px);
+  left: 38px;
   display: grid;
   justify-items: center;
   gap: 7px;
 }
 
-.hero__mark span {
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
+.hero__mark-logo {
+  width: auto;
+  height: 118px;
+  object-fit: contain;
 }
 
-.hero__mark .wordmark {
-  color: #fff;
-  font-size: 50px;
-  text-transform: lowercase;
+.hero__mark span {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .split {
@@ -400,7 +389,7 @@ p {
   margin-block: 14px 24px;
 }
 
-.copy-block p:not(.section-index),
+.copy-block p,
 .narrow-copy p:not(.eyebrow) {
   max-width: 520px;
   margin-bottom: 18px;
@@ -463,12 +452,12 @@ p {
 
 .service-card h3 {
   margin-bottom: 18px;
-  font-size: 22px;
+  font-size: 24px;
 }
 
 .service-card p {
   min-height: 78px;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .service-card strong {
@@ -485,7 +474,7 @@ p {
   margin-top: 7px;
   padding-left: 12px;
   color: #4b4b4b;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .service-card li::before {
@@ -559,7 +548,7 @@ p {
 .page-hero {
   position: relative;
   min-height: 540px;
-  padding-top: 80px;
+  padding-top: var(--header-h);
   overflow: hidden;
   color: #fff;
   background: #111;
@@ -576,7 +565,6 @@ p {
   justify-content: center;
 }
 
-.page-hero__copy .eyebrow,
 .page-hero h1 {
   color: #fff;
 }
@@ -667,6 +655,13 @@ p {
 
 .partner-detail h1 {
   margin-block: 18px 24px;
+}
+
+.partner-role {
+  margin-bottom: 22px;
+  color: #111;
+  font-size: 16px;
+  font-weight: 800;
 }
 
 .partner-detail blockquote {
@@ -774,8 +769,11 @@ p {
   text-align: center;
 }
 
-.footer-logo .wordmark {
-  font-size: 46px;
+.footer-logo__image {
+  width: auto;
+  height: 132px;
+  object-fit: contain;
+  filter: invert(1);
 }
 
 .footer-cols {
@@ -795,6 +793,38 @@ p {
 .footer-lang {
   display: flex;
   gap: 8px;
+}
+
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.footer-social a {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid #111;
+  color: #111;
+  transition:
+    background 240ms var(--ease),
+    color 240ms var(--ease);
+}
+
+.footer-social a:hover {
+  color: #fff;
+  background: #111;
+}
+
+.footer-social svg {
+  width: 23px;
+  height: 23px;
+  fill: currentColor;
 }
 
 .site-footer small {
@@ -819,10 +849,13 @@ p {
   color: #fff;
   background: #0bbf59;
   border-radius: 50%;
-  font-size: 9px;
-  font-weight: 900;
-  text-transform: uppercase;
   box-shadow: 0 18px 34px rgba(0, 0, 0, 0.22);
+}
+
+.whatsapp svg {
+  width: 29px;
+  height: 29px;
+  fill: currentColor;
 }
 
 .js-page-in,
@@ -836,15 +869,14 @@ p {
   }
 
   h1 {
-    font-size: 58px;
+    font-size: 62px;
   }
 
   h2 {
-    font-size: 38px;
+    font-size: 40px;
   }
 
-  .desktop-nav,
-  .book-link {
+  .desktop-nav {
     display: none;
   }
 
@@ -876,7 +908,8 @@ p {
   }
 
   .hero__mark {
-    right: 40px;
+    right: auto;
+    left: 40px;
   }
 
   .split,
@@ -904,22 +937,23 @@ p {
 @media (max-width: 640px) {
   :root {
     --gutter: 28px;
+    --header-h: 88px;
   }
 
   body {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   h1 {
-    font-size: 42px;
+    font-size: 44px;
   }
 
   h2 {
-    font-size: 32px;
+    font-size: 34px;
   }
 
   h3 {
-    font-size: 21px;
+    font-size: 22px;
   }
 
   .section-pad {
@@ -932,12 +966,12 @@ p {
   }
 
   .masthead {
-    height: 54px;
+    height: 66px;
     padding-inline: 16px;
   }
 
-  .wordmark {
-    font-size: 22px;
+  .brand-logo {
+    height: 62px;
   }
 
   .hero {
@@ -950,12 +984,13 @@ p {
 
   .hero__mark {
     right: auto;
-    bottom: 58px;
-    left: 28px;
+    top: calc(var(--header-h) + 18px);
+    bottom: auto;
+    left: 16px;
   }
 
-  .hero__mark .wordmark {
-    font-size: 38px;
+  .hero__mark-logo {
+    height: 92px;
   }
 
   .copy-block {
