@@ -1,12 +1,13 @@
 import { motion, useReducedMotion } from 'motion/react'
-import { hero, contact } from '../../data/site'
+import { contactInfo } from '../../data/site'
+import { useContent } from '../../lib/i18n'
 import { Frame } from '../ui/Frame'
 import './Hero.css'
 
-const TICKER = ['Saç Kesimi', 'Renklendirme', 'Bakım', 'Tırnak', 'Makyaj', 'Ağda', 'Kaş & Kirpik']
-
 export function Hero() {
   const reduce = useReducedMotion()
+  const t = useContent()
+  const hero = t.hero
 
   const line = (i: number) =>
     reduce
@@ -63,12 +64,12 @@ export function Hero() {
               <span className="btn__arrow" aria-hidden="true">→</span>
             </a>
             <a
-              href={contact.mapsUrl}
+              href={contactInfo.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn--ghost"
             >
-              {hero.ctaSecondary.label}
+              {hero.ctaSecondaryLabel}
             </a>
           </motion.div>
         </div>
@@ -80,12 +81,12 @@ export function Hero() {
                   (renkli olsa bile CSS ile otomatik siyah-beyaza dönüşür). */}
               <img
                 src="/assets/gallery/hero.jpg"
-                alt="Line & İba Kuaför salonundan bir kare"
+                alt={hero.imageAlt}
                 onError={(e) => {
                   e.currentTarget.style.visibility = 'hidden'
                 }}
               />
-              <figcaption className="hero__image-mark mono">Est. Caddebostan</figcaption>
+              <figcaption className="hero__image-mark mono">{hero.imageMark}</figcaption>
             </motion.figure>
           </Frame>
 
@@ -106,10 +107,10 @@ export function Hero() {
         >
           {[0, 1].map((dup) => (
             <span className="hero__ticker-group mono" key={dup}>
-              {TICKER.map((t) => (
-                <span className="hero__ticker-item" key={t}>
+              {t.ticker.map((item) => (
+                <span className="hero__ticker-item" key={item}>
                   <span className="hero__ticker-star">✳</span>
-                  {t}
+                  {item}
                 </span>
               ))}
             </span>

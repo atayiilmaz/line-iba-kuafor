@@ -1,0 +1,43 @@
+/* Köşede yüzen WhatsApp butonu. Sitenin monokrom sistemine tek bilinçli
+   istisna: WhatsApp'ın resmi yeşili, tanınırlık için korunur. */
+.wa-float {
+  position: fixed;
+  right: clamp(1rem, 3vw, 1.75rem);
+  bottom: clamp(1rem, 3vw, 1.75rem);
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #ffffff;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+.wa-float:hover,
+.wa-float:focus-visible {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+.wa-float:focus-visible {
+  outline: 2px solid #25d366;
+  outline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .wa-float {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-float,
+  .wa-float:hover {
+    transform: none;
+  }
+}

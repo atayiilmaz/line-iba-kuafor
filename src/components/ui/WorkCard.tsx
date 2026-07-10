@@ -18,7 +18,7 @@ export function WorkCard({ work, index }: Props) {
         <div className="work__media" data-key={work.key}>
           <img
             src={work.image}
-            alt={`${work.label} — Line & İba Kuaför çalışması`}
+            alt={`${work.label} — Line & İba Kuaför`}
             loading="lazy"
             onError={(e) => {
               e.currentTarget.style.display = 'none'

@@ -27,6 +27,12 @@
   letter-spacing: -0.02em;
   max-width: 22ch;
 }
+.contact__link {
+  transition: opacity 0.3s var(--ease);
+}
+.contact__link:hover {
+  opacity: 0.55;
+}
 .contact__phone {
   font-family: var(--font-display);
   font-weight: 600;

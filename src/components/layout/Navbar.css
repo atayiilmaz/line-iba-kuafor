@@ -75,6 +75,36 @@
   transition: height 0.4s var(--ease);
 }
 
+/* Dil anahtarı (TR / EN) */
+.navbar__lang-item {
+  padding-left: clamp(0.5rem, 1.2vw, 1.25rem);
+  border-left: 1px solid var(--hair);
+}
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.lang-switch__btn {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: var(--smoke);
+  padding-block: 0.4rem;
+  transition: color 0.3s var(--ease);
+}
+.lang-switch__btn:hover {
+  color: var(--black);
+}
+.lang-switch__btn.is-active {
+  color: var(--black);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.lang-switch__sep {
+  color: var(--hair);
+}
+
 /* Hamburger */
 .navbar__burger {
   display: none;
@@ -159,5 +189,12 @@
     letter-spacing: -0.03em;
     padding-block: 0.7rem;
     border-bottom: 1px solid var(--hair);
+  }
+  .navbar__mobile-lang {
+    margin-top: 2rem;
+  }
+  .navbar__mobile-lang .lang-switch__btn {
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
   }
 }

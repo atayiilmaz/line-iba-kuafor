@@ -1,9 +1,10 @@
-import { works } from '../../data/site'
+import { useContent } from '../../lib/i18n'
 import { SectionHeader } from '../ui/SectionHeader'
 import { WorkCard } from '../ui/WorkCard'
 import './Works.css'
 
 export function Works() {
+  const { works } = useContent()
   return (
     <section className="section works section--dark" id="calismalar">
       <div className="container">

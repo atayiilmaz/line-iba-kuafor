@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
-import { nav, brand } from '../../data/site'
+import { brand, type Lang } from '../../data/site'
+import { useContent, useLang } from '../../lib/i18n'
 import './Navbar.css'
 
 export function Navbar() {
@@ -9,6 +10,7 @@ export function Navbar() {
   const reduce = useReducedMotion()
   const panelRef = useRef<HTMLDivElement>(null)
   const toggleRef = useRef<HTMLButtonElement>(null)
+  const t = useContent()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -36,7 +38,7 @@ export function Navbar() {
     }
   }, [open])
 
-  const allLinks = [...nav.left, ...nav.right]
+  const allLinks = [...t.nav.left, ...t.nav.right]
 
   const entrance = reduce
     ? {}
@@ -49,9 +51,9 @@ export function Navbar() {
   return (
     <>
     <motion.header className={`navbar ${scrolled ? 'is-scrolled' : ''}`} {...entrance}>
-      <nav className="navbar__inner container" aria-label="Ana menü">
+      <nav className="navbar__inner container" aria-label={t.nav.ariaMain}>
         <ul className="navbar__links navbar__links--left">
-          {nav.left.map((link) => (
+          {t.nav.left.map((link) => (
             <li key={link.href}>
               <a href={link.href} className="navbar__link">
                 {link.label}
@@ -60,18 +62,21 @@ export function Navbar() {
           ))}
         </ul>
 
-        <a href="/" className="navbar__brand" aria-label="Line & İba Kuaför — ana sayfa">
-          <img className="navbar__logo" src={brand.logoDark} alt="Line & İba Kuaför" />
+        <a href="/" className="navbar__brand" aria-label={t.nav.ariaHome}>
+          <img className="navbar__logo" src={brand.logoDark} alt={brand.name} />
         </a>
 
         <ul className="navbar__links navbar__links--right">
-          {nav.right.map((link) => (
+          {t.nav.right.map((link) => (
             <li key={link.href}>
               <a href={link.href} className="navbar__link">
                 {link.label}
               </a>
             </li>
           ))}
+          <li className="navbar__lang-item">
+            <LangSwitch />
+          </li>
         </ul>
 
         <button
@@ -80,7 +85,7 @@ export function Navbar() {
           className={`navbar__burger ${open ? 'is-open' : ''}`}
           aria-expanded={open}
           aria-controls="mobile-menu"
-          aria-label={open ? 'Menüyü kapat' : 'Menüyü aç'}
+          aria-label={open ? t.nav.ariaClose : t.nav.ariaOpen}
           onClick={() => setOpen((v) => !v)}
         >
           <span />
@@ -106,7 +111,35 @@ export function Navbar() {
           </li>
         ))}
       </ul>
+      <div className="navbar__mobile-lang">
+        <LangSwitch />
+      </div>
     </div>
     </>
+  )
+}
+
+/** TR / EN dil anahtarı — mono etiket dilinde, hairline ayraçlı. */
+function LangSwitch() {
+  const { lang, setLang } = useLang()
+
+  const button = (code: Lang) => (
+    <button
+      type="button"
+      className={`lang-switch__btn ${lang === code ? 'is-active' : ''}`}
+      aria-pressed={lang === code}
+      lang={code}
+      onClick={() => setLang(code)}
+    >
+      {code.toUpperCase()}
+    </button>
+  )
+
+  return (
+    <span className="lang-switch mono">
+      {button('tr')}
+      <span className="lang-switch__sep" aria-hidden="true">/</span>
+      {button('en')}
+    </span>
   )
 }

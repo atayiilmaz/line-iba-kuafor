@@ -1,9 +1,10 @@
-import { services } from '../../data/site'
+import { useContent } from '../../lib/i18n'
 import { SectionHeader } from '../ui/SectionHeader'
 import { ServiceCard } from '../ui/ServiceCard'
 import './Services.css'
 
 export function Services() {
+  const { services } = useContent()
   return (
     <section className="section services" id="hizmetler">
       <div className="container">

@@ -43,6 +43,16 @@
     repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 18px),
     linear-gradient(160deg, #555, #161616);
 }
+.work__media[data-key='gelin']::before {
+  background:
+    repeating-linear-gradient(30deg, rgba(255, 255, 255, 0.06) 0 2px, transparent 2px 22px),
+    linear-gradient(160deg, #505050, #121212);
+}
+.work__media[data-key='salon']::before {
+  background:
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0 2px, transparent 2px 30px),
+    linear-gradient(160deg, #3f3f3f, #0e0e0e);
+}
 .work__media[data-key='makyaj']::before {
   background:
     repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 24px),

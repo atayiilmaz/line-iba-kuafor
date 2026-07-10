@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { useInView, useReducedMotion } from 'motion/react'
-import { trust } from '../../data/site'
+import { useContent } from '../../lib/i18n'
 import { SectionHeader } from '../ui/SectionHeader'
 import { AnimatedReveal } from '../ui/AnimatedReveal'
 import './Trust.css'
 
 export function Trust() {
+  const { trust } = useContent()
   return (
     <section className="section trust" id="deneyim">
       <div className="container">

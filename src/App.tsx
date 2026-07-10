@@ -8,13 +8,15 @@ import { Works } from './components/sections/Works'
 import { Trust } from './components/sections/Trust'
 import { Reviews } from './components/sections/Reviews'
 import { Contact } from './components/sections/Contact'
+import { WhatsAppButton } from './components/ui/WhatsAppButton'
+import { LanguageProvider } from './lib/i18n'
 import { SECTIONS, pathToId, idToPath, scrollToId } from './lib/nav'
 
 function App() {
   useCleanRouting()
 
   return (
-    <>
+    <LanguageProvider>
       <Navbar />
       <main>
         <Hero />
@@ -26,7 +28,8 @@ function App() {
         <Contact />
       </main>
       <Footer />
-    </>
+      <WhatsAppButton />
+    </LanguageProvider>
   )
 }
 

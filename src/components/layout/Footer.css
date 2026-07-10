@@ -22,6 +22,31 @@
   max-width: 48ch;
 }
 
+.footer__social {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.75rem;
+}
+.footer__social-label {
+  color: var(--smoke);
+}
+.footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--ash);
+  transition: color 0.3s var(--ease);
+}
+.footer__social-link:hover {
+  color: var(--paper);
+}
+/* Instagram kullanıcı adı küçük harf kalır (İ dönüşümünü engelle) */
+.footer__social-handle {
+  text-transform: none;
+}
+
 .footer__divider {
   background: var(--hair-dark);
 }
