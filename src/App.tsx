@@ -67,7 +67,6 @@ type Copy = {
     directions: string
   }
   footer: {
-    cols: [string, string, string]
     copyright: string
   }
   partners: Partner[]
@@ -123,7 +122,7 @@ const copy: Record<Lang, Copy> = {
         'Caddebostan’da saç kesimi, renklendirme, gelin başı, tırnak ve makyaj için rafine bir salon deneyimi.',
       cta: 'Hizmetleri İncele',
       secondary: 'Hikayemiz',
-      mark: 'Caddebostan Hairdressing',
+      mark: 'CADDEBOSTAN HAIRDRESSING',
     },
     philosophy: {
       title: 'Felsefemiz',
@@ -191,10 +190,7 @@ const copy: Record<Lang, Copy> = {
       hours: 'Her gün 09:00 - 19:30',
       directions: 'Yol Tarifi',
     },
-    footer: {
-      cols: ['Felsefemiz / Hizmetler / Koleksiyon', 'Randevu', 'İletişim / Yol Tarifi / WhatsApp'],
-      copyright: 'Tüm hakları saklıdır.',
-    },
+    footer: { copyright: 'Tüm hakları saklıdır.' },
     partners: [
       {
         key: 'ahmet',
@@ -251,7 +247,7 @@ const copy: Record<Lang, Copy> = {
         'A refined salon experience in Caddebostan for haircuts, color, bridal hair, nails and makeup.',
       cta: 'View Services',
       secondary: 'Our Story',
-      mark: 'Caddebostan Hairdressing',
+      mark: 'CADDEBOSTAN HAIRDRESSING',
     },
     philosophy: {
       title: 'Philosophy',
@@ -319,10 +315,7 @@ const copy: Record<Lang, Copy> = {
       hours: 'Every day 09:00 - 19:30',
       directions: 'Directions',
     },
-    footer: {
-      cols: ['Philosophy / Services / Collection', 'Booking', 'Contact / Directions / WhatsApp'],
-      copyright: 'All rights reserved.',
-    },
+    footer: { copyright: 'All rights reserved.' },
     partners: [
       {
         key: 'ahmet',
@@ -819,15 +812,54 @@ function SiteFooter({
   nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void
 }) {
   const year = useMemo(() => new Date().getFullYear(), [])
+  const footerPrimary =
+    lang === 'tr'
+      ? [
+          { label: 'Felsefemiz', href: '/hakkimizda' },
+          { label: 'Hizmetler', href: '/hizmetler' },
+          { label: 'Koleksiyon', href: '/koleksiyon' },
+        ]
+      : [
+          { label: 'Philosophy', href: '/hakkimizda' },
+          { label: 'Services', href: '/hizmetler' },
+          { label: 'Collection', href: '/koleksiyon' },
+        ]
+  const footerContact = [
+    { label: t.nav.contact, href: '/iletisim' },
+    { label: t.contact.directions, href: contactInfo.mapsUrl, external: true },
+    {
+      label: 'WhatsApp',
+      href: social.whatsappUrl('Merhaba, Line & İba Kuaför için randevu almak istiyorum.'),
+      external: true,
+    },
+  ]
+
   return (
     <footer className="site-footer">
       <a href="/" onClick={nav('/')} className="footer-logo">
         <img className="footer-logo__image" src={brand.logoLight} alt="Line & İba Kuaför" />
       </a>
       <div className="footer-cols">
-        {t.footer.cols.map((col) => (
-          <p key={col}>{col}</p>
-        ))}
+        <nav className="footer-links" aria-label={lang === 'tr' ? 'Alt menü' : 'Footer menu'}>
+          {footerPrimary.map((item) => (
+            <a key={item.href} href={item.href} onClick={nav(item.href)}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <nav className="footer-links" aria-label={lang === 'tr' ? 'Alt iletişim' : 'Footer contact'}>
+          {footerContact.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              onClick={item.external ? undefined : nav(item.href)}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noreferrer' : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
       </div>
       <div className="footer-social">
         <a href={social.instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram">

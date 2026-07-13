@@ -330,7 +330,7 @@ p {
 }
 
 .hero h1 {
-  width: min(560px, 100%);
+  width: min(590px, 100%);
   color: #fff;
   font-size: 64px;
 }
@@ -369,7 +369,6 @@ p {
   color: rgba(255, 255, 255, 0.75);
   font-size: 11px;
   font-weight: 800;
-  text-transform: uppercase;
 }
 
 .split {
@@ -795,16 +794,28 @@ p {
 
 .footer-cols {
   display: grid;
-  width: min(100%, 820px);
-  grid-template-columns: repeat(3, 1fr);
+  width: min(100%, 640px);
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px;
 }
 
-.footer-cols p {
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+}
+
+.footer-links a {
   color: #555;
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
+  transition: color 220ms var(--ease);
+}
+
+.footer-links a:hover {
+  color: #000;
 }
 
 .footer-lang {
