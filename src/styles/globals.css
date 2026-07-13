@@ -408,7 +408,6 @@ p {
   width: 100%;
   aspect-ratio: 0.86;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.04);
 }
 
 .mini-row {
@@ -422,7 +421,6 @@ p {
   aspect-ratio: 0.64;
   width: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.1);
   box-shadow: 0 22px 38px rgba(0, 0, 0, 0.17);
 }
 
@@ -501,11 +499,12 @@ p {
   background: #111;
 }
 
-.wide-photo img {
+.wide-photo img,
+.wide-photo video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.08) brightness(0.68);
+  display: block;
 }
 
 .featured-service {
@@ -525,7 +524,6 @@ p {
   height: 100%;
   min-height: 470px;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.1);
 }
 
 .feature-box div {
@@ -600,13 +598,11 @@ p {
   width: 100%;
   aspect-ratio: 0.72;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
-  transition: filter 300ms var(--ease), transform 300ms var(--ease);
+  transition: transform 300ms var(--ease);
 }
 
 .partner-card:hover img {
   transform: translateY(-4px);
-  filter: grayscale(1) contrast(1.18);
 }
 
 .partner-card span,
@@ -643,7 +639,6 @@ p {
   height: 100%;
   min-height: calc(100vh - 80px);
   object-fit: cover;
-  filter: grayscale(1) contrast(1.07);
 }
 
 .partner-detail__copy {
@@ -693,16 +688,38 @@ p {
 
 .insta-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 0;
   box-shadow: 0 34px 60px rgba(0, 0, 0, 0.14);
 }
 
+.video-tile {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  background: #111;
+}
+
+.video-tile video,
 .insta-grid img {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.06);
+  display: block;
+}
+
+.video-tile figcaption {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  padding-top: 12px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.45);
 }
 
 .contact-grid {

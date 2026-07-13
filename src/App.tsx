@@ -94,6 +94,14 @@ const images = {
     'https://images.pexels.com/photos/3993315/pexels-photo-3993315.jpeg?auto=compress&cs=tinysrgb&w=1300',
 }
 
+const videos = [
+  { src: '/assets/videos/salon-01.mp4', label: 'Salon hazırlığı' },
+  { src: '/assets/videos/salon-02.mp4', label: 'Saç uygulaması' },
+  { src: '/assets/videos/salon-03.mp4', label: 'Renk ve bakım' },
+  { src: '/assets/videos/salon-04.mp4', label: 'Line & İba atmosferi' },
+  { src: '/assets/videos/salon-05.mp4', label: 'Final görünüm' },
+]
+
 const copy: Record<Lang, Copy> = {
   tr: {
     nav: {
@@ -112,7 +120,7 @@ const copy: Record<Lang, Copy> = {
       eyebrow: 'Line & İba Kuaför',
       title: 'Güzelliğin ötesinde.',
       subtitle:
-        'Caddebostan’da saç kesimi, renklendirme, gelin başı, tırnak ve makyaj için rafine, siyah-beyaz bir salon deneyimi.',
+        'Caddebostan’da saç kesimi, renklendirme, gelin başı, tırnak ve makyaj için rafine bir salon deneyimi.',
       cta: 'Hizmetleri İncele',
       secondary: 'Hikayemiz',
       mark: 'Caddebostan Hairdressing',
@@ -169,9 +177,9 @@ const copy: Record<Lang, Copy> = {
     },
     gallery: {
       eyebrow: 'Koleksiyon',
-      title: 'Saçın ışıkla konuştuğu siyah-beyaz anlar.',
+      title: 'Salonumuzdan gerçek anlar.',
       intro:
-        'Gerçek salon fotoğrafları geldikçe bu alan Instagram akışına veya özel koleksiyonlara bağlanabilir.',
+        'Line & İba’daki uygulamalar, salon atmosferi ve hazırlık süreçlerinden seçilmiş kısa videolar.',
     },
     contact: {
       eyebrow: 'Randevu',
@@ -240,7 +248,7 @@ const copy: Record<Lang, Copy> = {
       eyebrow: 'Line & Iba Hairdressing',
       title: 'Beyond beauty.',
       subtitle:
-        'A refined black-and-white salon experience in Caddebostan for haircuts, color, bridal hair, nails and makeup.',
+        'A refined salon experience in Caddebostan for haircuts, color, bridal hair, nails and makeup.',
       cta: 'View Services',
       secondary: 'Our Story',
       mark: 'Caddebostan Hairdressing',
@@ -297,9 +305,9 @@ const copy: Record<Lang, Copy> = {
     },
     gallery: {
       eyebrow: 'Collection',
-      title: 'Black-and-white moments where hair meets light.',
+      title: 'Real moments from our salon.',
       intro:
-        'When real salon photography is ready, this section can connect to Instagram or dedicated look collections.',
+        'Short videos from treatments, salon atmosphere and preparation at Line & Iba.',
     },
     contact: {
       eyebrow: 'Booking',
@@ -571,8 +579,8 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
       </section>
 
       <ServicesStrip t={t} nav={nav} />
-      <section className="wide-photo js-reveal" aria-hidden="true">
-        <img src={images.salon} alt="" />
+      <section className="wide-photo js-reveal">
+        <video src={videos[0].src} autoPlay muted loop playsInline preload="metadata" aria-label={videos[0].label} />
       </section>
       <GalleryTeaser t={t} />
       <CtaBand t={t} />
@@ -715,7 +723,6 @@ function GalleryPage({ t }: { t: Copy }) {
 }
 
 function GalleryTeaser({ t }: { t: Copy }) {
-  const gallery = [images.merve, images.salon, images.elif, images.tools, images.ahmet, images.color, images.portrait, images.wash]
   return (
     <section className="gallery section-pad">
       <div className="container">
@@ -724,9 +731,12 @@ function GalleryTeaser({ t }: { t: Copy }) {
           <h2>{t.gallery.title}</h2>
           <p>{t.gallery.intro}</p>
         </div>
-        <div className="insta-grid js-reveal">
-          {gallery.map((src) => (
-            <img key={src} src={src} alt="" />
+        <div className="insta-grid">
+          {videos.map((video) => (
+            <figure className="video-tile" key={video.src}>
+              <video src={video.src} autoPlay muted loop playsInline preload="metadata" aria-label={video.label} />
+              <figcaption>{video.label}</figcaption>
+            </figure>
           ))}
         </div>
       </div>

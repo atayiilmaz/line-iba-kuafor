@@ -9,7 +9,7 @@ type Props = {
 
 /**
  * Çalışma kartı. Gerçek fotoğraf public/assets/gallery/ altına konunca görünür;
- * yoksa monokrom bir doku bloğu gösterilir. Her görsel otomatik siyah-beyaz olur.
+ * yoksa monokrom bir doku bloğu gösterilir.
  */
 export function WorkCard({ work, index }: Props) {
   return (

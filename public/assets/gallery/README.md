@@ -2,8 +2,8 @@
 
 Gerçek salon fotoğraflarını (Google Maps'teki fotoğraflarınız dahil) bu klasöre
 **tam bu isimlerle** koyun. Görsel yoksa monokrom doku blokları gösterilir; yani
-sayfa fotoğraf olmadan da düzgün görünür. **Tüm görseller CSS ile otomatik olarak
-siyah-beyaza dönüştürülür**, renkli fotoğraf koysanız bile temaya uyar.
+sayfa fotoğraf olmadan da düzgün görünür. Header dışındaki içerik fotoğrafları
+renkleriyle gösterilir.
 
 ## Beklenen dosyalar
 
