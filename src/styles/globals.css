@@ -721,6 +721,135 @@ p {
   text-shadow: 0 1px 18px rgba(0, 0, 0, 0.45);
 }
 
+.instagram-follow {
+  background: #f6f6f6;
+  padding: 0 0 clamp(4.5rem, 8vw, 7rem);
+}
+
+.instagram-follow__link {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: clamp(220px, 27vw, 340px);
+  overflow: hidden;
+  color: #fff;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    #090909;
+  background-size: 46px 46px;
+}
+
+.instagram-follow__link::before,
+.instagram-follow__link::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+}
+
+.instagram-follow__link::before {
+  background:
+    repeating-linear-gradient(135deg, transparent 0 18px, rgba(255, 255, 255, 0.06) 18px 19px, transparent 19px 42px);
+}
+
+.instagram-follow__link::after {
+  border-block: 1px solid rgba(255, 255, 255, 0.26);
+  box-shadow: inset 0 0 0 14px rgba(255, 255, 255, 0.03);
+}
+
+.instagram-follow__pattern {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.instagram-follow__word {
+  position: absolute;
+  left: 50%;
+  width: 120%;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+  font-size: clamp(4rem, 13vw, 11rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+  text-align: center;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.instagram-follow__word--top {
+  top: -0.18em;
+}
+
+.instagram-follow__word--bottom {
+  bottom: -0.2em;
+}
+
+.instagram-follow__panel {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-width: min(88vw, 520px);
+  padding: 22px 36px;
+  color: #111;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.26);
+  transition: transform 280ms var(--ease), box-shadow 280ms var(--ease);
+}
+
+.instagram-follow__link:hover .instagram-follow__panel {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.34);
+}
+
+.instagram-follow__icon {
+  display: inline-grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  color: #fff;
+  background:
+    radial-gradient(circle at 30% 105%, #feda75 0 20%, transparent 38%),
+    radial-gradient(circle at 35% 95%, #fa7e1e 0 28%, transparent 50%),
+    linear-gradient(135deg, #405de6, #833ab4 35%, #c13584 62%, #fd1d1d 82%, #fcb045);
+}
+
+.instagram-follow__icon svg {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+}
+
+.instagram-follow__copy {
+  display: grid;
+  gap: 6px;
+  text-align: left;
+}
+
+.instagram-follow__label {
+  font-size: clamp(1.25rem, 2.4vw, 2rem);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.instagram-follow__handle {
+  color: #666;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;

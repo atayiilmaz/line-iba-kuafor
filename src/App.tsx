@@ -57,6 +57,10 @@ type Copy = {
     title: string
     intro: string
   }
+  instagramFollow: {
+    label: string
+    aria: string
+  }
   contact: {
     eyebrow: string
     title: string
@@ -179,6 +183,10 @@ const copy: Record<Lang, Copy> = {
       title: 'Salonumuzdan gerçek anlar.',
       intro:
         'Line & İba’daki uygulamalar, salon atmosferi ve hazırlık süreçlerinden seçilmiş kısa videolar.',
+    },
+    instagramFollow: {
+      label: 'Bizi Takip Edin',
+      aria: 'Instagram’da Line & İba Kuaför hesabını aç',
     },
     contact: {
       eyebrow: 'Randevu',
@@ -304,6 +312,10 @@ const copy: Record<Lang, Copy> = {
       title: 'Real moments from our salon.',
       intro:
         'Short videos from treatments, salon atmosphere and preparation at Line & Iba.',
+    },
+    instagramFollow: {
+      label: 'Follow Us',
+      aria: 'Open Line & Iba Hairdressing on Instagram',
     },
     contact: {
       eyebrow: 'Booking',
@@ -576,6 +588,7 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
         <video src={videos[0].src} autoPlay muted loop playsInline preload="metadata" aria-label={videos[0].label} />
       </section>
       <GalleryTeaser t={t} />
+      <InstagramFollowBanner t={t} />
       <CtaBand t={t} />
     </>
   )
@@ -711,6 +724,7 @@ function GalleryPage({ t }: { t: Copy }) {
     <>
       <PageHero title={t.gallery.title} image={images.portrait} />
       <GalleryTeaser t={t} />
+      <InstagramFollowBanner t={t} />
     </>
   )
 }
@@ -733,6 +747,28 @@ function GalleryTeaser({ t }: { t: Copy }) {
           ))}
         </div>
       </div>
+    </section>
+  )
+}
+
+function InstagramFollowBanner({ t }: { t: Copy }) {
+  return (
+    <section className="instagram-follow">
+      <a className="instagram-follow__link" href={social.instagramUrl} target="_blank" rel="noreferrer" aria-label={t.instagramFollow.aria}>
+        <span className="instagram-follow__pattern" aria-hidden="true">
+          <span className="instagram-follow__word instagram-follow__word--top">INSTAGRAM</span>
+          <span className="instagram-follow__word instagram-follow__word--bottom">LINE &amp; IBA</span>
+        </span>
+        <span className="instagram-follow__panel">
+          <span className="instagram-follow__icon" aria-hidden="true">
+            <InstagramIcon />
+          </span>
+          <span className="instagram-follow__copy">
+            <span className="instagram-follow__label">{t.instagramFollow.label}</span>
+            <span className="instagram-follow__handle">{social.instagramHandle}</span>
+          </span>
+        </span>
+      </a>
     </section>
   )
 }
