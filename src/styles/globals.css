@@ -297,13 +297,22 @@ p {
 }
 
 .hero__image,
-.page-hero img {
+.page-hero__media {
   position: absolute;
   inset: var(--header-h) 0 0;
   width: 100%;
   height: calc(100% - var(--header-h));
   object-fit: cover;
   filter: grayscale(1) contrast(1.08);
+}
+
+.hero__image {
+  object-position: center 32%;
+}
+
+.page-hero__media {
+  display: block;
+  object-position: center 38%;
 }
 
 .hero__scrim,
@@ -491,21 +500,6 @@ p {
   margin-top: 44px;
 }
 
-.wide-photo {
-  position: relative;
-  height: 430px;
-  overflow: hidden;
-  background: #111;
-}
-
-.wide-photo img,
-.wide-photo video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
 .featured-service {
   background: #000;
   color: #fff;
@@ -688,7 +682,8 @@ p {
 .insta-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 0;
+  gap: 1px;
+  background: #fff;
   box-shadow: 0 34px 60px rgba(0, 0, 0, 0.14);
 }
 
@@ -702,23 +697,9 @@ p {
 .video-tile video,
 .insta-grid img {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   display: block;
-}
-
-.video-tile figcaption {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  left: 12px;
-  padding-top: 12px;
-  color: rgba(255, 255, 255, 0.86);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.45);
 }
 
 .instagram-follow {
@@ -1175,8 +1156,7 @@ p {
     padding: 36px 28px;
   }
 
-  .page-hero,
-  .wide-photo {
+  .page-hero {
     min-height: 420px;
   }
 

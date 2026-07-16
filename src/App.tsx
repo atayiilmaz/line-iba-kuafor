@@ -56,6 +56,7 @@ type Copy = {
     eyebrow: string
     title: string
     intro: string
+    items: string[]
   }
   instagramFollow: {
     label: string
@@ -77,11 +78,19 @@ type Copy = {
 }
 
 const images = {
-  hero:
-    'https://images.pexels.com/photos/3993320/pexels-photo-3993320.jpeg?auto=compress&cs=tinysrgb&w=2200',
-  portrait:
+  hero: '/assets/photos/hero-bridal.webp',
+  philosophyMain: '/assets/photos/philosophy-brunette.webp',
+  philosophyMini: [
+    '/assets/photos/philosophy-red-hair.webp',
+    '/assets/photos/philosophy-blonde.webp',
+    '/assets/photos/philosophy-volume.webp',
+  ],
+  servicesHero: '/assets/photos/services-blonde.webp',
+  servicesFeatured: '/assets/photos/color-blonde.webp',
+  aboutHero: '/assets/photos/about-red-hair.webp',
+  collectionHero:
     'https://images.pexels.com/photos/20046793/pexels-photo-20046793.jpeg?auto=compress&cs=tinysrgb&w=1400',
-  salon:
+  contactHero:
     'https://images.pexels.com/photos/35844833/pexels-photo-35844833.png?auto=compress&cs=tinysrgb&w=1600',
   ahmet:
     'https://images.pexels.com/photos/8867400/pexels-photo-8867400.jpeg?auto=compress&cs=tinysrgb&w=1100',
@@ -89,20 +98,49 @@ const images = {
     'https://images.pexels.com/photos/3993320/pexels-photo-3993320.jpeg?auto=compress&cs=tinysrgb&w=1100',
   merve:
     'https://images.pexels.com/photos/20046793/pexels-photo-20046793.jpeg?auto=compress&cs=tinysrgb&w=1100',
-  tools:
-    'https://images.pexels.com/photos/3993447/pexels-photo-3993447.jpeg?auto=compress&cs=tinysrgb&w=1300',
-  wash:
-    'https://images.pexels.com/photos/3993467/pexels-photo-3993467.jpeg?auto=compress&cs=tinysrgb&w=1300',
-  color:
-    'https://images.pexels.com/photos/3993315/pexels-photo-3993315.jpeg?auto=compress&cs=tinysrgb&w=1300',
 }
 
-const videos = [
-  { src: '/assets/videos/salon-01.mp4', label: 'Salon hazırlığı' },
-  { src: '/assets/videos/salon-02.mp4', label: 'Saç uygulaması' },
-  { src: '/assets/videos/salon-03.mp4', label: 'Renk ve bakım' },
-  { src: '/assets/videos/salon-04.mp4', label: 'Line & İba atmosferi' },
-  { src: '/assets/videos/salon-05.mp4', label: 'Final görünüm' },
+const galleryVideos = [
+  {
+    src: '/assets/videos/2026/salon-finish-01.mp4',
+    poster: '/assets/videos/2026/salon-finish-01-poster.jpg',
+  },
+  {
+    src: '/assets/videos/2026/archive-02.mp4',
+    poster: '/assets/videos/2026/salon-02-poster.jpg',
+  },
+  {
+    src: '/assets/videos/2026/salon-finish-02.mp4',
+    poster: '/assets/videos/2026/salon-finish-02-poster.jpg',
+  },
+  {
+    src: '/assets/videos/2026/archive-03.mp4',
+    poster: '/assets/videos/2026/salon-03-poster.jpg',
+  },
+  {
+    src: '/assets/videos/2026/collection-hero.mp4',
+    poster: '/assets/videos/2026/collection-hero-poster.jpg',
+  },
+  {
+    src: '/assets/videos/2026/archive-04.mp4',
+    poster: '/assets/videos/2026/salon-04-poster.jpg',
+  },
+  {
+    src: '/assets/videos/2026/salon-finish-03.mp4',
+    poster: '/assets/videos/2026/salon-finish-03-poster.jpg',
+  },
+  {
+    src: '/assets/videos/2026/archive-05.mp4',
+    poster: '/assets/videos/2026/salon-05-poster.jpg',
+  },
+  {
+    src: '/assets/videos/2026/contact-hero.mp4',
+    poster: '/assets/videos/2026/contact-hero-poster.jpg',
+  },
+  {
+    src: '/assets/videos/2026/archive-01.mp4',
+    poster: '/assets/videos/2026/home-feature-poster.jpg',
+  },
 ]
 
 const copy: Record<Lang, Copy> = {
@@ -183,6 +221,18 @@ const copy: Record<Lang, Copy> = {
       title: 'Salonumuzdan gerçek anlar.',
       intro:
         'Line & İba’daki uygulamalar, salon atmosferi ve hazırlık süreçlerinden seçilmiş kısa videolar.',
+      items: [
+        'Uzun katlar & ışıltı',
+        'Saç uygulaması',
+        'Yumuşak dalga & tonlama',
+        'Renk & bakım',
+        'Parlak sarı dalgalar',
+        'Salon atmosferi',
+        'Kesim & final görünüm',
+        'Final dokunuş',
+        'Keskin bob & sarı ton',
+        'Hazırlık ritüeli',
+      ],
     },
     instagramFollow: {
       label: 'Bizi Takip Edin',
@@ -312,6 +362,18 @@ const copy: Record<Lang, Copy> = {
       title: 'Real moments from our salon.',
       intro:
         'Short videos from treatments, salon atmosphere and preparation at Line & Iba.',
+      items: [
+        'Long layers & dimension',
+        'Hair application',
+        'Soft waves & toning',
+        'Colour & care',
+        'Glossy blonde waves',
+        'Salon atmosphere',
+        'Cut & final look',
+        'Finishing touch',
+        'Sharp bob & blonde tone',
+        'Preparation ritual',
+      ],
     },
     instagramFollow: {
       label: 'Follow Us',
@@ -573,21 +635,17 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
             </a>
           </div>
           <div className="editorial-stack js-reveal">
-            <img className="portrait-main" src={images.portrait} alt="" />
+            <img className="portrait-main" src={images.philosophyMain} alt="" loading="lazy" />
             <div className="mini-row">
-              <img src={images.ahmet} alt="" />
-              <img src={images.elif} alt="" />
-              <img src={images.merve} alt="" />
+              {images.philosophyMini.map((image) => (
+                <img src={image} alt="" loading="lazy" key={image} />
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       <ServicesStrip t={t} nav={nav} />
-      <section className="wide-photo js-reveal">
-        <video src={videos[0].src} autoPlay muted loop playsInline preload="metadata" aria-label={videos[0].label} />
-      </section>
-      <GalleryTeaser t={t} />
       <InstagramFollowBanner t={t} />
       <CtaBand t={t} />
     </>
@@ -630,11 +688,11 @@ function ServicesStrip({ t, nav }: { t: Copy; nav: (href: string) => (event: Rea
 function ServicesPage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void }) {
   return (
     <>
-      <PageHero title={t.services.title} image={images.wash} />
+      <PageHero title={t.services.title} image={images.servicesHero} />
       <ServicesStrip t={t} nav={nav} />
       <section className="featured-service section-pad">
         <div className="container feature-box js-reveal">
-          <img src={images.color} alt="" />
+          <img src={images.servicesFeatured} alt="" loading="lazy" />
           <div>
             <p className="eyebrow">Line & İba Signature</p>
             <h2>{t.services.featuredTitle}</h2>
@@ -653,7 +711,7 @@ function ServicesPage({ t, nav }: { t: Copy; nav: (href: string) => (event: Reac
 function AboutPage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void }) {
   return (
     <>
-      <PageHero title={t.about.title} image={images.salon} />
+      <PageHero title={t.about.title} image={images.aboutHero} />
       <section className="about-intro section-pad">
         <div className="container narrow-copy js-reveal">
           <p className="eyebrow">{t.about.eyebrow}</p>
@@ -722,7 +780,7 @@ function PartnerPage({
 function GalleryPage({ t }: { t: Copy }) {
   return (
     <>
-      <PageHero title={t.gallery.title} image={images.portrait} />
+      <PageHero title={t.gallery.title} image={images.collectionHero} />
       <GalleryTeaser t={t} />
       <InstagramFollowBanner t={t} />
     </>
@@ -739,10 +797,18 @@ function GalleryTeaser({ t }: { t: Copy }) {
           <p>{t.gallery.intro}</p>
         </div>
         <div className="insta-grid">
-          {videos.map((video) => (
+          {galleryVideos.map((video, index) => (
             <figure className="video-tile" key={video.src}>
-              <video src={video.src} autoPlay muted loop playsInline preload="metadata" aria-label={video.label} />
-              <figcaption>{video.label}</figcaption>
+              <video
+                src={video.src}
+                poster={video.poster}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label={t.gallery.items[index]}
+              />
             </figure>
           ))}
         </div>
@@ -776,7 +842,7 @@ function InstagramFollowBanner({ t }: { t: Copy }) {
 function ContactPage({ t }: { t: Copy }) {
   return (
     <>
-      <PageHero title={t.contact.title} image={images.salon} />
+      <PageHero title={t.contact.title} image={images.contactHero} />
       <section className="contact-page section-pad">
         <div className="container contact-grid">
           <div className="js-reveal">
@@ -811,7 +877,7 @@ function ContactPage({ t }: { t: Copy }) {
 function PageHero({ title, image }: { title: string; image: string }) {
   return (
     <section className="page-hero">
-      <img className="js-page-in" src={image} alt="" />
+      <img className="page-hero__media js-page-in" src={image} alt="" />
       <div className="page-hero__copy">
         <h1 className="js-page-in">{title}</h1>
       </div>
