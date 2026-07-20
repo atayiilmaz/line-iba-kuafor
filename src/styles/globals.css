@@ -460,6 +460,10 @@ p {
   margin-inline: auto;
 }
 
+.section-heading p:not(.eyebrow) + p:not(.eyebrow) {
+  margin-top: 18px;
+}
+
 .service-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -588,10 +592,6 @@ p {
 
 .narrow-copy p:not(.eyebrow) {
   margin-inline: auto;
-}
-
-.partners {
-  padding-top: 0;
 }
 
 .partner-grid {

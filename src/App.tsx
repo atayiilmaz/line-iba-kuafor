@@ -49,11 +49,9 @@ type Copy = {
     featuredBody: string
   }
   about: {
-    eyebrow: string
     title: string
-    intro: string
     partnersTitle: string
-    partnersIntro: string
+    partnersIntro: string[]
     detailCta: string
   }
   gallery: {
@@ -176,9 +174,11 @@ const copy: Record<Lang, Copy> = {
     philosophy: {
       title: 'Felsefemiz',
       body: [
-        'Line & İba’da güzellik, hızlı bir işlem değil; doğru dinleme, doğru teknik ve sakin bir ritüeldir.',
-        'Saçın dokusuna, yüzün oranına ve günlük hayatına göre şekillenen bir sonuç hedefleriz. Az konuşan, çok iyi çalışan bir salon dili kurarız.',
-        'Üç ortağın ortak standardı: temiz işçilik, doğal bitiş ve misafirin kendisi gibi hissettiği bir görünüm.',
+        'Bizim için kuaförlük, yalnızca saç kesmek, renklendirmek ya da şekillendirmek değildir. Her misafirimizin kendini en iyi hissettiği, karakterini yansıtan ve özgüvenini ortaya çıkaran bir görünüm tasarlamak, işimizin en değerli parçasıdır.',
+        'LİNE&İBA olarak her dokunuşun bir sanat eseri olduğuna inanıyoruz. Bu nedenle her müşterimizi dikkatle dinliyor, yüz hatlarını, yaşam tarzını ve kişisel stilini analiz ederek tamamen ona özel bir deneyim sunuyoruz. Bizim için gerçek lüks; kişiye özel hizmet, detaylara gösterilen özen ve kusursuz sonuçtur.',
+        'Dünyadaki trendleri yakından takip ederken, modayı birebir kopyalamak yerine onu misafirlerimizin karakteriyle buluşturuyoruz. Sürekli eğitim, yenilikçi bakış açısı ve gelişime olan bağlılığımız sayesinde her zaman bir adım önde olmayı hedefliyoruz.',
+        'Salonumuzun temelinde güven, samimiyet, estetik ve kalite vardır. Buradan ayrılan herkesin yalnızca saçından değil, kendini hissetme biçiminden de memnun ayrılması en büyük motivasyonumuzdur.',
+        'Çünkü biz, saçın bir görünümden çok daha fazlası olduğuna inanıyoruz. Saç; bir duruş, bir ifade ve kişinin kendini anlatma biçimidir. LİNE&İBA’da bu hikâyeyi birlikte yazıyor, her dokunuşumuzla güzelliği sanata dönüştürüyoruz.',
       ],
       cta: 'Devamını Oku',
     },
@@ -215,13 +215,13 @@ const copy: Record<Lang, Copy> = {
         'Doğal ışıltı, yumuşak geçiş ve saç sağlığını koruyan planlama. Renk uygulamasında hedefimiz fotoğraf için değil, gündelik ışıkta iyi görünen saçtır.',
     },
     about: {
-      eyebrow: 'Hikayemiz',
       title: 'Üç ortağın aynı salonda buluşan ustalığı.',
-      intro:
-        'Line & İba, üç farklı mesleki yolculuğun Caddebostan’da birleşmesiyle kuruldu. Her ortak kendi disiplinini, müşteriyle kurduğu dili ve teknik deneyimini salona taşır.',
-      partnersTitle: 'Ortaklar',
-      partnersIntro:
-        'Müşteri, her ortağın hikayesine ve deneyim alanlarına ayrı ayrı ulaşabilir. Ortakların profillerinde deneyim çizgileri detaylandırıldı.',
+      partnersTitle: 'Üç Ortağın Hikâyesi',
+      partnersIntro: [
+        '2020 yılında Ahmet Yılmaz ve Ergün Sarıca, ortak vizyonumuz ve saç sanatına duyduğumuz büyük tutkuyla Line Cadde’yi kurduk. Kurulduğumuz ilk günden itibaren amacımız; sadece kaliteli hizmet sunan bir kuaför salonu olmak değil, yaratıcılığı, estetik anlayışı ve sürekli gelişimi merkeze alan bir marka oluşturmaktı.',
+        'Bu vizyon, 2024 yılında İBA markasının kurucusu İbrahim Yılmaz’ın üçüncü ortak olarak aramıza katılmasıyla daha da güçlendi. Farklı deneyimlerimizi, uzmanlık alanlarımızı ve sanatsal bakış açılarımızı bir araya getirerek, misafirlerimize her zaman en yenilikçi ve en kaliteli hizmeti sunmayı hedefledik.',
+        'Bugün LİNE&İBA, yalnızca bir kuaför salonu değil; saç sanatına yön veren, trendleri yakından takip eden ve kendi çizgisini oluşturan, sektörde tanınan ve güven duyulan bir marka olarak hizmet vermeye devam etmektedir.',
+      ],
       detailCta: 'Deneyimlerine Bak',
     },
     gallery: {
@@ -321,9 +321,11 @@ const copy: Record<Lang, Copy> = {
     philosophy: {
       title: 'Philosophy',
       body: [
-        'At Line & Iba, beauty is not a rushed service. It is careful listening, precise technique and a calm ritual.',
-        'Every result is shaped around hair texture, face structure and daily routine. The salon language is quiet, focused and exact.',
-        'The three partners share one standard: clean craft, natural finish and a look that still feels like the guest.',
+        'For us, hairdressing is not simply about cutting, colouring or styling hair. The most valuable part of our work is creating a look that helps every guest feel their best, reflects their character and brings out their confidence.',
+        'At LINE&IBA, we believe that every touch is a work of art. That is why we listen carefully to every guest and offer a completely personal experience by considering their facial features, lifestyle and individual style. To us, true luxury means personalised service, meticulous attention to detail and flawless results.',
+        'We follow global trends closely, but rather than copying fashion, we bring it together with the character of each guest. Through continuous education, an innovative perspective and our commitment to improvement, we always aim to remain one step ahead.',
+        'Trust, sincerity, aesthetics and quality are the foundations of our salon. Our greatest motivation is for every guest to leave satisfied not only with their hair, but also with the way they feel about themselves.',
+        'We believe that hair is far more than appearance. It is an attitude, a form of expression and a way of telling your story. At LINE&IBA, we write that story together and transform beauty into art with every touch.',
       ],
       cta: 'Read More',
     },
@@ -360,13 +362,13 @@ const copy: Record<Lang, Copy> = {
         'Natural light, soft transitions and planning that protects hair health. The goal is hair that works in real daylight, not only in photographs.',
     },
     about: {
-      eyebrow: 'Our Story',
       title: 'Three partners, one shared craft.',
-      intro:
-        'Line & Iba was founded when three different professional journeys met in Caddebostan. Each partner brings a distinct discipline, client language and technical background.',
-      partnersTitle: 'Partners',
-      partnersIntro:
-        'Guests can open each partner profile to read their story and explore their experience.',
+      partnersTitle: 'The Story of Three Partners',
+      partnersIntro: [
+        'In 2020, Ahmet Yılmaz and Ergün Sarıca founded Line Cadde, united by a shared vision and a deep passion for the art of hair. From the very beginning, our aim was not simply to become a salon known for quality service, but to build a brand centred on creativity, aesthetics and continuous development.',
+        'This vision grew even stronger in 2024, when İbrahim Yılmaz, founder of the İBA brand, joined us as our third partner. By bringing together our different experiences, areas of expertise and artistic perspectives, we set out to offer our guests the most innovative and highest-quality service at all times.',
+        'Today, LINE&IBA is more than a hair salon. It continues to serve as a recognised and trusted brand in the industry—one that helps shape the art of hair, follows trends closely and creates a distinctive style of its own.',
+      ],
       detailCta: 'View Experience',
     },
     gallery: {
@@ -743,19 +745,12 @@ function AboutPage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.M
   return (
     <>
       <PageHero title={t.about.title} image={images.aboutHero} />
-      <section className="about-intro section-pad">
-        <div className="container narrow-copy js-reveal">
-          <p className="eyebrow">{t.about.eyebrow}</p>
-          <h2>{t.about.title}</h2>
-          <p>{t.about.intro}</p>
-        </div>
-      </section>
       <section className="partners section-pad">
         <div className="container">
           <div className="section-heading js-reveal">
             <p className="eyebrow">{t.about.partnersTitle}</p>
             <h2>{t.about.partnersTitle}</h2>
-            <p>{t.about.partnersIntro}</p>
+            {t.about.partnersIntro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
           <div className="partner-grid">
             {t.partners.map((partner) => (
