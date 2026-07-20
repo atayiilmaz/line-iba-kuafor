@@ -4,7 +4,7 @@ import { LanguageProvider, useLang } from './lib/i18n'
 import { brand, contactInfo, social, type Lang } from './data/site'
 
 type RouteKey = 'home' | 'services' | 'about' | 'partner' | 'gallery' | 'contact'
-type PartnerKey = 'ahmet' | 'elif' | 'merve'
+type PartnerKey = 'ahmet' | 'ergun' | 'ibrahim'
 
 type Partner = {
   key: PartnerKey
@@ -78,11 +78,11 @@ type Copy = {
 }
 
 const images = {
-  hero: '/assets/photos/hero-bridal.webp',
+  hero: '/assets/photos/IMG_7858.PNG',
   philosophyMain: '/assets/photos/philosophy-blonde.webp',
   philosophyMini: [
     '/assets/photos/philosophy-red-hair.webp',
-    '/assets/photos/philosophy-brunette.webp',
+    '/assets/photos/IMG_8443.JPG',
     '/assets/photos/philosophy-volume.webp',
   ],
   servicesHero: '/assets/photos/services-blonde.webp',
@@ -94,9 +94,9 @@ const images = {
     'https://images.pexels.com/photos/35844833/pexels-photo-35844833.png?auto=compress&cs=tinysrgb&w=1600',
   ahmet:
     'https://images.pexels.com/photos/8867400/pexels-photo-8867400.jpeg?auto=compress&cs=tinysrgb&w=1100',
-  elif:
+  ergun:
     'https://images.pexels.com/photos/3993320/pexels-photo-3993320.jpeg?auto=compress&cs=tinysrgb&w=1100',
-  merve:
+  ibrahim:
     'https://images.pexels.com/photos/20046793/pexels-photo-20046793.jpeg?auto=compress&cs=tinysrgb&w=1100',
 }
 
@@ -213,7 +213,7 @@ const copy: Record<Lang, Copy> = {
         'Line & İba, üç farklı mesleki yolculuğun Caddebostan’da birleşmesiyle kuruldu. Her ortak kendi disiplinini, müşteriyle kurduğu dili ve teknik deneyimini salona taşır.',
       partnersTitle: 'Ortaklar',
       partnersIntro:
-        'Müşteri, her ortağın hikayesine ve deneyim alanlarına ayrı ayrı ulaşabilir. Ahmet’in profilinde deneyim çizgisi örnek olarak detaylandırıldı.',
+        'Müşteri, her ortağın hikayesine ve deneyim alanlarına ayrı ayrı ulaşabilir. Ortakların profillerinde deneyim çizgileri detaylandırıldı.',
       detailCta: 'Deneyimlerine Bak',
     },
     gallery: {
@@ -262,24 +262,24 @@ const copy: Record<Lang, Copy> = {
         quote: 'İyi saç, salondan çıktıktan üç hafta sonra da formunu koruyandır.',
       },
       {
-        key: 'elif',
-        slug: 'elif-kara',
-        name: 'Elif Kara',
+        key: 'ergun',
+        slug: 'ergun-sarica',
+        name: 'Ergün Sarıca',
         role: 'Kurucu Ortak / Renk Uzmanı',
-        image: images.elif,
+        image: images.ergun,
         intro:
-          'Elif, renklendirme ve bakım protokollerinde doğal geçiş, parlak bitiş ve saç sağlığı dengesine odaklanır.',
+          'Ergün, renklendirme ve bakım protokollerinde doğal geçiş, parlak bitiş ve saç sağlığı dengesine odaklanır.',
         experience: ['Balayage ve doğal renk geçişleri', 'Bakım protokolü planlama', 'Tonlama ve parlaklık servisleri', 'Saç analizi danışmanlığı'],
         quote: 'Renk, saçın kendi hareketini saklamamalı; onu görünür kılmalı.',
       },
       {
-        key: 'merve',
-        slug: 'merve-inal',
-        name: 'Merve İnal',
+        key: 'ibrahim',
+        slug: 'ibrahim-yilmaz',
+        name: 'İbrahim Yılmaz',
         role: 'Kurucu Ortak / Stil & Makyaj',
-        image: images.merve,
+        image: images.ibrahim,
         intro:
-          'Merve, özel gün hazırlıkları, makyaj ve final styling tarafında bütün görünümün dengeli çalışmasını sağlar.',
+          'İbrahim, özel gün hazırlıkları, makyaj ve final styling tarafında bütün görünümün dengeli çalışmasını sağlar.',
         experience: ['Gelin başı ve prova süreci', 'Profesyonel makyaj', 'Topuz ve editorial styling', 'Tırnak servis koordinasyonu'],
         quote: 'Final görünüm abartıyla değil, doğru dengeyle akılda kalır.',
       },
@@ -354,7 +354,7 @@ const copy: Record<Lang, Copy> = {
         'Line & Iba was founded when three different professional journeys met in Caddebostan. Each partner brings a distinct discipline, client language and technical background.',
       partnersTitle: 'Partners',
       partnersIntro:
-        'Guests can open each partner profile and read their story. Ahmet’s profile includes a detailed experience example.',
+        'Guests can open each partner profile to read their story and explore their experience.',
       detailCta: 'View Experience',
     },
     gallery: {
@@ -403,24 +403,24 @@ const copy: Record<Lang, Copy> = {
         quote: 'Good hair keeps its form three weeks after leaving the salon.',
       },
       {
-        key: 'elif',
-        slug: 'elif-kara',
-        name: 'Elif Kara',
+        key: 'ergun',
+        slug: 'ergun-sarica',
+        name: 'Ergün Sarıca',
         role: 'Founding Partner / Color Specialist',
-        image: images.elif,
+        image: images.ergun,
         intro:
-          'Elif focuses on natural color transitions, glossy finishes and the balance between beauty and hair health.',
+          'Ergün focuses on natural color transitions, glossy finishes and the balance between beauty and hair health.',
         experience: ['Balayage and soft transitions', 'Care protocol planning', 'Toning and shine services', 'Hair analysis consultation'],
         quote: 'Color should not hide hair movement. It should reveal it.',
       },
       {
-        key: 'merve',
-        slug: 'merve-inal',
-        name: 'Merve İnal',
+        key: 'ibrahim',
+        slug: 'ibrahim-yilmaz',
+        name: 'İbrahim Yılmaz',
         role: 'Founding Partner / Style & Makeup',
-        image: images.merve,
+        image: images.ibrahim,
         intro:
-          'Merve shapes event preparation, makeup and final styling so the full look feels balanced and intentional.',
+          'İbrahim shapes event preparation, makeup and final styling so the full look feels balanced and intentional.',
         experience: ['Bridal hair and trial process', 'Professional makeup', 'Updo and editorial styling', 'Nail service coordination'],
         quote: 'A final look is remembered through balance, not excess.',
       },
@@ -635,7 +635,9 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
             </a>
           </div>
           <div className="editorial-stack js-reveal">
-            <img className="portrait-main" src={images.philosophyMain} alt="" loading="lazy" />
+            <div className="portrait-main-frame">
+              <img className="portrait-main" src={images.philosophyMain} alt="" loading="lazy" />
+            </div>
             <div className="mini-row">
               {images.philosophyMini.map((image) => (
                 <img src={image} alt="" loading="lazy" key={image} />

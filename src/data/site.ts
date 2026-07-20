@@ -25,7 +25,7 @@ export const contactInfo = {
   phoneDisplay: '0216 407 27 77',
   phoneHref: 'tel:+902164072777',
   mapsUrl:
-    'https://www.google.com/maps/search/?api=1&query=Line+%26+%C4%B0ba+Kuaf%C3%B6r+Caddebostan+%C3%96mer+Pa%C5%9Fa+Sokak',
+    'https://www.google.com/maps/place/Line+Cadde/@40.9691202,29.0629322,17z/data=!3m1!4b1!4m6!3m5!1s0x14cac79675559a79:0x451f486bb0ee14e3!8m2!3d40.9691162!4d29.0655071!16s%2Fg%2F11j7dc6v55?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D',
 }
 
 export const social = {
@@ -226,17 +226,17 @@ const tr: SiteContent = {
           image: '/assets/team/ortak-1.jpg',
         },
         {
-          name: 'İsim Soyad',
+          name: 'Ergün Sarıca',
           role: 'Kurucu Ortak',
           story:
-            'İkinci ortağımızın yolculuğu: ilk adımları, ustalık yılları ve üç yolun kesişme anı. Metin, kendi anlatımıyla bu alana eklenecek.',
+            'Ergün’ün yolculuğu: ilk adımları, ustalık yılları ve üç yolun kesişme anı. Metin, kendi anlatımıyla bu alana eklenecek.',
           image: '/assets/team/ortak-2.jpg',
         },
         {
-          name: 'İsim Soyad',
+          name: 'İbrahim Yılmaz',
           role: 'Kurucu Ortak',
           story:
-            'Üçüncü ortağımızın hikayesi: mesleğe başlangıcı, deneyimleri ve birleşme kararı. Metin, kendi anlatımıyla bu alana eklenecek.',
+            'İbrahim’in hikayesi: mesleğe başlangıcı, deneyimleri ve birleşme kararı. Metin, kendi anlatımıyla bu alana eklenecek.',
           image: '/assets/team/ortak-3.jpg',
         },
       ],
@@ -427,17 +427,17 @@ const en: SiteContent = {
           image: '/assets/team/ortak-1.jpg',
         },
         {
-          name: 'Full Name',
+          name: 'Ergün Sarıca',
           role: 'Co-Founder',
           story:
-            'Our second partner’s journey: first steps, years of mastery, and the moment three paths crossed. The text will be added here in their own words.',
+            'Ergün’s journey: first steps, years of mastery, and the moment three paths crossed. His story will be added here in his own words.',
           image: '/assets/team/ortak-2.jpg',
         },
         {
-          name: 'Full Name',
+          name: 'İbrahim Yılmaz',
           role: 'Co-Founder',
           story:
-            'Our third partner’s story: how the craft began, the experience gathered, and the decision to join forces. The text will be added here in their own words.',
+            'İbrahim’s story: how the craft began, the experience gathered, and the decision to join forces. His story will be added here in his own words.',
           image: '/assets/team/ortak-3.jpg',
         },
       ],
