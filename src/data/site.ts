@@ -18,20 +18,20 @@ export const brand = {
 }
 
 /* ---------- Dilden bağımsız iletişim & sosyal medya ---------- */
-// Instagram biyosundaki hat: (0216) 467-8805. WhatsApp hattı değişirse sadece burayı güncelleyin.
-const WHATSAPP_NUMBER = '902164678805'
+const WHATSAPP_NUMBER = '905333212283'
 
 export const contactInfo = {
   address: 'Caddebostan Mah. Ömer Paşa Sok. No:1 Can Apt. Göztepe / İstanbul',
-  phoneDisplay: '0850 303 68 76',
-  phoneHref: 'tel:+908503036876',
+  phoneDisplay: '0216 407 27 77',
+  phoneHref: 'tel:+902164072777',
   mapsUrl:
     'https://www.google.com/maps/search/?api=1&query=Line+%26+%C4%B0ba+Kuaf%C3%B6r+Caddebostan+%C3%96mer+Pa%C5%9Fa+Sokak',
 }
 
 export const social = {
-  instagramUrl: 'https://www.instagram.com/ibakuafor/',
-  instagramHandle: '@ibakuafor',
+  instagramUrl: 'https://www.instagram.com/linecadde/',
+  instagramHandle: '@linecadde',
+  whatsappDisplay: '+90 533 321 22 83',
   whatsappUrl: (message: string) =>
     `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
 }

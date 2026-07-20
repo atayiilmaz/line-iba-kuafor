@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { LanguageProvider, useLang } from './lib/i18n'
 import { brand, contactInfo, social, type Lang } from './data/site'
@@ -789,6 +789,62 @@ function GalleryPage({ t }: { t: Copy }) {
 }
 
 function GalleryTeaser({ t }: { t: Copy }) {
+  const gridRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const videos = Array.from(gridRef.current?.querySelectorAll('video') ?? [])
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (reducedMotion) return
+
+    const playVideo = (video: HTMLVideoElement) => {
+      video.muted = true
+      video.defaultMuted = true
+      void video.play().catch(() => {
+        // Mobil tarayıcı henüz yeterli veri indirmediyse canplay olayı tekrar dener.
+      })
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement
+          if (entry.isIntersecting) playVideo(video)
+          else video.pause()
+        })
+      },
+      { rootMargin: '120px 0px', threshold: 0.15 },
+    )
+
+    const handleCanPlay = (event: Event) => {
+      const video = event.currentTarget as HTMLVideoElement
+      const rect = video.getBoundingClientRect()
+      if (rect.bottom >= -120 && rect.top <= window.innerHeight + 120) playVideo(video)
+    }
+
+    const resumeVisibleVideos = () => {
+      if (document.visibilityState !== 'visible') return
+      videos.forEach((video) => {
+        const rect = video.getBoundingClientRect()
+        if (rect.bottom >= -120 && rect.top <= window.innerHeight + 120) playVideo(video)
+      })
+    }
+
+    videos.forEach((video) => {
+      video.addEventListener('canplay', handleCanPlay)
+      observer.observe(video)
+    })
+    document.addEventListener('visibilitychange', resumeVisibleVideos)
+    window.addEventListener('pageshow', resumeVisibleVideos)
+
+    return () => {
+      observer.disconnect()
+      videos.forEach((video) => video.removeEventListener('canplay', handleCanPlay))
+      document.removeEventListener('visibilitychange', resumeVisibleVideos)
+      window.removeEventListener('pageshow', resumeVisibleVideos)
+    }
+  }, [])
+
   return (
     <section className="gallery section-pad">
       <div className="container">
@@ -797,13 +853,12 @@ function GalleryTeaser({ t }: { t: Copy }) {
           <h2>{t.gallery.title}</h2>
           <p>{t.gallery.intro}</p>
         </div>
-        <div className="insta-grid">
+        <div className="insta-grid" ref={gridRef}>
           {galleryVideos.map((video, index) => (
             <figure className="video-tile" key={video.src}>
               <video
                 src={video.src}
                 poster={video.poster}
-                autoPlay
                 muted
                 loop
                 playsInline
@@ -866,7 +921,7 @@ function ContactPage({ t }: { t: Copy }) {
             </div>
             <a href={social.whatsappUrl('Merhaba, Line & İba Kuaför için randevu almak istiyorum.')} target="_blank" rel="noreferrer">
               <span>WhatsApp</span>
-              {t.book}
+              {social.whatsappDisplay}
             </a>
           </div>
         </div>
