@@ -223,6 +223,7 @@ p {
 }
 
 .desktop-nav a,
+.masthead-booking,
 .menu-toggle {
   color: #111;
   font-size: 12px;
@@ -250,6 +251,17 @@ p {
 .desktop-nav a:hover::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+.nav-booking {
+  margin-block: -10px;
+  padding: 10px 16px;
+  color: #fff;
+  background: #111;
+}
+
+.masthead-booking {
+  justify-self: end;
 }
 
 .menu-toggle {
@@ -997,13 +1009,37 @@ p {
   background: #0bbf59;
   border-radius: 50%;
   box-shadow: 0 18px 34px rgba(0, 0, 0, 0.22);
+  transition: transform 260ms var(--ease), background 260ms var(--ease), box-shadow 260ms var(--ease);
 }
+
+.whatsapp:hover,
+.whatsapp:focus-visible {
+  background: #079f49;
+  box-shadow: 0 24px 42px rgba(0, 0, 0, .3);
+  transform: translateY(-5px) scale(1.07);
+}
+
+.whatsapp:focus-visible { outline: 2px solid #0bbf59; outline-offset: 4px; }
 
 .whatsapp svg {
   width: 29px;
   height: 29px;
   fill: currentColor;
+  transition: transform 260ms var(--ease);
 }
+
+.whatsapp:hover svg { transform: rotate(-8deg) scale(1.08); }
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp, .whatsapp:hover, .whatsapp svg, .whatsapp:hover svg { transform: none; transition: none; }
+}
+
+.privacy-page { padding-top: calc(var(--header-h) + 90px); background: #f4f2ee; }
+.privacy-copy { max-width: 820px; padding: clamp(32px, 6vw, 72px); background: #fff; border: 1px solid #111; }
+.privacy-copy h1 { margin: 14px 0 28px; font-size: clamp(42px, 7vw, 74px); }
+.privacy-copy h2 { margin: 44px 0 14px; font-size: 28px; }
+.privacy-note { margin-top: 44px; padding: 18px; border: 1px solid #b28a48; background: #fff8e9; }
+.route-loader { min-height: 70vh; display: grid; place-items: center; padding-top: var(--header-h); font-size: 12px; font-weight: 800; text-transform: uppercase; }
 
 .js-page-in,
 .js-reveal {
@@ -1024,6 +1060,10 @@ p {
   }
 
   .desktop-nav {
+    display: none;
+  }
+
+  .masthead-booking {
     display: none;
   }
 

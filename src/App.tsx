@@ -1,9 +1,12 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { LanguageProvider, useLang } from './lib/i18n'
 import { brand, contactInfo, social, type Lang } from './data/site'
 
-type RouteKey = 'home' | 'services' | 'about' | 'partner' | 'gallery' | 'contact'
+const BookingPage = lazy(() => import('./components/booking/BookingPage').then((module) => ({ default: module.BookingPage })))
+const AdminPage = lazy(() => import('./components/admin/AdminPage').then((module) => ({ default: module.AdminPage })))
+
+type RouteKey = 'home' | 'services' | 'about' | 'partner' | 'gallery' | 'contact' | 'booking' | 'privacy' | 'admin'
 type PartnerKey = 'ahmet' | 'ergun' | 'ibrahim'
 
 type Partner = {
@@ -40,6 +43,7 @@ type Copy = {
     eyebrow: string
     title: string
     intro: string
+    benefitsLabel: string
     items: { title: string; body: string; benefits: string[] }[]
     featuredTitle: string
     featuredBody: string
@@ -152,6 +156,9 @@ const copy: Record<Lang, Copy> = {
       partner: 'Ortaklar',
       gallery: 'Koleksiyon',
       contact: 'İletişim',
+      booking: 'Randevu',
+      privacy: 'KVKK',
+      admin: 'Yönetim',
     },
     langLabel: 'Dil',
     menu: 'Menü',
@@ -180,6 +187,7 @@ const copy: Record<Lang, Copy> = {
       title: 'En çok tercih edilen hizmetler',
       intro:
         'Tek ekranda anlaşılır, salonda detaylandırılır. Her işlem öncesi saç analizi ve beklenti konuşması yapılır.',
+      benefitsLabel: 'Verilen Hizmetler',
       items: [
         {
           title: 'Kesim & Stil',
@@ -199,7 +207,7 @@ const copy: Record<Lang, Copy> = {
         {
           title: 'Tırnak & Makyaj',
           body: 'Bakımlı eller, net bitişler ve özel gün makyajı için tamamlayıcı servis.',
-          benefits: ['Manikür', 'Kalıcı oje', 'Profesyonel makyaj'],
+          benefits: ['Manikür', 'Pedikür', 'Kalıcı oje', 'Profesyonel makyaj', 'Kirpik'],
         },
       ],
       featuredTitle: 'Öne çıkan işlem: renk tasarımı',
@@ -293,6 +301,9 @@ const copy: Record<Lang, Copy> = {
       partner: 'Partners',
       gallery: 'Collection',
       contact: 'Contact',
+      booking: 'Booking',
+      privacy: 'Privacy',
+      admin: 'Management',
     },
     langLabel: 'Language',
     menu: 'Menu',
@@ -321,6 +332,7 @@ const copy: Record<Lang, Copy> = {
       title: 'Most requested services',
       intro:
         'Clear online, detailed in the salon. Every service begins with hair analysis and a short expectation consultation.',
+      benefitsLabel: 'Services Provided',
       items: [
         {
           title: 'Cut & Style',
@@ -340,7 +352,7 @@ const copy: Record<Lang, Copy> = {
         {
           title: 'Nails & Makeup',
           body: 'Complementary services for polished hands, clean finishes and event makeup.',
-          benefits: ['Manicure', 'Permanent polish', 'Professional makeup'],
+          benefits: ['Manicure', 'Pedicure', 'Permanent polish', 'Professional makeup', 'Lashes'],
         },
       ],
       featuredTitle: 'Featured service: color design',
@@ -428,7 +440,7 @@ const copy: Record<Lang, Copy> = {
   },
 }
 
-const routeOrder: RouteKey[] = ['home', 'services', 'about', 'gallery', 'contact']
+const routeOrder: RouteKey[] = ['home', 'services', 'about', 'gallery', 'contact', 'booking', 'privacy', 'admin']
 
 function App() {
   return (
@@ -459,18 +471,22 @@ function LineIbaSite() {
       },
       (context) => {
         const reduceMotion = context.conditions?.reduceMotion
+        const pageItems = Array.from(document.querySelectorAll<HTMLElement>('.js-page-in'))
+        const revealItems = Array.from(document.querySelectorAll<HTMLElement>('.js-reveal'))
         if (reduceMotion) {
-          gsap.set('.js-page-in, .js-reveal', { autoAlpha: 1, y: 0 })
+          if (pageItems.length) gsap.set(pageItems, { autoAlpha: 1, y: 0 })
+          if (revealItems.length) gsap.set(revealItems, { autoAlpha: 1, y: 0 })
           return
         }
 
-        gsap.fromTo(
-          '.js-page-in',
-          { autoAlpha: 0, y: 24 },
-          { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08 },
-        )
+        if (pageItems.length) {
+          gsap.fromTo(
+            pageItems,
+            { autoAlpha: 0, y: 24 },
+            { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08 },
+          )
+        }
 
-        const revealItems = Array.from(document.querySelectorAll<HTMLElement>('.js-reveal'))
         const observer = new IntersectionObserver(
           (entries) => {
             for (const entry of entries) {
@@ -488,8 +504,10 @@ function LineIbaSite() {
           { threshold: 0.18 },
         )
 
-        gsap.set(revealItems, { autoAlpha: 0, y: 34 })
-        revealItems.forEach((item) => observer.observe(item))
+        if (revealItems.length) {
+          gsap.set(revealItems, { autoAlpha: 0, y: 34 })
+          revealItems.forEach((item) => observer.observe(item))
+        }
 
         return () => observer.disconnect()
       },
@@ -512,6 +530,8 @@ function LineIbaSite() {
     navigate(href)
   }
 
+  if (route.key === 'admin') return <Suspense fallback={<RouteLoader />}><AdminPage /></Suspense>
+
   return (
     <>
       <SiteHeader t={t} lang={lang} setLang={setLang} nav={nav} />
@@ -521,14 +541,20 @@ function LineIbaSite() {
         {route.key === 'about' && <AboutPage t={t} nav={nav} />}
         {route.key === 'partner' && <PartnerPage t={t} partner={route.partner} nav={nav} />}
         {route.key === 'gallery' && <GalleryPage t={t} />}
-        {route.key === 'contact' && <ContactPage t={t} />}
+        {route.key === 'contact' && <ContactPage t={t} nav={nav} />}
+        {route.key === 'booking' && <Suspense fallback={<RouteLoader />}><BookingPage lang={lang} navigate={nav} /></Suspense>}
+        {route.key === 'privacy' && <PrivacyPage lang={lang} />}
       </main>
       <SiteFooter t={t} lang={lang} setLang={setLang} nav={nav} />
-      <a className="whatsapp" href={social.whatsappUrl('Merhaba, Line & İba Kuaför için randevu almak istiyorum.')} target="_blank" rel="noreferrer" aria-label="WhatsApp">
+      {route.key !== 'booking' && <a className="whatsapp" href={social.whatsappUrl('Merhaba, Line & İba Kuaför için randevu almak istiyorum.')} target="_blank" rel="noreferrer" aria-label="WhatsApp">
         <WhatsAppIcon />
-      </a>
+      </a>}
     </>
   )
+}
+
+function RouteLoader() {
+  return <div className="route-loader" role="status">Yükleniyor…</div>
 }
 
 function SiteHeader({
@@ -543,13 +569,14 @@ function SiteHeader({
   nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void
 }) {
   const [open, setOpen] = useState(false)
-  const links = [
+  const primaryLinks = [
     ['/', t.nav.home],
     ['/hizmetler', t.nav.services],
     ['/hakkimizda', t.nav.about],
     ['/koleksiyon', t.nav.gallery],
     ['/iletisim', t.nav.contact],
   ] as const
+  const links = [...primaryLinks, ['/randevu', t.book] as const]
 
   return (
     <header className="site-head js-page-in">
@@ -570,12 +597,13 @@ function SiteHeader({
           <img className="brand-logo brand-logo--dark" src={brand.logoLight} alt="Line & İba Kuaför" />
         </a>
         <div className="desktop-nav">
-          {links.map(([href, label]) => (
+          {primaryLinks.map(([href, label]) => (
             <a key={href} href={href} onClick={nav(href)}>
               {label}
             </a>
           ))}
         </div>
+        <a className="nav-booking masthead-booking" href="/randevu" onClick={nav('/randevu')}>{t.book}</a>
         <button className="menu-toggle" type="button" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
           <span>{open ? t.close : t.menu}</span>
           <i />
@@ -609,11 +637,11 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
           <h1 className="js-page-in">{t.hero.title}</h1>
           <p className="hero__subtitle js-page-in">{t.hero.subtitle}</p>
           <div className="hero__actions js-page-in">
-            <a className="button button--light" href="/hizmetler" onClick={nav('/hizmetler')}>
-              {t.hero.cta}
+            <a className="button button--light" href="/randevu" onClick={nav('/randevu')}>
+              {t.book}
             </a>
-            <a className="button button--ghost-light" href="/hakkimizda" onClick={nav('/hakkimizda')}>
-              {t.hero.secondary}
+            <a className="button button--ghost-light" href="/hizmetler" onClick={nav('/hizmetler')}>
+              {t.hero.cta}
             </a>
           </div>
         </div>
@@ -650,7 +678,7 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
       <ServicesStrip t={t} nav={nav} />
       <GalleryTeaser t={t} />
       <InstagramFollowBanner t={t} />
-      <CtaBand t={t} />
+      <CtaBand t={t} nav={nav} />
     </>
   )
 }
@@ -669,7 +697,7 @@ function ServicesStrip({ t, nav }: { t: Copy; nav: (href: string) => (event: Rea
             <article className="service-card js-reveal" key={item.title}>
               <h3>{item.title}</h3>
               <p>{item.body}</p>
-              <strong>Faydaları</strong>
+              <strong>{t.services.benefitsLabel}</strong>
               <ul>
                 {item.benefits.map((benefit) => (
                   <li key={benefit}>{benefit}</li>
@@ -700,13 +728,13 @@ function ServicesPage({ t, nav }: { t: Copy; nav: (href: string) => (event: Reac
             <p className="eyebrow">Line & İba Signature</p>
             <h2>{t.services.featuredTitle}</h2>
             <p>{t.services.featuredBody}</p>
-            <a className="button button--light" href="/iletisim" onClick={nav('/iletisim')}>
+            <a className="button button--light" href="/randevu" onClick={nav('/randevu')}>
               {t.book}
             </a>
           </div>
         </div>
       </section>
-      <CtaBand t={t} />
+      <CtaBand t={t} nav={nav} />
     </>
   )
 }
@@ -897,7 +925,7 @@ function InstagramFollowBanner({ t }: { t: Copy }) {
   )
 }
 
-function ContactPage({ t }: { t: Copy }) {
+function ContactPage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void }) {
   return (
     <>
       <PageHero title={t.contact.title} image={images.contactHero} />
@@ -925,6 +953,10 @@ function ContactPage({ t }: { t: Copy }) {
               <span>WhatsApp</span>
               {social.whatsappDisplay}
             </a>
+            <a href="/randevu" onClick={nav('/randevu')}>
+              <span>{t.book}</span>
+              {t.contact.title}
+            </a>
           </div>
         </div>
       </section>
@@ -943,14 +975,14 @@ function PageHero({ title, image }: { title: string; image: string }) {
   )
 }
 
-function CtaBand({ t }: { t: Copy }) {
+function CtaBand({ t, nav }: { t: Copy; nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void }) {
   return (
     <section className="cta-band js-reveal">
       <p className="eyebrow">{t.contact.eyebrow}</p>
       <h2>{t.contact.title}</h2>
       <div>
-        <a className="button button--light" href={social.whatsappUrl('Merhaba, Line & İba Kuaför için randevu almak istiyorum.')} target="_blank" rel="noreferrer">
-          WhatsApp
+        <a className="button button--light" href="/randevu" onClick={nav('/randevu')}>
+          {t.book}
         </a>
         <a className="button button--outline-light" href={contactInfo.phoneHref}>
           {contactInfo.phoneDisplay}
@@ -985,6 +1017,7 @@ function SiteFooter({
           { label: 'Collection', href: '/koleksiyon' },
         ]
   const footerContact = [
+    { label: t.book, href: '/randevu' },
     { label: t.nav.contact, href: '/iletisim' },
     { label: t.contact.directions, href: contactInfo.mapsUrl, external: true },
     {
@@ -1060,6 +1093,30 @@ function InstagramIcon() {
   )
 }
 
+function PrivacyPage({ lang }: { lang: Lang }) {
+  const isTr = lang === 'tr'
+  return (
+    <section className="privacy-page section-pad">
+      <div className="container privacy-copy js-page-in">
+        <p className="eyebrow">{isTr ? 'Randevu Sistemi' : 'Booking System'}</p>
+        <h1>{isTr ? 'KVKK Aydınlatma Metni' : 'Privacy Notice'}</h1>
+        <p className="lead">{isTr
+          ? 'Bu metin, online randevu sırasında paylaştığınız kişisel verilerin nasıl kullanıldığını açıklar.'
+          : 'This notice explains how the personal data you provide during online booking is used.'}</p>
+        <h2>{isTr ? 'İşlenen bilgiler' : 'Data we process'}</h2>
+        <p>{isTr ? 'Ad-soyad, cep telefonu, seçilen hizmet, randevu tarihi ve saati ile isteğe bağlı notunuz işlenir.' : 'We process your name, mobile number, selected service, appointment date and time, and any optional note.'}</p>
+        <h2>{isTr ? 'Amaç ve hukuki sebep' : 'Purpose and legal basis'}</h2>
+        <p>{isTr ? 'Bilgileriniz randevuyu oluşturmak, salon takvimini yönetmek, sizinle iletişim kurmak ve işletmeye WhatsApp bildirimi göndermek amacıyla kullanılır.' : 'Your information is used to create the appointment, manage salon availability, contact you, and notify the business through WhatsApp.'}</p>
+        <h2>{isTr ? 'Saklama ve güvenlik' : 'Retention and security'}</h2>
+        <p>{isTr ? 'Randevu bilgileri 12 ay saklanır, ardından kimlik bilgileri anonimleştirilir. Veriler yalnızca yetkili işletme hesapları tarafından görüntülenebilir.' : 'Booking information is retained for 12 months, after which identifying information is anonymized. Only authorized business accounts can access it.'}</p>
+        <h2>{isTr ? 'Haklarınız ve iletişim' : 'Your rights and contact'}</h2>
+        <p>{isTr ? `Bilgilerinize ilişkin talepleriniz için ${contactInfo.phoneDisplay} numarasından veya ${social.whatsappDisplay} WhatsApp hattından bize ulaşabilirsiniz.` : `For requests about your personal data, contact us at ${contactInfo.phoneDisplay} or through WhatsApp at ${social.whatsappDisplay}.`}</p>
+        <p className="privacy-note">{isTr ? 'Bu metin canlıya geçmeden önce işletmenin hukuk danışmanı tarafından gözden geçirilmelidir.' : 'This notice should be reviewed by the business’s legal adviser before production launch.'}</p>
+      </div>
+    </section>
+  )
+}
+
 function getRoute(path: string, partners: Partner[]): { key: RouteKey; partner: Partner } | { key: Exclude<RouteKey, 'partner'> } {
   const clean = path.replace(/\/$/, '') || '/'
   const partner = partners.find((item) => clean === `/hakkimizda/${item.slug}`)
@@ -1068,6 +1125,9 @@ function getRoute(path: string, partners: Partner[]): { key: RouteKey; partner: 
   if (clean === '/hakkimizda') return { key: 'about' }
   if (clean === '/koleksiyon') return { key: 'gallery' }
   if (clean === '/iletisim') return { key: 'contact' }
+  if (clean === '/randevu') return { key: 'booking' }
+  if (clean === '/kvkk') return { key: 'privacy' }
+  if (clean === '/yonetim' || clean === '/yonetim/randevular') return { key: 'admin' }
   if (!routeOrder.includes(clean.slice(1) as RouteKey)) return { key: 'home' }
   return { key: 'home' }
 }

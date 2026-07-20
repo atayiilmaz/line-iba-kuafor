@@ -7,9 +7,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
+    "test:edge": "deno test supabase/functions/_shared/validation_test.ts",
+    "test:concurrency": "bash scripts/test-booking-concurrency.sh",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.110.7",
     "gsap": "^3.15.0",
     "motion": "^12.42.2",
     "react": "^19.2.7",

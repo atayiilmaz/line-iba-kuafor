@@ -1,0 +1,16 @@
+project_id = "line-cadde-booking"
+
+[functions.booking-availability]
+verify_jwt = false
+
+[functions.booking-create]
+verify_jwt = false
+
+[functions.admin-bookings]
+verify_jwt = false
+
+[functions.send-whatsapp-notifications]
+verify_jwt = false
+
+[functions.whatsapp-webhook]
+verify_jwt = false
