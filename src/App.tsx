@@ -79,10 +79,10 @@ type Copy = {
 
 const images = {
   hero: '/assets/photos/hero-bridal.webp',
-  philosophyMain: '/assets/photos/philosophy-brunette.webp',
+  philosophyMain: '/assets/photos/philosophy-blonde.webp',
   philosophyMini: [
     '/assets/photos/philosophy-red-hair.webp',
-    '/assets/photos/philosophy-blonde.webp',
+    '/assets/photos/philosophy-brunette.webp',
     '/assets/photos/philosophy-volume.webp',
   ],
   servicesHero: '/assets/photos/services-blonde.webp',
@@ -646,6 +646,7 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
       </section>
 
       <ServicesStrip t={t} nav={nav} />
+      <GalleryTeaser t={t} />
       <InstagramFollowBanner t={t} />
       <CtaBand t={t} />
     </>
