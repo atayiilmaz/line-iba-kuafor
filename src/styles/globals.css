@@ -212,10 +212,6 @@ p {
   object-fit: contain;
 }
 
-.brand-logo--dark {
-  filter: invert(1);
-}
-
 .desktop-nav {
   display: flex;
   justify-content: center;
@@ -920,7 +916,6 @@ p {
   width: auto;
   height: 132px;
   object-fit: contain;
-  filter: invert(1);
 }
 
 .footer-cols {
@@ -986,7 +981,7 @@ p {
   fill: currentColor;
 }
 
-.site-footer small {
+.site-footer > small {
   width: calc(100% + var(--gutter) * 2);
   margin-bottom: -26px;
   padding-block: 13px;

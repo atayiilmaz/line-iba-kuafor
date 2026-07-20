@@ -2,7 +2,7 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-## Line Cadde randevu sistemi
+## Line & İba Kuaför randevu sistemi
 
 Uygulama Vite/React arayüzünü Vercel'de, randevu verisi ve sunucu işlemlerini Supabase üzerinde çalıştırır.
 
@@ -43,7 +43,7 @@ Supabase Dashboard > Authentication bölümünden işletme kullanıcısını olu
 
 ```sql
 insert into public.admin_profiles (user_id, role, display_name)
-select id, 'owner', 'Line Cadde'
+select id, 'owner', 'Line & İba Kuaför'
 from auth.users
 where email = 'isletme@example.com';
 ```

@@ -594,7 +594,7 @@ function SiteHeader({
       </div>
       <nav className="masthead" aria-label="Main">
         <a className="brand" href="/" onClick={nav('/')}>
-          <img className="brand-logo brand-logo--dark" src={brand.logoLight} alt="Line & İba Kuaför" />
+          <img className="brand-logo" src={brand.logoDark} alt="Line & İba Kuaför" />
         </a>
         <div className="desktop-nav">
           {primaryLinks.map(([href, label]) => (
@@ -1030,7 +1030,7 @@ function SiteFooter({
   return (
     <footer className="site-footer">
       <a href="/" onClick={nav('/')} className="footer-logo">
-        <img className="footer-logo__image" src={brand.logoLight} alt="Line & İba Kuaför" />
+        <img className="footer-logo__image" src={brand.logoDark} alt="Line & İba Kuaför" />
       </a>
       <div className="footer-cols">
         <nav className="footer-links" aria-label={lang === 'tr' ? 'Alt menü' : 'Footer menu'}>

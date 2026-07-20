@@ -90,14 +90,14 @@ export function AdminPage() {
   if (!session) return <main className="admin-page admin-page--auth">
     <form className="admin-login" onSubmit={login}>
       <div className="admin-login__top"><a href="/">← Siteye dön</a><span>Güvenli işletme girişi</span></div>
-      <div className="admin-login__title"><p className="eyebrow">Line Cadde / Yönetim</p><h1>Randevu<br />Yönetimi</h1><p>Günlük akışı, kapalı saatleri ve WhatsApp bildirimlerini tek ekrandan yönetin.</p></div>
+      <div className="admin-login__title"><p className="eyebrow">Line &amp; İba Kuaför / Yönetim</p><h1>Randevu<br />Yönetimi</h1><p>Günlük akışı, kapalı saatleri ve WhatsApp bildirimlerini tek ekrandan yönetin.</p></div>
       {error && <div className="admin-alert" role="alert">{error}</div>}
       <div className="admin-login__fields">
-        <label className="admin-field"><span>E-posta</span><input type="email" autoComplete="email" placeholder="ornek@linecadde.com" value={email} onChange={(event) => setEmail(event.target.value)} required /></label>
+        <label className="admin-field"><span>E-posta</span><input type="email" autoComplete="email" placeholder="ornek@lineibakuafor.com" value={email} onChange={(event) => setEmail(event.target.value)} required /></label>
         <label className="admin-field"><span>Şifre</span><input type="password" autoComplete="current-password" placeholder="••••••••••••" value={password} onChange={(event) => setPassword(event.target.value)} required /></label>
       </div>
       <button className="button button--dark" disabled={busy}>{busy ? 'Giriş yapılıyor…' : 'Giriş Yap'}</button>
-      <p className="admin-login__foot">Bu alan yalnızca Line Cadde yetkili hesaplarına açıktır.</p>
+      <p className="admin-login__foot">Bu alan yalnızca Line &amp; İba Kuaför yetkili hesaplarına açıktır.</p>
     </form>
   </main>
 
@@ -127,7 +127,7 @@ export function AdminPage() {
 
   return <main className="admin-page">
     <header className="admin-head">
-      <div><p className="eyebrow">Line Cadde</p><h1>Randevular</h1><p>{data?.admin.display_name || session.user.email}</p></div>
+      <div><p className="eyebrow">Line &amp; İba Kuaför</p><h1>Randevular</h1><p>{data?.admin.display_name || session.user.email}</p></div>
       <div><a className="button" href="/">Siteyi Gör</a><button className="button button--dark" onClick={() => void client.auth.signOut()}>Çıkış</button></div>
     </header>
     <section className="admin-toolbar">
@@ -178,7 +178,7 @@ function AdminLoading({ label }: { label: string }) {
   return <main className="admin-page admin-page--loading" aria-busy="true" aria-live="polite">
     <div className="admin-loader">
       <span className="admin-loader__monogram">LC</span>
-      <p className="eyebrow">Line Cadde / Yönetim</p>
+      <p className="eyebrow">Line &amp; İba Kuaför / Yönetim</p>
       <h1>{label}</h1>
       <div className="admin-loader__track"><i /></div>
       <p>Güvenli oturum hazırlanıyor.</p>

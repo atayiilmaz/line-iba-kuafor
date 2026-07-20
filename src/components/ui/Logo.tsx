@@ -4,7 +4,7 @@ import './Logo.css'
 
 type Props = {
   variant?: 'dark' | 'light'
-  /** 'full' = tam kilit (makas + LINE CADDE + İBA); 'mark' = sadece makas ikonu */
+  /** 'full' = tam marka kilidi; 'mark' = sadece makas ikonu */
   type?: 'full' | 'mark'
   className?: string
   label?: string
