@@ -29,8 +29,8 @@ export const contactInfo = {
 }
 
 export const social = {
-  instagramUrl: 'https://www.instagram.com/linecadde/',
-  instagramHandle: '@linecadde',
+  instagramUrl: 'https://www.instagram.com/line_iba/',
+  instagramHandle: '@line_iba',
   whatsappDisplay: '+90 533 321 22 83',
   whatsappUrl: (message: string) =>
     `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,

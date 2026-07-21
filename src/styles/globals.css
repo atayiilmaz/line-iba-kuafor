@@ -658,6 +658,39 @@ p {
   padding: 88px;
 }
 
+.partner-detail--biography {
+  align-items: start;
+}
+
+.partner-detail--biography .partner-detail__media {
+  position: sticky;
+  top: var(--header-h);
+  width: 100%;
+  height: calc(100vh - var(--header-h));
+  min-height: 620px;
+}
+
+.partner-detail--biography .partner-detail__media img {
+  height: 100%;
+  min-height: 0;
+}
+
+.partner-detail--biography .partner-detail__copy {
+  justify-content: flex-start;
+}
+
+.partner-biography {
+  display: grid;
+  gap: 18px;
+  max-width: 760px;
+  margin-bottom: 38px;
+}
+
+.partner-biography p {
+  color: #444;
+  line-height: 1.72;
+}
+
 .partner-detail h1 {
   margin-block: 18px 24px;
 }
@@ -1112,6 +1145,16 @@ p {
 
   .partner-detail__media,
   .partner-detail__media img {
+    min-height: 620px;
+  }
+
+  .partner-detail--biography .partner-detail__media {
+    position: relative;
+    top: auto;
+    height: auto;
+  }
+
+  .partner-detail--biography .partner-detail__media img {
     min-height: 620px;
   }
 }

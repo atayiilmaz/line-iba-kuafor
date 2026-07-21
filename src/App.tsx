@@ -16,8 +16,9 @@ type Partner = {
   role: string
   image: string
   intro: string
+  bio?: string[]
   experience: string[]
-  quote: string
+  quote?: string
 }
 
 type Copy = {
@@ -94,10 +95,8 @@ const images = {
     'https://images.pexels.com/photos/20046793/pexels-photo-20046793.jpeg?auto=compress&cs=tinysrgb&w=1400',
   contactHero:
     'https://images.pexels.com/photos/35844833/pexels-photo-35844833.png?auto=compress&cs=tinysrgb&w=1600',
-  ahmet:
-    'https://images.pexels.com/photos/8867400/pexels-photo-8867400.jpeg?auto=compress&cs=tinysrgb&w=1100',
-  ergun:
-    'https://images.pexels.com/photos/3993320/pexels-photo-3993320.jpeg?auto=compress&cs=tinysrgb&w=1100',
+  ahmet: '/assets/photos/ahmetyilmazhakkimda.png',
+  ergun: '/assets/photos/ergunsaricahakkimda.jpg',
   ibrahim:
     'https://images.pexels.com/photos/20046793/pexels-photo-20046793.jpeg?auto=compress&cs=tinysrgb&w=1100',
 }
@@ -273,12 +272,30 @@ const copy: Record<Lang, Copy> = {
         key: 'ergun',
         slug: 'ergun-sarica',
         name: 'Ergün Sarıca',
-        role: 'Kurucu Ortak / Renk Uzmanı',
+        role: 'Kurucu Ortak',
         image: images.ergun,
         intro:
-          'Ergün, renklendirme ve bakım protokollerinde doğal geçiş, parlak bitiş ve saç sağlığı dengesine odaklanır.',
-        experience: ['Balayage ve doğal renk geçişleri', 'Bakım protokolü planlama', 'Tonlama ve parlaklık servisleri', 'Saç analizi danışmanlığı'],
-        quote: 'Renk, saçın kendi hareketini saklamamalı; onu görünür kılmalı.',
+          '1989’dan bu yana kuaförlük mesleğini usta-çırak geleneği, uluslararası eğitimler ve işletmecilik deneyimiyle sürdüren LINE&İBA kurucu ortağı.',
+        bio: [
+          '1976 yılında Tokat’ta doğdum. İlköğrenimimi Heybeliada’da tamamladım. Kuaförlük mesleğine 1989 yılında Heybeliada’da başladım. Usta-çırak geleneğinin disiplinli ve köklü eğitim anlayışı içerisinde yetişerek mesleğin tüm inceliklerini, çalışma disiplinini, müşteri ilişkilerini ve profesyonel etik değerlerini en temelinden öğrenme fırsatı buldum. Bu sağlam temel, yıllar içinde edindiğim deneyim ve eğitimlerle birleşerek kariyerimin en önemli yapı taşını oluşturdu.',
+          'Mesleki gelişimim kapsamında L’Oréal ve Wella gibi dünyanın önde gelen markalarının işletme, kesim ve renklendirme eğitimlerine katıldım. Ayrıca yurt dışında ileri seviye saç kesimi ve renklendirme eğitimleri alarak uluslararası trend ve teknikler konusunda uzmanlaştım.',
+          '1999–2006 yılları arasında Ali Gür bünyesinde görev aldım. Bu süreçte salon kaptanlığı yaparak ekip yönetimi, operasyon ve müşteri memnuniyeti konularında önemli deneyimler kazandım.',
+          '2006 yılında ilk işletmem olan Pera Kuaförü’nü kurdum. 2009 yılında ise kendi adımı taşıyan ilk salonumu açarak profesyonel kariyerimde yeni bir döneme adım attım.',
+          '2016 yılında Ali Gür Caddebostan franchise salonunu iki ortaklı bir yapıyla hayata geçirdik. 2018 yılında eğitim ve demonstrasyon amacıyla katıldığım Balkan Festivali’nde Ahmet Yılmaz ile yollarımız kesişti. Ortak vizyonumuz ve mesleğe bakış açımızın örtüşmesiyle, kurucusu olduğum salon bünyesinde yeni bir ortaklık yapısı oluşturarak birlikte üretmeye ve oluşturduğumuz markayı daha da ileri taşımaya başladık.',
+          '2020 yılında Ahmet Yılmaz ile LINE CADDE markasını hayata geçirdik. 2024 yılında ise markamıza değer katan, sanatına ve mesleki vizyonuna inandığımız İbrahim Yılmaz’ın İBA markasıyla gerçekleşen birleşme sonucunda salonumuz LINE&İBA adını aldı.',
+          'Bugün, mesleğe ve saç sanatına değer katan vizyonumuz doğrultusunda üç ortak olarak LINE&İBA çatısı altında hizmet vermeye; yenilikçi bakış açımız ve eğitim odaklı anlayışımızla sektöre katkı sağlamaya devam ediyoruz.',
+        ],
+        experience: [
+          '1989 · Heybeliada’da mesleğe başlangıç',
+          'L’Oréal ve Wella kesim, renk ve işletme eğitimleri',
+          '1999–2006 · Ali Gür / Salon kaptanlığı',
+          '2006 · Pera Kuaförü’nün kuruluşu',
+          '2009 · Ergün Sarıca markalı ilk salon',
+          '2016 · Ali Gür Caddebostan franchise salonu',
+          '2018 · Ahmet Yılmaz ile ortaklık',
+          '2020 · LINE CADDE’nin kuruluşu',
+          '2024 · LINE&İBA marka birleşmesi',
+        ],
       },
       {
         key: 'ibrahim',
@@ -420,12 +437,30 @@ const copy: Record<Lang, Copy> = {
         key: 'ergun',
         slug: 'ergun-sarica',
         name: 'Ergün Sarıca',
-        role: 'Founding Partner / Color Specialist',
+        role: 'Founding Partner',
         image: images.ergun,
         intro:
-          'Ergün focuses on natural color transitions, glossy finishes and the balance between beauty and hair health.',
-        experience: ['Balayage and soft transitions', 'Care protocol planning', 'Toning and shine services', 'Hair analysis consultation'],
-        quote: 'Color should not hide hair movement. It should reveal it.',
+          'A founding partner of LINE&IBA who has practised hairdressing since 1989, combining the master-apprentice tradition with international education and salon management experience.',
+        bio: [
+          'I was born in Tokat in 1976 and completed my primary education in Heybeliada. I began my career in hairdressing in Heybeliada in 1989. Trained within the disciplined and deeply rooted master-apprentice tradition, I had the opportunity to learn every aspect of the craft—from professional discipline and client relations to ethical standards—at its foundation. Combined with the experience and education I gained over the years, this strong foundation became the most important building block of my career.',
+          'As part of my professional development, I attended business management, cutting and colouring programmes offered by leading global brands such as L’Oréal and Wella. I also completed advanced haircutting and colouring training abroad, developing expertise in international trends and techniques.',
+          'Between 1999 and 2006, I worked at Ali Gür. During this period, I served as salon captain and gained significant experience in team management, operations and client satisfaction.',
+          'In 2006, I founded my first business, Pera Kuaförü. In 2009, I opened the first salon carrying my own name and entered a new chapter in my professional career.',
+          'In 2016, we launched the Ali Gür Caddebostan franchise salon as a two-partner venture. In 2018, I met Ahmet Yılmaz at the Balkan Festival, where I was taking part for education and demonstration purposes. As our shared vision and outlook on the profession aligned, we formed a new partnership within the salon I had founded and began creating together, taking the brand we built to the next level.',
+          'In 2020, Ahmet Yılmaz and I launched the LINE CADDE brand. In 2024, following the union with İbrahim Yılmaz’s İBA brand—whose artistry and professional vision we deeply value—our salon took the name LINE&IBA.',
+          'Today, as three partners under the LINE&IBA name, we continue to serve with a vision that adds value to the profession and the art of hair, while contributing to the industry through our innovative perspective and education-focused approach.',
+        ],
+        experience: [
+          '1989 · Began his career in Heybeliada',
+          'L’Oréal and Wella cutting, colour and business training',
+          '1999–2006 · Ali Gür / Salon captain',
+          '2006 · Founded Pera Kuaförü',
+          '2009 · First salon under the Ergün Sarıca name',
+          '2016 · Ali Gür Caddebostan franchise salon',
+          '2018 · Partnership with Ahmet Yılmaz',
+          '2020 · Launch of LINE CADDE',
+          '2024 · LINE&IBA brand union',
+        ],
       },
       {
         key: 'ibrahim',
@@ -781,15 +816,17 @@ function PartnerPage({
   nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void
 }) {
   return (
-    <section className="partner-detail">
+    <section className={`partner-detail${partner.bio ? ' partner-detail--biography' : ''}`}>
       <div className="partner-detail__media js-page-in">
         <img src={partner.image} alt={partner.name} />
       </div>
       <div className="partner-detail__copy">
         <h1 className="js-page-in">{partner.name}</h1>
         <p className="partner-role js-page-in">{partner.role}</p>
-        <p className="lead js-page-in">{partner.intro}</p>
-        <blockquote className="js-page-in">{partner.quote}</blockquote>
+        {partner.bio
+          ? <div className="partner-biography js-page-in">{partner.bio.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
+          : <p className="lead js-page-in">{partner.intro}</p>}
+        {partner.quote && <blockquote className="js-page-in">{partner.quote}</blockquote>}
         <ul className="experience-list js-reveal">
           {partner.experience.map((item) => (
             <li key={item}>{item}</li>
