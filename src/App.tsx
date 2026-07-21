@@ -82,11 +82,11 @@ type Copy = {
 
 const images = {
   hero: '/assets/photos/IMG_7858.PNG',
-  philosophyMain: '/assets/photos/philosophy-blonde.webp',
+  philosophyMain: '/assets/photos/IMG_7960.png',
   philosophyMini: [
     '/assets/photos/philosophy-red-hair.webp',
     '/assets/photos/IMG_8443.JPG',
-    '/assets/photos/philosophy-volume.webp',
+    '/assets/photos/philosophy-blonde.webp',
   ],
   servicesHero: '/assets/photos/services-blonde.webp',
   servicesFeatured: '/assets/photos/color-blonde.webp',
