@@ -13,6 +13,7 @@ type Partner = {
   key: PartnerKey
   slug: string
   name: string
+  detailTitle?: string
   role: string
   image: string
   intro: string
@@ -312,12 +313,18 @@ const copy: Record<Lang, Copy> = {
         key: 'ibrahim',
         slug: 'ibrahim-yilmaz',
         name: 'İbrahim Yılmaz',
-        role: 'Kurucu Ortak / Stil & Makyaj',
+        detailTitle: 'Makasın İzinde 34 Yıl: İbrahim Yılmaz',
+        role: 'Kurucu Ortak',
         image: images.ibrahim,
         intro:
-          'İbrahim, özel gün hazırlıkları, makyaj ve final styling tarafında bütün görünümün dengeli çalışmasını sağlar.',
-        experience: ['Gelin başı ve prova süreci', 'Profesyonel makyaj', 'Topuz ve editorial styling', 'Tırnak servis koordinasyonu'],
-        quote: 'Final görünüm abartıyla değil, doğru dengeyle akılda kalır.',
+          '1992 yılında Bağdat Caddesi Çiftehavuzlar’da başlayan yolculuğunu, kişiye özel kesimler ve 34 yıllık deneyimiyle Line İBA Bağdat Caddesi çatısı altında sürdürüyor.',
+        bio: [
+          '1992 yılında Bağdat Caddesi Çiftehavuzlar’da, alanında çok değerli ustaların yanında başlayan bu yolculuk, benim için ilk günden beri saça şekil vermekten çok daha fazlası oldu. 2001 yılında Göztepe’de kurduğum İBA markasıyla uzun yıllar boyunca heyecanla sürdürdüğüm bir yolculuk yürüttüm.',
+          'Salonumuza adım atan her misafirimiz için renklendirmeden şekillendirmeye kadar saç tasarımının her alanında en doğru dokunuşu yapmaya özen gösterdim. Ancak zaman içinde, yüz anatomisine uygun ve zamansız dokunuşlarla hazırladığım kişiye özel kesimler benim asıl imzam ve tutkum haline geldi. Beni tercih eden misafirlerim de genelde bu kesim tarzımla bilir ve koltuğuma ağırlıklı olarak bu güvenle otururlar. Günün sonunda koltuğumdan kalkan birinin aynaya bakıp gülümsediğini görmek ise benim bu meslekteki en büyük motivasyonum ve mutluluğum.',
+          'Bu tutkuyu sadece salon duvarları arasında tutmayıp; yurt içi ve yurt dışındaki sayısız sahne şovunda yer alarak, İBA markasıyla meslektaşlarıma eğitimler vererek ve sektöre yeni yetenekler kazandırarak kendimi her zaman dinamik tutmaya çalıştım.',
+          'Senelerin getirdiği bu birikimi, bugün değerli dostlarım Ergün Sarıca ve Ahmet Yılmaz ile birlikte gerçekleştirdiğimiz güçlü bir marka ortaklığıyla Line İBA Bağdat Caddesi çatısı altında birleştirdik. Sizleri de bu yeni hikayemizde ağırlamaktan mutluluk duyuyorum.',
+        ],
+        experience: [],
       },
     ],
   },
@@ -488,12 +495,18 @@ const copy: Record<Lang, Copy> = {
         key: 'ibrahim',
         slug: 'ibrahim-yilmaz',
         name: 'İbrahim Yılmaz',
-        role: 'Founding Partner / Style & Makeup',
+        detailTitle: '34 Years Following the Scissors: İbrahim Yılmaz',
+        role: 'Founding Partner',
         image: images.ibrahim,
         intro:
-          'İbrahim shapes event preparation, makeup and final styling so the full look feels balanced and intentional.',
-        experience: ['Bridal hair and trial process', 'Professional makeup', 'Updo and editorial styling', 'Nail service coordination'],
-        quote: 'A final look is remembered through balance, not excess.',
+          'He continues the journey he began in Çiftehavuzlar on Bağdat Avenue in 1992 under the Line İBA Bağdat Avenue roof, bringing 34 years of experience and a signature approach to bespoke haircuts.',
+        bio: [
+          'This journey began in 1992 in Çiftehavuzlar on Bağdat Avenue, alongside highly respected masters of the craft. From the very first day, it has meant far more to me than simply shaping hair. In 2001, I founded the İBA brand in Göztepe and pursued this journey with excitement for many years.',
+          'For every guest who stepped into our salon, I took care to make the right choice across every area of hair design, from colouring to styling. Over time, however, bespoke cuts shaped with timeless touches and tailored to facial anatomy became my true signature and passion. The guests who choose me generally know me for this cutting style and sit in my chair with that trust above all. At the end of the day, seeing someone leave my chair, look in the mirror and smile is my greatest motivation and joy in this profession.',
+          'I have worked to keep this passion alive beyond the salon walls by taking part in countless stage shows in Türkiye and abroad, training fellow professionals under the İBA brand and bringing new talent into the industry.',
+          'Today, I have brought together the experience accumulated over the years under the Line İBA Bağdat Avenue roof through a strong brand partnership with my dear friends Ergün Sarıca and Ahmet Yılmaz. I am delighted to welcome you into this new chapter of our story.',
+        ],
+        experience: [],
       },
     ],
   },
@@ -843,17 +856,19 @@ function PartnerPage({
         <img src={partner.image} alt={partner.name} />
       </div>
       <div className="partner-detail__copy">
-        <h1 className="js-page-in">{partner.name}</h1>
+        <h1 className="js-page-in">{partner.detailTitle ?? partner.name}</h1>
         <p className="partner-role js-page-in">{partner.role}</p>
         {partner.bio
           ? <div className="partner-biography js-page-in">{partner.bio.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
           : <p className="lead js-page-in">{partner.intro}</p>}
         {partner.quote && <blockquote className="js-page-in">{partner.quote}</blockquote>}
-        <ul className="experience-list js-reveal">
-          {partner.experience.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
+        {partner.experience.length > 0 && (
+          <ul className="experience-list js-reveal">
+            {partner.experience.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        )}
         <a className="button button--dark js-reveal" href="/hakkimizda" onClick={nav('/hakkimizda')}>
           {t.nav.about}
         </a>
