@@ -92,14 +92,12 @@ const images = {
   servicesHero: '/assets/photos/services-blonde.webp',
   servicesFeatured: '/assets/photos/color-blonde.webp',
   aboutHero: '/assets/photos/about-red-hair.webp',
-  collectionHero:
-    'https://images.pexels.com/photos/20046793/pexels-photo-20046793.jpeg?auto=compress&cs=tinysrgb&w=1400',
+  collectionHero: '/assets/photos/hero-bridal.webp',
   contactHero:
     'https://images.pexels.com/photos/35844833/pexels-photo-35844833.png?auto=compress&cs=tinysrgb&w=1600',
   ahmet: '/assets/photos/ahmetyilmazhakkimda.png',
   ergun: '/assets/photos/ergunsaricahakkimda.jpg',
-  ibrahim:
-    'https://images.pexels.com/photos/20046793/pexels-photo-20046793.jpeg?auto=compress&cs=tinysrgb&w=1100',
+  ibrahim: '/assets/photos/ibrahim.jpg',
 }
 
 const galleryVideos = [
