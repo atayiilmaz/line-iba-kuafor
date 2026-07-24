@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /yonetim
+Disallow: /yonetim/
 
-Sitemap: https://lineibakuafor.example/sitemap.xml
+Sitemap: https://www.lineibakuafor.com/sitemap.xml
