@@ -4,13 +4,13 @@
 
 ## Resmî site
 
-- [Ana Sayfa](https://www.lineibakuafor.com/): Salon, hizmetler ve marka hakkında genel bilgi.
-- [Hizmetler](https://www.lineibakuafor.com/hizmetler): Kesim ve stil, renklendirme, gelin başı, tırnak ve makyaj hizmetleri.
-- [Hakkımızda](https://www.lineibakuafor.com/hakkimizda): Line & İba Kuaför'ün hikâyesi ve kurucu ortakları.
-- [Koleksiyon](https://www.lineibakuafor.com/koleksiyon): Salondan çalışmalar ve uygulama örnekleri.
-- [İletişim](https://www.lineibakuafor.com/iletisim): Adres, telefon, çalışma saatleri ve yol tarifi.
-- [Randevu](https://www.lineibakuafor.com/randevu): Online randevu oluşturma.
-- [KVKK](https://www.lineibakuafor.com/kvkk): Kişisel verilerin işlenmesine ilişkin bilgilendirme.
+- [Ana Sayfa](https://lineiba.com/): Salon, hizmetler ve marka hakkında genel bilgi.
+- [Hizmetler](https://lineiba.com/hizmetler): Kesim ve stil, renklendirme, gelin başı, tırnak ve makyaj hizmetleri.
+- [Hakkımızda](https://lineiba.com/hakkimizda): Line & İba Kuaför'ün hikâyesi ve kurucu ortakları.
+- [Koleksiyon](https://lineiba.com/koleksiyon): Salondan çalışmalar ve uygulama örnekleri.
+- [İletişim](https://lineiba.com/iletisim): Adres, telefon, çalışma saatleri ve yol tarifi.
+- [Randevu](https://lineiba.com/randevu): Online randevu oluşturma.
+- [KVKK](https://lineiba.com/kvkk): Kişisel verilerin işlenmesine ilişkin bilgilendirme.
 
 ## İşletme bilgileri
 

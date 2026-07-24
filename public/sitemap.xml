@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.lineibakuafor.com/</loc>
+    <loc>https://lineiba.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.lineibakuafor.com/hizmetler</loc>
+    <loc>https://lineiba.com/hizmetler</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.lineibakuafor.com/hakkimizda</loc>
+    <loc>https://lineiba.com/hakkimizda</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.lineibakuafor.com/hakkimizda/ahmet-yilmaz</loc>
+    <loc>https://lineiba.com/hakkimizda/ahmet-yilmaz</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.lineibakuafor.com/hakkimizda/ergun-sarica</loc>
+    <loc>https://lineiba.com/hakkimizda/ergun-sarica</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.lineibakuafor.com/hakkimizda/ibrahim-yilmaz</loc>
+    <loc>https://lineiba.com/hakkimizda/ibrahim-yilmaz</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.lineibakuafor.com/koleksiyon</loc>
+    <loc>https://lineiba.com/koleksiyon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.lineibakuafor.com/iletisim</loc>
+    <loc>https://lineiba.com/iletisim</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.lineibakuafor.com/randevu</loc>
+    <loc>https://lineiba.com/randevu</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.lineibakuafor.com/kvkk</loc>
+    <loc>https://lineiba.com/kvkk</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
