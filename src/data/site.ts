@@ -9,8 +9,8 @@ export type Lang = 'tr' | 'en'
 /* ---------- Dilden bağımsız marka varlıkları ---------- */
 export const brand = {
   name: 'Line & İba Kuaför',
-  logoDark: '/assets/logo/logo-dark.png', // koyu logo — açık zeminlerde kullanılır
-  logoLight: '/assets/logo/logo-light.png', // beyaz logo — koyu zeminlerde kullanılır
+  logoDark: '/assets/logo/logo-dark-optimized.webp', // koyu logo — açık zeminlerde kullanılır
+  logoLight: '/assets/logo/logo-light-optimized.webp', // beyaz logo — koyu zeminlerde kullanılır
   markDark: '/assets/logo/mark-dark.png', // sadece makas ikonu — açık zemin
   markLight: '/assets/logo/mark-light.png', // sadece makas ikonu — koyu zemin
   ibaDark: '/assets/logo/iba-dark.png', // İBA rozeti — açık zemin

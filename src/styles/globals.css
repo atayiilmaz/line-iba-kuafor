@@ -445,6 +445,7 @@ p {
 .mini-row img {
   aspect-ratio: 0.64;
   width: 100%;
+  height: auto;
   object-fit: cover;
   box-shadow: 0 22px 38px rgba(0, 0, 0, 0.17);
 }
@@ -606,6 +607,7 @@ p {
 
 .partner-card img {
   width: 100%;
+  height: auto;
   aspect-ratio: 0.72;
   object-fit: cover;
   transition: transform 300ms var(--ease);

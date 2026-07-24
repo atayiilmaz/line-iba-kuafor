@@ -82,64 +82,63 @@ type Copy = {
 }
 
 const images = {
-  hero: '/assets/photos/IMG_7858.PNG',
-  philosophyMain: '/assets/photos/IMG_7960.png',
+  hero: '/assets/photos/home-hero.webp',
+  philosophyMain: '/assets/photos/philosophy-main.webp',
   philosophyMini: [
-    '/assets/photos/philosophy-red-hair.webp',
-    '/assets/photos/IMG_8443.JPG',
-    '/assets/photos/philosophy-blonde.webp',
+    '/assets/photos/philosophy-red-hair-small.webp',
+    '/assets/photos/philosophy-salon-small.webp',
+    '/assets/photos/philosophy-blonde-small.webp',
   ],
-  servicesHero: '/assets/photos/services-blonde.webp',
+  servicesHero: '/assets/photos/services-hero.webp',
   servicesFeatured: '/assets/photos/color-blonde.webp',
-  aboutHero: '/assets/photos/about-red-hair.webp',
+  aboutHero: '/assets/photos/about-hero.webp',
   collectionHero: '/assets/photos/hero-bridal.webp',
-  contactHero:
-    'https://images.pexels.com/photos/35844833/pexels-photo-35844833.png?auto=compress&cs=tinysrgb&w=1600',
-  ahmet: '/assets/photos/ahmetyilmazhakkimda.png',
-  ergun: '/assets/photos/ergunsaricahakkimda.jpg',
-  ibrahim: '/assets/photos/ibrahim.jpg',
+  contactHero: '/assets/videos/2026/contact-hero-poster.webp',
+  ahmet: '/assets/photos/ahmet-yilmaz.webp',
+  ergun: '/assets/photos/ergun-sarica.webp',
+  ibrahim: '/assets/photos/ibrahim-yilmaz.webp',
 }
 
 const galleryVideos = [
   {
     src: '/assets/videos/2026/salon-finish-01.mp4',
-    poster: '/assets/videos/2026/salon-finish-01-poster.jpg',
+    poster: '/assets/videos/2026/salon-finish-01-poster.webp',
   },
   {
     src: '/assets/videos/2026/archive-02.mp4',
-    poster: '/assets/videos/2026/salon-02-poster.jpg',
+    poster: '/assets/videos/2026/salon-02-poster.webp',
   },
   {
     src: '/assets/videos/2026/salon-finish-02.mp4',
-    poster: '/assets/videos/2026/salon-finish-02-poster.jpg',
+    poster: '/assets/videos/2026/salon-finish-02-poster.webp',
   },
   {
     src: '/assets/videos/2026/archive-03.mp4',
-    poster: '/assets/videos/2026/salon-03-poster.jpg',
+    poster: '/assets/videos/2026/salon-03-poster.webp',
   },
   {
     src: '/assets/videos/2026/collection-hero.mp4',
-    poster: '/assets/videos/2026/collection-hero-poster.jpg',
+    poster: '/assets/videos/2026/collection-hero-poster.webp',
   },
   {
     src: '/assets/videos/2026/archive-04.mp4',
-    poster: '/assets/videos/2026/salon-04-poster.jpg',
+    poster: '/assets/videos/2026/salon-04-poster.webp',
   },
   {
     src: '/assets/videos/2026/salon-finish-03.mp4',
-    poster: '/assets/videos/2026/salon-finish-03-poster.jpg',
+    poster: '/assets/videos/2026/salon-finish-03-poster.webp',
   },
   {
     src: '/assets/videos/2026/archive-05.mp4',
-    poster: '/assets/videos/2026/salon-05-poster.jpg',
+    poster: '/assets/videos/2026/salon-05-poster.webp',
   },
   {
     src: '/assets/videos/2026/contact-hero.mp4',
-    poster: '/assets/videos/2026/contact-hero-poster.jpg',
+    poster: '/assets/videos/2026/contact-hero-poster.webp',
   },
   {
     src: '/assets/videos/2026/archive-01.mp4',
-    poster: '/assets/videos/2026/home-feature-poster.jpg',
+    poster: '/assets/videos/2026/home-feature-poster.webp',
   },
 ]
 
@@ -664,7 +663,14 @@ function SiteHeader({
       </div>
       <nav className="masthead" aria-label="Main">
         <a className="brand" href="/" onClick={nav('/')}>
-          <img className="brand-logo" src={brand.logoDark} alt="Line & İba Kuaför" />
+          <img
+            className="brand-logo"
+            src={brand.logoDark}
+            width="409"
+            height="512"
+            decoding="async"
+            alt="Line & İba Kuaför"
+          />
         </a>
         <div className="desktop-nav">
           {primaryLinks.map(([href, label]) => (
@@ -701,7 +707,16 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
   return (
     <>
       <section className="hero">
-        <img className="hero__image js-page-in" src={images.hero} alt="" />
+        <img
+          className="hero__image js-page-in"
+          src={images.hero}
+          width="1242"
+          height="1249"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
+          alt=""
+        />
         <div className="hero__scrim" />
         <div className="hero__copy">
           <h1 className="js-page-in">{t.hero.title}</h1>
@@ -716,7 +731,14 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
           </div>
         </div>
         <div className="hero__mark js-page-in">
-          <img className="hero__mark-logo" src={brand.logoLight} alt="" />
+          <img
+            className="hero__mark-logo"
+            src={brand.logoLight}
+            width="409"
+            height="512"
+            decoding="async"
+            alt=""
+          />
           <span>{t.hero.mark}</span>
         </div>
       </section>
@@ -734,11 +756,27 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
           </div>
           <div className="editorial-stack js-reveal">
             <div className="portrait-main-frame">
-              <img className="portrait-main" src={images.philosophyMain} alt="" loading="lazy" />
+              <img
+                className="portrait-main"
+                src={images.philosophyMain}
+                width="1200"
+                height="1600"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
             </div>
             <div className="mini-row">
               {images.philosophyMini.map((image) => (
-                <img src={image} alt="" loading="lazy" key={image} />
+                <img
+                  src={image}
+                  width="480"
+                  height="640"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  key={image}
+                />
               ))}
             </div>
           </div>
@@ -793,7 +831,14 @@ function ServicesPage({ t, nav }: { t: Copy; nav: (href: string) => (event: Reac
       <ServicesStrip t={t} nav={nav} />
       <section className="featured-service section-pad">
         <div className="container feature-box js-reveal">
-          <img src={images.servicesFeatured} alt="" loading="lazy" />
+          <img
+            src={images.servicesFeatured}
+            width="1200"
+            height="1800"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
           <div>
             <p className="eyebrow">Line & İba Signature</p>
             <h2>{t.services.featuredTitle}</h2>
@@ -824,7 +869,14 @@ function AboutPage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.M
             {t.partners.map((partner) => (
               <article className="partner-card js-reveal" key={partner.slug}>
                 <a href={`/hakkimizda/${partner.slug}`} onClick={nav(`/hakkimizda/${partner.slug}`)}>
-                  <img src={partner.image} alt={partner.name} />
+                  <img
+                    src={partner.image}
+                    width="1200"
+                    height="1600"
+                    alt={partner.name}
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <span>{partner.role}</span>
                   <h3>{partner.name}</h3>
                   <p>{partner.intro}</p>
@@ -851,7 +903,15 @@ function PartnerPage({
   return (
     <section className={`partner-detail${partner.bio ? ' partner-detail--biography' : ''}`}>
       <div className="partner-detail__media js-page-in">
-        <img src={partner.image} alt={partner.name} />
+        <img
+          src={partner.image}
+          width="1200"
+          height="1600"
+          alt={partner.name}
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
+        />
       </div>
       <div className="partner-detail__copy">
         <h1 className="js-page-in">{partner.detailTitle ?? partner.name}</h1>
@@ -892,9 +952,19 @@ function GalleryTeaser({ t }: { t: Copy }) {
     const videos = Array.from(gridRef.current?.querySelectorAll('video') ?? [])
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    if (reducedMotion) return
+    const hydrateVideo = (video: HTMLVideoElement, includeSource: boolean) => {
+      const poster = video.dataset.poster
+      if (poster && !video.poster) video.poster = poster
+
+      const src = video.dataset.src
+      if (includeSource && src && !video.getAttribute('src')) {
+        video.src = src
+        video.load()
+      }
+    }
 
     const playVideo = (video: HTMLVideoElement) => {
+      hydrateVideo(video, true)
       video.muted = true
       video.defaultMuted = true
       void video.play().catch(() => {
@@ -906,11 +976,14 @@ function GalleryTeaser({ t }: { t: Copy }) {
       (entries) => {
         entries.forEach((entry) => {
           const video = entry.target as HTMLVideoElement
-          if (entry.isIntersecting) playVideo(video)
+          if (entry.isIntersecting) {
+            hydrateVideo(video, !reducedMotion)
+            if (!reducedMotion) playVideo(video)
+          }
           else video.pause()
         })
       },
-      { rootMargin: '120px 0px', threshold: 0.15 },
+      { rootMargin: '300px 0px', threshold: 0.01 },
     )
 
     const handleCanPlay = (event: Event) => {
@@ -920,10 +993,10 @@ function GalleryTeaser({ t }: { t: Copy }) {
     }
 
     const resumeVisibleVideos = () => {
-      if (document.visibilityState !== 'visible') return
+      if (reducedMotion || document.visibilityState !== 'visible') return
       videos.forEach((video) => {
         const rect = video.getBoundingClientRect()
-        if (rect.bottom >= -120 && rect.top <= window.innerHeight + 120) playVideo(video)
+        if (rect.bottom >= -300 && rect.top <= window.innerHeight + 300) playVideo(video)
       })
     }
 
@@ -954,12 +1027,12 @@ function GalleryTeaser({ t }: { t: Copy }) {
           {galleryVideos.map((video, index) => (
             <figure className="video-tile" key={video.src}>
               <video
-                src={video.src}
-                poster={video.poster}
+                data-src={video.src}
+                data-poster={video.poster}
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="none"
                 aria-label={t.gallery.items[index]}
               />
             </figure>
@@ -1034,7 +1107,16 @@ function ContactPage({ t, nav }: { t: Copy; nav: (href: string) => (event: React
 function PageHero({ title, image }: { title: string; image: string }) {
   return (
     <section className="page-hero">
-      <img className="page-hero__media js-page-in" src={image} alt="" />
+      <img
+        className="page-hero__media js-page-in"
+        src={image}
+        width="1500"
+        height="2000"
+        fetchPriority="high"
+        loading="eager"
+        decoding="async"
+        alt=""
+      />
       <div className="page-hero__copy">
         <h1 className="js-page-in">{title}</h1>
       </div>
@@ -1097,7 +1179,15 @@ function SiteFooter({
   return (
     <footer className="site-footer">
       <a href="/" onClick={nav('/')} className="footer-logo">
-        <img className="footer-logo__image" src={brand.logoDark} alt="Line & İba Kuaför" />
+        <img
+          className="footer-logo__image"
+          src={brand.logoDark}
+          width="409"
+          height="512"
+          loading="lazy"
+          decoding="async"
+          alt="Line & İba Kuaför"
+        />
       </a>
       <div className="footer-cols">
         <nav className="footer-links" aria-label={lang === 'tr' ? 'Alt menü' : 'Footer menu'}>

@@ -5,6 +5,16 @@
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script>
+      if (window.location.pathname === '/') {
+        const heroPreload = document.createElement('link')
+        heroPreload.rel = 'preload'
+        heroPreload.as = 'image'
+        heroPreload.href = '/assets/photos/home-hero.webp'
+        heroPreload.fetchPriority = 'high'
+        document.head.appendChild(heroPreload)
+      }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#11100e" />
 
@@ -14,8 +24,8 @@
       content="Line &amp; İba Kuaför, Caddebostan'da saç kesimi, renklendirme, gelin başı, tırnak ve makyaj hizmetleri sunan kadın kuaförüdür."
     />
     <meta name="robots" content="index, follow" />
-    <!-- Tek sayfalık site: canonical daima kök adres. Yayına almadan önce alan adını değiştirin. -->
-    <link rel="canonical" href="https://lineibakuafor.example/" />
+    <!-- Tek sayfalık site: canonical daima kök adres. -->
+    <link rel="canonical" href="https://www.lineibakuafor.com/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -25,6 +35,7 @@
       content="Caddebostan'da kadın kuaförü; saç kesimi, renklendirme, gelin başı, tırnak ve makyaj aynı salonda."
     />
     <meta property="og:locale" content="tr_TR" />
+    <meta property="og:url" content="https://www.lineibakuafor.com/" />
 
     <!-- Fonts: Albert Sans with Turkish (latin-ext) coverage: ı İ ç ş ğ ü ö -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -41,8 +52,8 @@
         "@type": "HairSalon",
         "name": "Line & İba Kuaför",
         "description": "Caddebostan'da kadın kuaförü hizmetlerini premium salon deneyimiyle sunan modern bir kuaför.",
-        "image": "/assets/logo/logo-dark.png",
-        "url": "https://lineibakuafor.example",
+        "image": "https://www.lineibakuafor.com/assets/logo/logo-dark-optimized.webp",
+        "url": "https://www.lineibakuafor.com/",
         "telephone": "+902164072777",
         "sameAs": ["https://www.instagram.com/line_iba/"],
         "priceRange": "$$",
