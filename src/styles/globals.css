@@ -465,6 +465,54 @@ p {
   margin-top: 18px;
 }
 
+.care-service {
+  display: grid;
+  grid-template-columns: 0.8fr 1.25fr 0.85fr;
+  gap: 42px;
+  align-items: start;
+  margin-bottom: 12px;
+  padding: 34px 36px;
+  color: #fff;
+  background: var(--ink);
+}
+
+.care-service .eyebrow,
+.care-service h3 {
+  color: #fff;
+}
+
+.care-service h3 {
+  margin-top: 14px;
+  font-size: 24px;
+}
+
+.care-service > p {
+  color: #c8c8c8;
+  font-size: 15px;
+}
+
+.care-service ol {
+  list-style: none;
+  counter-reset: care-service;
+}
+
+.care-service li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  padding: 9px 0;
+  border-top: 1px solid #454545;
+  font-size: 14px;
+  counter-increment: care-service;
+}
+
+.care-service li::before {
+  color: #999;
+  font-size: 10px;
+  font-weight: 800;
+  content: "0" counter(care-service);
+}
+
 .service-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1132,8 +1180,15 @@ p {
   .split,
   .feature-box,
   .contact-grid,
+  .care-service,
   .partner-detail {
     grid-template-columns: 1fr;
+  }
+
+  .care-service ol {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 28px;
   }
 
   .service-grid,
@@ -1257,6 +1312,15 @@ p {
   .contact-list div {
     grid-template-columns: 1fr;
     gap: 6px;
+  }
+
+  .care-service {
+    gap: 24px;
+    padding: 28px;
+  }
+
+  .care-service ol {
+    grid-template-columns: 1fr;
   }
 
   .partner-detail__media,

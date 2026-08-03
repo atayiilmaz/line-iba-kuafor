@@ -46,6 +46,7 @@ type Copy = {
     title: string
     intro: string
     benefitsLabel: string
+    care: { title: string; body: string; benefits: string[] }
     items: { title: string; body: string; benefits: string[] }[]
     featuredTitle: string
     featuredBody: string
@@ -70,9 +71,14 @@ type Copy = {
     eyebrow: string
     title: string
     intro: string
+    area: string
+    areaDetail: string
     address: string
+    addressDetail: string
     phone: string
+    hoursLabel: string
     hours: string
+    whatsapp: string
     directions: string
   }
   footer: {
@@ -185,10 +191,17 @@ const copy: Record<Lang, Copy> = {
       intro:
         'Tek ekranda anlaşılır, salonda detaylandırılır. Her işlem öncesi saç analizi ve beklenti konuşması yapılır.',
       benefitsLabel: 'Verilen Hizmetler',
+      care: {
+        title: 'Saç Bakımı & Düzleştirme',
+        body:
+          'Line & İba Kuaför, yıpranmış ve dalgalı saçlar için saçın mevcut durumuna göre planlanan bakım ve şekillendirme hizmetleri sunar.',
+        benefits: ['Keratin bakımı', 'Saç botoksu', 'Mikro kaynak', 'Kalıcı fön / düzleştirme'],
+      },
       items: [
         {
           title: 'Kesim & Stil',
-          body: 'Form, yüz hattı ve günlük kullanım rutini üzerinden planlanan kesim.',
+          body:
+            "Line & İba'da form, yüz hattı ve günlük kullanım rutini üzerinden planlanan kesim sunulur — kıvırcık ve dalgalı saçların doğal dokusunu koruyan özel teknikler dahil.",
           benefits: ['Kadın saç kesimi', 'Fön ve maşa', 'Topuz ve özel gün stili'],
         },
         {
@@ -198,8 +211,8 @@ const copy: Record<Lang, Copy> = {
         },
         {
           title: 'Gelin Başı',
-          body: 'Düğün günü için prova, saç formu ve makyaj uyumuyla bütün hazırlık.',
-          benefits: ['Prova planı', 'Gelin topuzu', 'Makyaj uyumu'],
+          body: "Line & İba'da gelin başı hizmeti gelin makyajı ve makyaj uyumunu da kapsar.",
+          benefits: ['Prova planı', 'Gelin topuzu', 'Gelin makyajı', 'Makyaj uyumu'],
         },
         {
           title: 'Tırnak & Makyaj',
@@ -247,10 +260,15 @@ const copy: Record<Lang, Copy> = {
       eyebrow: 'Randevu',
       title: 'Size en uygun zamanı birlikte belirleyelim.',
       intro:
-        'WhatsApp, telefon veya yol tarifi bağlantılarıyla hızlıca ulaşın. Hizmet süresi ve fiyat bilgisi işlem öncesinde netleştirilir.',
+        "Line & İba Kuaför Caddebostan'da tek salonda hizmet verir; Bağdat Caddesi, Göztepe ve Kadıköy çevresinden gelen misafirler aynı adrese gelir.",
+      area: 'Semt',
+      areaDetail: 'Bağdat Caddesi / Caddebostan, Göztepe–Kadıköy hattı',
       address: 'Adres',
+      addressDetail: 'Caddebostan Mah. Ömer Paşa Sok. No:1 Can Apt. — tek salon, şube yok',
       phone: 'Telefon',
-      hours: 'Her gün 09:00 - 19:30',
+      hoursLabel: 'Çalışma saatleri',
+      hours: 'Her gün 09:00–19:30',
+      whatsapp: 'WhatsApp / randevu',
       directions: 'Yol Tarifi',
     },
     footer: { copyright: 'Tüm hakları saklıdır.' },
@@ -367,10 +385,17 @@ const copy: Record<Lang, Copy> = {
       intro:
         'Clear online, detailed in the salon. Every service begins with hair analysis and a short expectation consultation.',
       benefitsLabel: 'Services Provided',
+      care: {
+        title: 'Hair Care & Smoothing',
+        body:
+          'Line & Iba provides hair care and styling services planned around the current condition of damaged, wavy or textured hair.',
+        benefits: ['Keratin care', 'Hair botox', 'Micro extensions', 'Permanent blow-dry / smoothing'],
+      },
       items: [
         {
           title: 'Cut & Style',
-          body: 'Haircuts planned around form, face line and daily styling habits.',
+          body:
+            'Line & Iba offers haircuts planned around form, facial structure and daily styling habits, including techniques that preserve the natural texture of curly and wavy hair.',
           benefits: ['Women’s haircut', 'Blow dry and waves', 'Updo and event styling'],
         },
         {
@@ -380,8 +405,8 @@ const copy: Record<Lang, Copy> = {
         },
         {
           title: 'Bridal Hair',
-          body: 'A full preparation plan for the wedding day, from trial to final hair and makeup balance.',
-          benefits: ['Trial planning', 'Bridal updo', 'Makeup harmony'],
+          body: 'Bridal hair at Line & Iba also includes bridal makeup and coordination between the hair and makeup look.',
+          benefits: ['Trial planning', 'Bridal updo', 'Bridal makeup', 'Makeup harmony'],
         },
         {
           title: 'Nails & Makeup',
@@ -429,10 +454,15 @@ const copy: Record<Lang, Copy> = {
       eyebrow: 'Booking',
       title: 'Let’s find the right time for you.',
       intro:
-        'Reach us by WhatsApp, phone or directions. Service duration and pricing are clarified before the appointment.',
+        'Line & Iba operates from one salon in Caddebostan; guests arriving from Bağdat Avenue, Göztepe and Kadıköy all visit the same address.',
+      area: 'Area',
+      areaDetail: 'Bağdat Avenue / Caddebostan, on the Göztepe–Kadıköy line',
       address: 'Address',
+      addressDetail: 'Caddebostan Mah. Ömer Paşa Sok. No:1 Can Apt. — one salon, no branches',
       phone: 'Phone',
-      hours: 'Every day 09:00 - 19:30',
+      hoursLabel: 'Opening hours',
+      hours: 'Daily 09:00–19:30',
+      whatsapp: 'WhatsApp / booking',
       directions: 'Directions',
     },
     footer: { copyright: 'All rights reserved.' },
@@ -791,7 +821,15 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
   )
 }
 
-function ServicesStrip({ t, nav }: { t: Copy; nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void }) {
+function ServicesStrip({
+  t,
+  nav,
+  showCare = false,
+}: {
+  t: Copy
+  nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void
+  showCare?: boolean
+}) {
   return (
     <section className="services-strip section-pad">
       <div className="container">
@@ -800,6 +838,18 @@ function ServicesStrip({ t, nav }: { t: Copy; nav: (href: string) => (event: Rea
           <h2>{t.services.title}</h2>
           <p>{t.services.intro}</p>
         </div>
+        {showCare && (
+          <article className="care-service js-reveal">
+            <div>
+              <p className="eyebrow">Line & İba Care</p>
+              <h3>{t.services.care.title}</h3>
+            </div>
+            <p>{t.services.care.body}</p>
+            <ol>
+              {t.services.care.benefits.map((benefit) => <li key={benefit}>{benefit}</li>)}
+            </ol>
+          </article>
+        )}
         <div className="service-grid">
           {t.services.items.map((item) => (
             <article className="service-card js-reveal" key={item.title}>
@@ -828,7 +878,7 @@ function ServicesPage({ t, nav }: { t: Copy; nav: (href: string) => (event: Reac
   return (
     <>
       <PageHero title={t.services.title} image={images.servicesHero} />
-      <ServicesStrip t={t} nav={nav} />
+      <ServicesStrip t={t} nav={nav} showCare />
       <section className="featured-service section-pad">
         <div className="container feature-box js-reveal">
           <img
@@ -1077,20 +1127,24 @@ function ContactPage({ t, nav }: { t: Copy; nav: (href: string) => (event: React
             <p>{t.contact.intro}</p>
           </div>
           <div className="contact-list js-reveal">
+            <div>
+              <span>{t.contact.area}</span>
+              {t.contact.areaDetail}
+            </div>
             <a href={contactInfo.mapsUrl} target="_blank" rel="noreferrer">
               <span>{t.contact.address}</span>
-              {contactInfo.address}
+              {t.contact.addressDetail}
             </a>
+            <div>
+              <span>{t.contact.hoursLabel}</span>
+              {t.contact.hours}
+            </div>
             <a href={contactInfo.phoneHref}>
               <span>{t.contact.phone}</span>
               {contactInfo.phoneDisplay}
             </a>
-            <div>
-              <span>{t.contact.hours}</span>
-              Caddebostan / İstanbul
-            </div>
             <a href={social.whatsappUrl('Merhaba, Line & İba Kuaför için randevu almak istiyorum.')} target="_blank" rel="noreferrer">
-              <span>WhatsApp</span>
+              <span>{t.contact.whatsapp}</span>
               {social.whatsappDisplay}
             </a>
             <a href="/randevu" onClick={nav('/randevu')}>

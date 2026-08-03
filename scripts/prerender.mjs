@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/hizmetler',
     title: 'Hizmetler | Line & İba Kuaför',
-    description: "Caddebostan'da saç kesimi, renklendirme, gelin başı, manikür, pedikür ve profesyonel makyaj hizmetlerini inceleyin.",
+    description: "Caddebostan'da saç kesimi, renklendirme, keratin bakımı, saç botoksu, mikro kaynak, kalıcı fön, gelin başı ve makyaj hizmetlerini inceleyin.",
   },
   {
     path: '/hakkimizda',
@@ -42,7 +42,7 @@ const routes = [
   {
     path: '/iletisim',
     title: 'İletişim | Line & İba Kuaför',
-    description: "Caddebostan'daki Line & İba Kuaför'e telefon, WhatsApp veya yol tarifi üzerinden ulaşın; adres ve çalışma saatlerini görüntüleyin.",
+    description: "Bağdat Caddesi, Caddebostan ve Göztepe–Kadıköy hattındaki Line & İba Kuaför'ün adres, çalışma saatleri, telefon ve WhatsApp bilgilerini görüntüleyin.",
   },
   {
     path: '/randevu',

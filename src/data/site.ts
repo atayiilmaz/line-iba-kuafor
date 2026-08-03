@@ -243,16 +243,16 @@ const tr: SiteContent = {
     },
   },
 
-  // Müşteri talebi: bölümler az ve öz — kesim, renklendirme, gelin başı, tırnak.
+  // Hizmet grupları: kesim, renklendirme, bakım, gelin başı ve tırnak/makyaj.
   services: {
     number: '03',
     eyebrow: 'Hizmetler',
-    title: 'Az ve öz: dört ana hizmet.',
+    title: 'Özenle sunulan beş ana hizmet.',
     groups: [
       {
         key: 'kesim',
         title: 'Kesim & Stil',
-        description: 'Yüz hattına şekil veren kesim, fön ve şekillendirme.',
+        description: 'Kıvırcık ve dalgalı saçların doğal dokusunu koruyan teknikler dahil, yüz hattına şekil veren kesim ve stil.',
         items: ['Saç Kesimi', 'Fön', 'Kırık Fön', 'Maşa', 'Topuz', 'Örgü'],
       },
       {
@@ -260,6 +260,12 @@ const tr: SiteContent = {
         title: 'Renklendirme',
         description: 'Doğal tonlardan iddialı geçişlere profesyonel renk uygulamaları.',
         items: ['Saç Boyama', 'Dip Boyama', 'Balyaj', 'Ombre', 'Röfle ve Gölge'],
+      },
+      {
+        key: 'bakim',
+        title: 'Saç Bakımı & Düzleştirme',
+        description: 'Saçın mevcut durumuna göre planlanan bakım ve şekillendirme hizmetleri.',
+        items: ['Keratin Bakımı', 'Saç Botoksu', 'Mikro Kaynak', 'Kalıcı Fön / Düzleştirme'],
       },
       {
         key: 'gelin',
@@ -447,12 +453,12 @@ const en: SiteContent = {
   services: {
     number: '03',
     eyebrow: 'Services',
-    title: 'Four essentials, done well.',
+    title: 'Five essentials, done well.',
     groups: [
       {
         key: 'kesim',
         title: 'Cut & Style',
-        description: 'Cuts, blowouts and styling shaped to frame your features.',
+        description: 'Cuts and styling shaped to frame your features, including techniques that preserve curly and wavy texture.',
         items: ['Haircut', 'Blowout', 'Waves & Curls', 'Updo', 'Braids'],
       },
       {
@@ -460,6 +466,12 @@ const en: SiteContent = {
         title: 'Colour',
         description: 'Professional colour, from natural tones to bold transformations.',
         items: ['Hair Colouring', 'Root Touch-Up', 'Balayage', 'Ombré', 'Highlights & Lowlights'],
+      },
+      {
+        key: 'bakim',
+        title: 'Hair Care & Smoothing',
+        description: 'Care and styling services planned around the current condition of the hair.',
+        items: ['Keratin Care', 'Hair Botox', 'Micro Extensions', 'Permanent Blow-Dry / Smoothing'],
       },
       {
         key: 'gelin',
