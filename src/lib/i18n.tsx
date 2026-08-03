@@ -13,6 +13,7 @@ type LangContextValue = { lang: Lang; setLang: (lang: Lang) => void }
 const LangContext = createContext<LangContextValue>({ lang: 'tr', setLang: () => {} })
 
 function initialLang(): Lang {
+  if (typeof window === 'undefined') return 'tr'
   // ?lang=en gibi bir adresle açılırsa URL kazanır (paylaşılabilir link)
   const fromUrl = new URLSearchParams(window.location.search).get('lang')
   if (fromUrl === 'en' || fromUrl === 'tr') return fromUrl
@@ -24,21 +25,25 @@ function initialLang(): Lang {
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>(initialLang)
+  // Sunucu ve ilk tarayıcı render'ı aynı dilde başlamalı; kaydedilmiş tercih
+  // hydration tamamlandıktan sonra uygulanır.
+  const [lang, setLang] = useState<Lang>('tr')
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
+    setLang(initialLang())
+    setReady(true)
+  }, [])
+
+  useEffect(() => {
+    if (!ready) return
     try {
       localStorage.setItem(STORAGE_KEY, lang)
     } catch {
       /* gizli modda sessizce geç */
     }
     document.documentElement.lang = lang
-    const t = content[lang]
-    document.title = t.meta.title
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute('content', t.meta.description)
-  }, [lang])
+  }, [lang, ready])
 
   return <LangContext.Provider value={{ lang, setLang }}>{children}</LangContext.Provider>
 }

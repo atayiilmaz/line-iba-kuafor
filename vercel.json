@@ -1,4 +1,12 @@
 {
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "lineiba.com" }],
+      "destination": "https://www.lineiba.com/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
@@ -10,5 +18,17 @@
       ]
     }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/hizmetler", "destination": "/hizmetler/index.html" },
+    { "source": "/hakkimizda", "destination": "/hakkimizda/index.html" },
+    { "source": "/hakkimizda/ahmet-yilmaz", "destination": "/hakkimizda/ahmet-yilmaz/index.html" },
+    { "source": "/hakkimizda/ergun-sarica", "destination": "/hakkimizda/ergun-sarica/index.html" },
+    { "source": "/hakkimizda/ibrahim-yilmaz", "destination": "/hakkimizda/ibrahim-yilmaz/index.html" },
+    { "source": "/koleksiyon", "destination": "/koleksiyon/index.html" },
+    { "source": "/iletisim", "destination": "/iletisim/index.html" },
+    { "source": "/randevu", "destination": "/randevu/index.html" },
+    { "source": "/kvkk", "destination": "/kvkk/index.html" },
+    { "source": "/yonetim", "destination": "/index.html" },
+    { "source": "/yonetim/(.*)", "destination": "/index.html" }
+  ]
 }

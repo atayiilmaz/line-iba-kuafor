@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir .prerender && node scripts/prerender.mjs",
     "lint": "oxlint",
     "test:edge": "deno test supabase/functions/_shared/validation_test.ts",
     "test:concurrency": "bash scripts/test-booking-concurrency.sh",

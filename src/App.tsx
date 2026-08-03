@@ -2,8 +2,8 @@ import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { LanguageProvider, useLang } from './lib/i18n'
 import { brand, contactInfo, social, type Lang } from './data/site'
+import { BookingPage } from './components/booking/BookingPage'
 
-const BookingPage = lazy(() => import('./components/booking/BookingPage').then((module) => ({ default: module.BookingPage })))
 const AdminPage = lazy(() => import('./components/admin/AdminPage').then((module) => ({ default: module.AdminPage })))
 
 type RouteKey = 'home' | 'services' | 'about' | 'partner' | 'gallery' | 'contact' | 'booking' | 'privacy' | 'admin'
@@ -511,18 +511,18 @@ const copy: Record<Lang, Copy> = {
 
 const routeOrder: RouteKey[] = ['home', 'services', 'about', 'gallery', 'contact', 'booking', 'privacy', 'admin']
 
-function App() {
+function App({ initialPath }: { initialPath?: string }) {
   return (
     <LanguageProvider>
-      <LineIbaSite />
+      <LineIbaSite initialPath={initialPath} />
     </LanguageProvider>
   )
 }
 
-function LineIbaSite() {
+function LineIbaSite({ initialPath }: { initialPath?: string }) {
   const { lang, setLang } = useLang()
   const t = copy[lang]
-  const [path, setPath] = useState(window.location.pathname)
+  const [path, setPath] = useState(() => initialPath ?? (typeof window === 'undefined' ? '/' : window.location.pathname))
   const route = getRoute(path, t.partners)
 
   useEffect(() => {
@@ -611,7 +611,7 @@ function LineIbaSite() {
         {route.key === 'partner' && <PartnerPage t={t} partner={route.partner} nav={nav} />}
         {route.key === 'gallery' && <GalleryPage t={t} />}
         {route.key === 'contact' && <ContactPage t={t} nav={nav} />}
-        {route.key === 'booking' && <Suspense fallback={<RouteLoader />}><BookingPage lang={lang} navigate={nav} /></Suspense>}
+        {route.key === 'booking' && <BookingPage lang={lang} navigate={nav} />}
         {route.key === 'privacy' && <PrivacyPage lang={lang} />}
       </main>
       <SiteFooter t={t} lang={lang} setLang={setLang} nav={nav} />

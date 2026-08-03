@@ -1,1 +1,11 @@
-/*    /index.html   200
+/hizmetler                         /hizmetler/index.html                         200
+/hakkimizda                        /hakkimizda/index.html                        200
+/hakkimizda/ahmet-yilmaz           /hakkimizda/ahmet-yilmaz/index.html           200
+/hakkimizda/ergun-sarica           /hakkimizda/ergun-sarica/index.html           200
+/hakkimizda/ibrahim-yilmaz         /hakkimizda/ibrahim-yilmaz/index.html         200
+/koleksiyon                        /koleksiyon/index.html                        200
+/iletisim                          /iletisim/index.html                          200
+/randevu                           /randevu/index.html                           200
+/kvkk                              /kvkk/index.html                              200
+/yonetim      /index.html   200
+/yonetim/*    /index.html   200

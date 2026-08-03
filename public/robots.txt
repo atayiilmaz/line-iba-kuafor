@@ -3,4 +3,4 @@ Allow: /
 Disallow: /yonetim
 Disallow: /yonetim/
 
-Sitemap: https://lineiba.com/sitemap.xml
+Sitemap: https://www.lineiba.com/sitemap.xml
