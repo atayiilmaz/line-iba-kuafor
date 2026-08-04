@@ -56,13 +56,6 @@ export type WorkCategory = {
 
 export type Review = { quote: string; name: string; meta: string }
 
-export type Partner = {
-  name: string
-  role: string
-  story: string
-  image: string // Gerçek portreyi bu yola koyun; yoksa baş harfli zarif bir blok gösterilir
-}
-
 export type SiteContent = {
   meta: { title: string; description: string }
   nav: {
@@ -93,12 +86,6 @@ export type SiteContent = {
     imageAlt: string
     imageMark: string
     features: { title: string; text: string }[]
-    story: {
-      eyebrow: string
-      title: string
-      intro: string
-      partners: Partner[]
-    }
   }
   services: { number: string; eyebrow: string; title: string; groups: ServiceGroup[] }
   works: { number: string; eyebrow: string; title: string; categories: WorkCategory[] }
@@ -209,38 +196,6 @@ const tr: SiteContent = {
         text: 'Göztepe’ye komşu, ulaşımı kolay merkezi Caddebostan konumu.',
       },
     ],
-    // Üç ortağın hikayesi — ortaklardan metinler geldikçe story alanlarını
-    // ve isim/rolleri kendi anlatımlarıyla değiştirin. Portreler için:
-    // public/assets/team/ altına ortak-1.jpg, ortak-2.jpg, ortak-3.jpg koyun.
-    story: {
-      eyebrow: 'Hikayemiz',
-      title: 'Üç usta, tek salon.',
-      intro:
-        'Line & İba; üç ortağın ayrı ayrı yürüdüğü yolların Caddebostan’da birleşmesiyle doğdu. Her biri kendi alanında yıllarını vermiş üç usta, aynı titizlik ve aynı hizmet anlayışında buluştu. Aşağıda her ortak kendi yolculuğunu kendi sözleriyle anlatıyor.',
-      partners: [
-        {
-          name: 'Ahmet Yılmaz',
-          role: 'Kurucu Ortak',
-          story:
-            'Nerede başladı, hangi salonlarda ustalaştı, Line & İba’ya uzanan yol nasıl şekillendi — Ahmet, hikayesini burada kendi sözleriyle anlatacak.',
-          image: '/assets/team/ortak-1.jpg',
-        },
-        {
-          name: 'Ergün Sarıca',
-          role: 'Kurucu Ortak',
-          story:
-            'Ergün’ün yolculuğu: ilk adımları, ustalık yılları ve üç yolun kesişme anı. Metin, kendi anlatımıyla bu alana eklenecek.',
-          image: '/assets/team/ortak-2.jpg',
-        },
-        {
-          name: 'İbrahim Yılmaz',
-          role: 'Kurucu Ortak',
-          story:
-            'İbrahim’in hikayesi: mesleğe başlangıcı, deneyimleri ve birleşme kararı. Metin, kendi anlatımıyla bu alana eklenecek.',
-          image: '/assets/team/ortak-3.jpg',
-        },
-      ],
-    },
   },
 
   // Hizmet grupları: kesim, renklendirme, bakım, gelin başı ve tırnak/makyaj.
@@ -419,35 +374,6 @@ const en: SiteContent = {
         text: 'A central, easy-to-reach spot in Caddebostan, next to Göztepe.',
       },
     ],
-    story: {
-      eyebrow: 'Our Story',
-      title: 'Three masters, one salon.',
-      intro:
-        'Line & İba was born when three separate paths met in Caddebostan. Three masters, each with years of craft in their own field, came together around the same care and the same standard of service. Below, each partner tells their own journey in their own words.',
-      partners: [
-        {
-          name: 'Ahmet Yılmaz',
-          role: 'Co-Founder',
-          story:
-            'Where it began, the salons where he honed his craft, and the road that led to Line & İba — Ahmet will tell his story here in his own words.',
-          image: '/assets/team/ortak-1.jpg',
-        },
-        {
-          name: 'Ergün Sarıca',
-          role: 'Co-Founder',
-          story:
-            'Ergün’s journey: first steps, years of mastery, and the moment three paths crossed. His story will be added here in his own words.',
-          image: '/assets/team/ortak-2.jpg',
-        },
-        {
-          name: 'İbrahim Yılmaz',
-          role: 'Co-Founder',
-          story:
-            'İbrahim’s story: how the craft began, the experience gathered, and the decision to join forces. His story will be added here in his own words.',
-          image: '/assets/team/ortak-3.jpg',
-        },
-      ],
-    },
   },
 
   services: {

@@ -45,60 +45,7 @@ export function About() {
           </ul>
         </div>
 
-        {/* Üç ortağın hikayesi — metinler ortaklardan geldikçe
-            src/data/site.ts içindeki about.story alanından güncellenir. */}
-        <div className="about__story">
-          <AnimatedReveal className="about__story-head">
-            <div>
-              <span className="mono about__story-eyebrow">{about.story.eyebrow}</span>
-              <h3 className="about__story-title display">{about.story.title}</h3>
-            </div>
-            <p className="lead">{about.story.intro}</p>
-          </AnimatedReveal>
-
-          <ul className="about__partners">
-            {about.story.partners.map((partner, i) => (
-              <AnimatedReveal
-                as="li"
-                key={`${partner.name}-${i}`}
-                className="about__partner"
-                delay={0.1 + i * 0.12}
-              >
-                <Frame tone="dark" className="about__partner-frame">
-                  <figure className="about__partner-photo">
-                    {/* Portre yoksa baş harfler görünür */}
-                    <span className="about__partner-initials display" aria-hidden="true">
-                      {initials(partner.name)}
-                    </span>
-                    <img
-                      src={partner.image}
-                      alt={partner.name}
-                      loading="lazy"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none'
-                      }}
-                    />
-                  </figure>
-                </Frame>
-                <h4 className="about__partner-name">{partner.name}</h4>
-                <span className="mono about__partner-role">{partner.role}</span>
-                <p className="about__partner-story">{partner.story}</p>
-              </AnimatedReveal>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
-  )
-}
-
-/** 'Ahmet Yılmaz' → 'A.Y.' */
-function initials(name: string): string {
-  return (
-    name
-      .split(/\s+/)
-      .filter(Boolean)
-      .map((word) => word[0])
-      .join('.') + '.'
   )
 }
