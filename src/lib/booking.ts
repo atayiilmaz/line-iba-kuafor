@@ -11,6 +11,7 @@ export type BookingResult = {
 export type BookingPayload = {
   requestId: string
   serviceCode: string
+  staffCode: string
   date: string
   startTime: string
   customerName: string
@@ -61,11 +62,11 @@ async function request<T>(name: string, init: RequestInit = {}, query = ''): Pro
   return body as T
 }
 
-export async function getAvailability(date: string) {
+export async function getAvailability(date: string, staffCode: string) {
   return request<{ date: string; timezone: string; slots: BookingSlot[] }>(
     'booking-availability',
     { method: 'GET' },
-    `?date=${encodeURIComponent(date)}`,
+    `?date=${encodeURIComponent(date)}&staffCode=${encodeURIComponent(staffCode)}`,
   )
 }
 

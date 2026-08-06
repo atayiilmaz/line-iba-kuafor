@@ -1,4 +1,5 @@
 export const serviceCodes = ['cut-style', 'color', 'bridal', 'nails-makeup'] as const
+export const staffCodes = ['ergun-sarica', 'ibrahim-yilmaz', 'ahmet-yilmaz'] as const
 
 export function normalizeTurkishPhone(input: unknown) {
   const raw = String(input ?? '').trim()

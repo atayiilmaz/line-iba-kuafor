@@ -7,6 +7,7 @@ type Job = {
   recipient: string
   reference_code: string
   service_code: string
+  staff_code: string
   customer_name: string | null
   phone_e164: string | null
   note: string | null
@@ -20,6 +21,12 @@ const services: Record<string, string> = {
   color: 'Renklendirme',
   bridal: 'Gelin Başı',
   'nails-makeup': 'Tırnak & Makyaj',
+}
+
+const staff: Record<string, string> = {
+  'ergun-sarica': 'Ergün Sarıca',
+  'ibrahim-yilmaz': 'İbrahim Yılmaz',
+  'ahmet-yilmaz': 'Ahmet Yılmaz',
 }
 
 Deno.serve(async (request) => {
@@ -60,7 +67,7 @@ Deno.serve(async (request) => {
                 { type: 'text', text: job.reference_code },
                 { type: 'text', text: dateLabel },
                 { type: 'text', text: timeLabel },
-                { type: 'text', text: services[job.service_code] ?? job.service_code },
+                { type: 'text', text: `${services[job.service_code] ?? job.service_code} · ${staff[job.staff_code] ?? job.staff_code}` },
                 { type: 'text', text: job.customer_name ?? 'Anonim' },
                 { type: 'text', text: job.phone_e164 ?? '-' },
                 { type: 'text', text: job.note || '-' },

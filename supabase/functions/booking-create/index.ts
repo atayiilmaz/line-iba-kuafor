@@ -1,12 +1,13 @@
 import { isAllowedOrigin } from '../_shared/cors.ts'
 import { json, options } from '../_shared/http.ts'
 import { adminClient } from '../_shared/supabase.ts'
-import { normalizeTurkishPhone, serviceCodes, toIstanbulTimestamp, validDate, validTime } from '../_shared/validation.ts'
+import { normalizeTurkishPhone, serviceCodes, staffCodes, toIstanbulTimestamp, validDate, validTime } from '../_shared/validation.ts'
 import { verifyTurnstile } from '../_shared/turnstile.ts'
 
 type BookingPayload = {
   requestId?: string
   serviceCode?: string
+  staffCode?: string
   date?: string
   startTime?: string
   customerName?: string
@@ -18,7 +19,7 @@ type BookingPayload = {
 }
 
 function rpcErrorCode(message: string) {
-  return ['SLOT_TAKEN', 'INVALID_SERVICE', 'INVALID_INPUT', 'INVALID_NAME', 'INVALID_PHONE', 'INVALID_SLOT', 'SLOT_OUTSIDE_WINDOW']
+  return ['SLOT_TAKEN', 'INVALID_SERVICE', 'INVALID_STAFF', 'INVALID_INPUT', 'INVALID_NAME', 'INVALID_PHONE', 'INVALID_SLOT', 'SLOT_OUTSIDE_WINDOW']
     .find((code) => message.includes(code))
 }
 
@@ -39,6 +40,7 @@ Deno.serve(async (request) => {
   const note = String(body.note ?? '').trim()
   const requestId = String(body.requestId ?? '')
   const serviceCode = String(body.serviceCode ?? '')
+  const staffCode = String(body.staffCode ?? '')
   const date = String(body.date ?? '')
   const startTime = String(body.startTime ?? '')
   const turnstileToken = String(body.turnstileToken ?? '')
@@ -47,6 +49,7 @@ Deno.serve(async (request) => {
   const invalidFields = [
     !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(requestId) && 'requestId',
     !serviceCodes.includes(serviceCode as (typeof serviceCodes)[number]) && 'serviceCode',
+    !staffCodes.includes(staffCode as (typeof staffCodes)[number]) && 'staffCode',
     !validDate(date) && 'date',
     !validTime(startTime) && 'startTime',
     (name.length < 2 || name.length > 100) && 'customerName',
@@ -68,6 +71,7 @@ Deno.serve(async (request) => {
     const { data, error } = await client.rpc('create_appointment', {
       p_request_id: requestId,
       p_service_code: serviceCode,
+      p_staff_code: staffCode,
       p_customer_name: name,
       p_phone_e164: phone,
       p_note: note,

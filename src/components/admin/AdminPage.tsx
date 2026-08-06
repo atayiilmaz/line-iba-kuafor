@@ -4,7 +4,7 @@ import { adminAction, adminBookings, BookingApiError } from '../../lib/booking'
 import { getSupabaseClient } from '../../lib/supabaseClient'
 import './AdminPage.css'
 
-type CalendarEntry = { id: string; start_at: string; kind: 'appointment' | 'block'; status: 'active' | 'released'; reason: string | null; created_at: string }
+type CalendarEntry = { id: string; start_at: string; staff_code: string; kind: 'appointment' | 'block'; status: 'active' | 'released'; reason: string | null; created_at: string }
 type Appointment = {
   id: string; calendar_entry_id: string; reference_code: string; service_code: string; customer_name: string | null;
   phone_e164: string | null; note: string | null; source: string; status: string; notification_status: string; created_at: string
@@ -13,6 +13,7 @@ type Notification = { appointment_id: string; status: string; attempts: number; 
 type AdminData = { date: string; entries: CalendarEntry[]; appointments: Appointment[]; notifications: Notification[]; admin: { display_name: string | null; role: string } }
 
 const services: Record<string, string> = { 'cut-style': 'Kesim & Stil', color: 'Renklendirme', bridal: 'Gelin Başı', 'nails-makeup': 'Tırnak & Makyaj' }
+const staff: Record<string, string> = { 'ergun-sarica': 'Ergün Sarıca', 'ibrahim-yilmaz': 'İbrahim Yılmaz', 'ahmet-yilmaz': 'Ahmet Yılmaz' }
 const timeOptions = Array.from({ length: 10 }, (_, index) => `${String(index + 9).padStart(2, '0')}:00`)
 
 function localDate() {
@@ -144,7 +145,7 @@ export function AdminPage() {
         {activeEntries.map((entry) => {
           const appointment = appointmentByEntry.get(entry.id)
           if (entry.kind === 'block') return <article className="admin-row admin-row--block" key={entry.id}>
-            <time>{timeLabel(entry.start_at)}</time><div><span>Kapalı Saat</span><strong>{entry.reason || 'İşletme tarafından kapatıldı'}</strong></div>
+            <time>{timeLabel(entry.start_at)}</time><div><span>Kapalı Saat · {staff[entry.staff_code]}</span><strong>{entry.reason || 'İşletme tarafından kapatıldı'}</strong></div>
             <button disabled={busy} onClick={() => void action({ action: 'unblock', entryId: entry.id })}>Saati Aç</button>
           </article>
           if (!appointment) return null
@@ -152,7 +153,7 @@ export function AdminPage() {
           return <article className="admin-row" key={entry.id}>
             <time>{timeLabel(entry.start_at)}</time>
             <div className="admin-row__person"><span>{appointment.reference_code}</span><strong>{appointment.customer_name}</strong><a href={`tel:${appointment.phone_e164}`}>{appointment.phone_e164}</a></div>
-            <div><span>Hizmet</span><strong>{services[appointment.service_code]}</strong>{appointment.note && <small>{appointment.note}</small>}</div>
+            <div><span>Hizmet / Personel</span><strong>{services[appointment.service_code]}</strong><small>{staff[entry.staff_code]}</small>{appointment.note && <small>{appointment.note}</small>}</div>
             <div className={`admin-status is-${appointment.notification_status}`}>
               <span>WhatsApp</span><strong>{appointment.notification_status}</strong>
               {notification?.last_error && <small title={notification.last_error}>Deneme {notification.attempts}: {notification.last_error.slice(0, 90)}</small>}
@@ -167,7 +168,7 @@ export function AdminPage() {
         })}
       </div>
       <aside className="admin-side">
-        <BlockForm date={date} busy={busy} onSubmit={(startTime, reason) => action({ action: 'block', date, startTime, reason })} />
+        <BlockForm date={date} busy={busy} onSubmit={(startTime, staffCode, reason) => action({ action: 'block', date, startTime, staffCode, reason })} />
         {showManual && <ManualForm date={date} busy={busy} onSubmit={(payload) => action({ action: 'manual', date, requestId: crypto.randomUUID(), ...payload })} />}
       </aside>
     </section>
@@ -198,22 +199,24 @@ function AdminGate({ eyebrow, title, body, actionLabel, onAction, onSignOut }: {
   </main>
 }
 
-function BlockForm({ date, busy, onSubmit }: { date: string; busy: boolean; onSubmit: (time: string, reason: string) => Promise<void> }) {
-  const [time, setTime] = useState('09:00'); const [reason, setReason] = useState('')
-  return <form className="admin-card" onSubmit={(event) => { event.preventDefault(); void onSubmit(time, reason) }}>
-    <p className="eyebrow">Müsaitlik</p><h3>Saat Kapat</h3><p>{date} tarihinde rezervasyon alınmayacak bir saat belirleyin.</p>
+function BlockForm({ date, busy, onSubmit }: { date: string; busy: boolean; onSubmit: (time: string, staffCode: string, reason: string) => Promise<void> }) {
+  const [time, setTime] = useState('09:00'); const [staffCode, setStaffCode] = useState('ergun-sarica'); const [reason, setReason] = useState('')
+  return <form className="admin-card" onSubmit={(event) => { event.preventDefault(); void onSubmit(time, staffCode, reason) }}>
+    <p className="eyebrow">Müsaitlik</p><h3>Saat Kapat</h3><p>{date} tarihinde bir personelin rezervasyon alınmayacak saatini belirleyin.</p>
     <label className="admin-field"><span>Saat</span><select value={time} onChange={(event) => setTime(event.target.value)}>{timeOptions.map((item) => <option key={item}>{item}</option>)}</select></label>
+    <label className="admin-field"><span>Personel</span><select value={staffCode} onChange={(event) => setStaffCode(event.target.value)}>{Object.entries(staff).map(([code, label]) => <option value={code} key={code}>{label}</option>)}</select></label>
     <label className="admin-field"><span>Neden</span><input maxLength={240} value={reason} onChange={(event) => setReason(event.target.value)} placeholder="Örn. toplantı" /></label>
     <button className="button button--dark" disabled={busy}>Saati Kapat</button>
   </form>
 }
 
 function ManualForm({ date, busy, onSubmit }: { date: string; busy: boolean; onSubmit: (payload: Record<string, unknown>) => Promise<void> }) {
-  const [startTime, setStartTime] = useState('09:00'); const [serviceCode, setServiceCode] = useState('cut-style'); const [customerName, setName] = useState(''); const [phone, setPhone] = useState(''); const [note, setNote] = useState('')
-  return <form className="admin-card" onSubmit={(event) => { event.preventDefault(); void onSubmit({ startTime, serviceCode, customerName, phone, note }) }}>
+  const [startTime, setStartTime] = useState('09:00'); const [serviceCode, setServiceCode] = useState('cut-style'); const [staffCode, setStaffCode] = useState('ergun-sarica'); const [customerName, setName] = useState(''); const [phone, setPhone] = useState(''); const [note, setNote] = useState('')
+  return <form className="admin-card" onSubmit={(event) => { event.preventDefault(); void onSubmit({ startTime, serviceCode, staffCode, customerName, phone, note }) }}>
     <p className="eyebrow">Telefon / Salon</p><h3>Manuel Randevu</h3><p>{date} tarihine işletme adına randevu ekleyin.</p>
     <label className="admin-field"><span>Saat</span><select value={startTime} onChange={(event) => setStartTime(event.target.value)}>{timeOptions.map((item) => <option key={item}>{item}</option>)}</select></label>
     <label className="admin-field"><span>Hizmet</span><select value={serviceCode} onChange={(event) => setServiceCode(event.target.value)}>{Object.entries(services).map(([code, label]) => <option value={code} key={code}>{label}</option>)}</select></label>
+    <label className="admin-field"><span>Personel</span><select value={staffCode} onChange={(event) => setStaffCode(event.target.value)}>{Object.entries(staff).map(([code, label]) => <option value={code} key={code}>{label}</option>)}</select></label>
     <label className="admin-field"><span>Ad Soyad</span><input value={customerName} onChange={(event) => setName(event.target.value)} required /></label>
     <label className="admin-field"><span>Telefon</span><input type="tel" value={phone} onChange={(event) => setPhone(event.target.value)} required /></label>
     <label className="admin-field"><span>Not</span><textarea rows={3} maxLength={600} value={note} onChange={(event) => setNote(event.target.value)} /></label>

@@ -1,7 +1,7 @@
 import { isAllowedOrigin } from '../_shared/cors.ts'
 import { json, options } from '../_shared/http.ts'
 import { requireAdmin } from '../_shared/supabase.ts'
-import { normalizeTurkishPhone, serviceCodes, toIstanbulTimestamp, validDate, validTime } from '../_shared/validation.ts'
+import { normalizeTurkishPhone, serviceCodes, staffCodes, toIstanbulTimestamp, validDate, validTime } from '../_shared/validation.ts'
 
 type AdminAction = {
   action?: 'cancel' | 'block' | 'unblock' | 'retry' | 'manual'
@@ -12,6 +12,7 @@ type AdminAction = {
   reason?: string
   requestId?: string
   serviceCode?: string
+  staffCode?: string
   customerName?: string
   phone?: string
   note?: string
@@ -42,7 +43,7 @@ Deno.serve(async (request) => {
     const to = new Date(new Date(from).getTime() + 24 * 60 * 60 * 1000).toISOString()
     const { data: entries, error: entryError } = await admin.client
       .from('calendar_entries')
-      .select('id, start_at, kind, status, reason, created_at')
+      .select('id, start_at, staff_code, kind, status, reason, created_at')
       .gte('start_at', from)
       .lt('start_at', to)
       .order('start_at')
@@ -77,9 +78,10 @@ Deno.serve(async (request) => {
         p_appointment_id: body.appointmentId, p_actor_id: admin.user.id,
       })
       if (error) throw error
-    } else if (body.action === 'block' && validDate(body.date) && validTime(body.startTime)) {
+    } else if (body.action === 'block' && validDate(body.date) && validTime(body.startTime) && staffCodes.includes(body.staffCode as (typeof staffCodes)[number])) {
       const { error } = await admin.client.rpc('admin_block_slot', {
         p_start_at: toIstanbulTimestamp(body.date, body.startTime),
+        p_staff_code: body.staffCode,
         p_reason: String(body.reason ?? '').slice(0, 240),
         p_actor_id: admin.user.id,
       })
@@ -101,6 +103,7 @@ Deno.serve(async (request) => {
       && validDate(body.date)
       && validTime(body.startTime)
       && serviceCodes.includes(body.serviceCode as (typeof serviceCodes)[number])
+      && staffCodes.includes(body.staffCode as (typeof staffCodes)[number])
     ) {
       const phone = normalizeTurkishPhone(body.phone)
       const name = String(body.customerName ?? '').trim()
@@ -108,6 +111,7 @@ Deno.serve(async (request) => {
       const { data, error } = await admin.client.rpc('create_appointment', {
         p_request_id: body.requestId,
         p_service_code: body.serviceCode,
+        p_staff_code: body.staffCode,
         p_customer_name: name,
         p_phone_e164: phone,
         p_note: String(body.note ?? '').slice(0, 600),

@@ -1,5 +1,5 @@
 import { assertEquals } from 'jsr:@std/assert@1'
-import { normalizeTurkishPhone, toIstanbulTimestamp, validDate, validTime } from './validation.ts'
+import { normalizeTurkishPhone, staffCodes, toIstanbulTimestamp, validDate, validTime } from './validation.ts'
 
 Deno.test('normalizes supported Turkish mobile phone formats', () => {
   assertEquals(normalizeTurkishPhone('0533 321 22 83'), '+905333212283')
@@ -18,6 +18,10 @@ Deno.test('validates the fixed booking grid', () => {
   assertEquals(validTime('09:00'), true)
   assertEquals(validTime('18:00'), true)
   assertEquals(validTime('18:30'), false)
+})
+
+Deno.test('exposes the supported booking staff codes', () => {
+  assertEquals(staffCodes, ['ergun-sarica', 'ibrahim-yilmaz', 'ahmet-yilmaz'])
 })
 
 Deno.test('rejects impossible calendar dates', () => {

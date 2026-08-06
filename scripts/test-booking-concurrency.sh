@@ -13,6 +13,7 @@ slot_sql="make_timestamptz(
 request_sql="select * from public.create_appointment(
   gen_random_uuid(),
   'cut-style',
+  'ergun-sarica',
   'Concurrency Test',
   '+905551112233',
   '',
@@ -36,6 +37,7 @@ created_count=$(psql "${booking_test_db_url}" -v ON_ERROR_STOP=1 -Atc "
   from public.appointments a
   join public.calendar_entries ce on ce.id = a.calendar_entry_id
   where ce.start_at = ${slot_sql}
+    and ce.staff_code = 'ergun-sarica'
     and a.customer_name = 'Concurrency Test';
 ")
 
