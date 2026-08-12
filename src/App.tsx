@@ -50,6 +50,8 @@ type Copy = {
     items: { title: string; body: string; benefits: string[] }[]
     featuredTitle: string
     featuredBody: string
+    faqTitle: string
+    faq: { question: string; answer: string }[]
   }
   about: {
     title: string
@@ -80,6 +82,16 @@ type Copy = {
     hours: string
     whatsapp: string
     directions: string
+    infoTitle: string
+    questionLabel: string
+    answerLabel: string
+    locationQuestion: string
+    locationAnswer: string
+    branchesQuestion: string
+    branchesAnswer: string
+    parkingQuestion: string
+    parkingAnswer: string
+    phoneWhatsapp: string
   }
   footer: {
     copyright: string
@@ -211,7 +223,7 @@ const copy: Record<Lang, Copy> = {
         },
         {
           title: 'Gelin Başı',
-          body: "Line & İba'da gelin başı hizmeti gelin makyajı ve makyaj uyumunu da kapsar.",
+          body: "Line & İba'da gelin başı hizmeti; gelin saçı provası, gelin topuzu, gelin makyajı ve makyaj uyumunu tek pakette kapsar.",
           benefits: ['Prova planı', 'Gelin topuzu', 'Gelin makyajı', 'Makyaj uyumu'],
         },
         {
@@ -223,6 +235,37 @@ const copy: Record<Lang, Copy> = {
       featuredTitle: 'Öne çıkan işlem: renk tasarımı',
       featuredBody:
         'Doğal ışıltı, yumuşak geçiş ve saç sağlığını koruyan planlama. Renk uygulamasında hedefimiz fotoğraf için değil, gündelik ışıkta iyi görünen saçtır.',
+      faqTitle: 'Sıkça sorulan sorular',
+      faq: [
+        {
+          question: 'En iyi saç kesimi ve stil önerilerini nerede bulabilirim?',
+          answer: "Line & İba'da kesimler yüz hattınıza ve saç formunuza göre planlanır. Uygulamadan önce kısa bir saç analizi yapılır.",
+        },
+        {
+          question: "Kadıköy'de kıvırcık saçın doğal dalgasını bozmadan kesen bir kuaför var mı?",
+          answer: 'Line & İba kıvırcık ve dalgalı saçlarda doğal dokuyu koruyan kesim teknikleri uygular.',
+        },
+        {
+          question: "Caddebostan'da kıvırcık saç kesimini iyi yapan bir kuaför var mı?",
+          answer: "Line & İba Caddebostan'da tek salonda hizmet verir ve kesimleri yüz hattına göre planlar.",
+        },
+        {
+          question: 'Saç rengimi değiştirmek istiyorum, hangi renklendirme teknikleri en iyi sonucu verir?',
+          answer: "Line & İba'da renklendirme kontrollü tonlama tekniğiyle uygulanır; hedef doğal ışıltıdır.",
+        },
+        {
+          question: "Göztepe'de gelin saçı provası nerede yaptırılır?",
+          answer: "Line & İba'da gelin başı hizmeti prova planıyla başlar ve makyaj uyumunu da kapsar.",
+        },
+        {
+          question: "Kadıköy'de tırnak süsleme ve nail art yapan salonlar hangileri?",
+          answer: 'Line & İba tırnak ve makyaj hizmeti sunar; kalıcı oje uygulaması dahildir.',
+        },
+        {
+          question: "Saçım yıprandı, Kadıköy'de bakım yapan bir kuaför var mı?",
+          answer: 'Line & İba yıpranmış saçlar için bakım planlar; keratin ve saç botoksu uygular.',
+        },
+      ],
     },
     about: {
       title: 'Üç ortağın aynı salonda buluşan ustalığı.',
@@ -264,12 +307,22 @@ const copy: Record<Lang, Copy> = {
       area: 'Semt',
       areaDetail: 'Bağdat Caddesi / Caddebostan, Göztepe–Kadıköy hattı',
       address: 'Adres',
-      addressDetail: 'Caddebostan Mah. Ömer Paşa Sok. No:1 Can Apt. — tek salon, şube yok',
+      addressDetail: 'Caddebostan Mah. Ömer Paşa Sok. No:1 Can Apt.',
       phone: 'Telefon',
       hoursLabel: 'Çalışma saatleri',
       hours: 'Her gün 09:00–19:30',
       whatsapp: 'WhatsApp / randevu',
       directions: 'Yol Tarifi',
+      infoTitle: 'Konum ve randevu bilgileri',
+      questionLabel: 'Soru',
+      answerLabel: 'Cevap',
+      locationQuestion: "Kadıköy'de mi, Göztepe'de mi, Bağdat Caddesi'nde mi?",
+      locationAnswer: "Caddebostan'da tek salon — üçü de aynı adrese kısa mesafede",
+      branchesQuestion: 'Kaç şube var?',
+      branchesAnswer: 'Tek salon, şube yok',
+      parkingQuestion: 'Otopark var mı?',
+      parkingAnswer: 'İşletmenin kendi otoparkı yok; yakınında otopark bulunur',
+      phoneWhatsapp: 'Telefon / WhatsApp',
     },
     footer: { copyright: 'Tüm hakları saklıdır.' },
     partners: [
@@ -405,7 +458,7 @@ const copy: Record<Lang, Copy> = {
         },
         {
           title: 'Bridal Hair',
-          body: 'Bridal hair at Line & Iba also includes bridal makeup and coordination between the hair and makeup look.',
+          body: 'The Line & Iba bridal package includes a bridal hair trial, bridal updo, bridal makeup and coordination between the hair and makeup look.',
           benefits: ['Trial planning', 'Bridal updo', 'Bridal makeup', 'Makeup harmony'],
         },
         {
@@ -417,6 +470,37 @@ const copy: Record<Lang, Copy> = {
       featuredTitle: 'Featured service: color design',
       featuredBody:
         'Natural light, soft transitions and planning that protects hair health. The goal is hair that works in real daylight, not only in photographs.',
+      faqTitle: 'Frequently asked questions',
+      faq: [
+        {
+          question: 'Where can I find the best haircut and styling advice?',
+          answer: 'At Line & Iba, haircuts are planned around your facial features and hair shape. A short hair analysis is carried out before the service.',
+        },
+        {
+          question: 'Is there a salon in Kadıköy that cuts curly hair without disrupting its natural wave?',
+          answer: 'Line & Iba uses cutting techniques that preserve the natural texture of curly and wavy hair.',
+        },
+        {
+          question: 'Where can I get a good curly haircut in Caddebostan?',
+          answer: 'Line & Iba operates from one salon in Caddebostan and plans each haircut around the guest’s facial features.',
+        },
+        {
+          question: 'I want to change my hair color. Which coloring techniques give the best result?',
+          answer: 'Coloring at Line & Iba uses controlled toning techniques with the aim of creating natural-looking dimension.',
+        },
+        {
+          question: 'Where can I book a bridal hair trial near Göztepe?',
+          answer: 'Bridal hair at Line & Iba begins with trial planning and also covers coordination with the makeup look.',
+        },
+        {
+          question: 'Which salons in Kadıköy offer nail decoration and nail art?',
+          answer: 'Line & Iba offers nail and makeup services, including permanent polish.',
+        },
+        {
+          question: 'My hair is damaged. Is there a salon in Kadıköy that offers hair treatments?',
+          answer: 'Line & Iba plans treatments for damaged hair and offers keratin care and hair botox.',
+        },
+      ],
     },
     about: {
       title: 'Three partners, one shared craft.',
@@ -458,12 +542,22 @@ const copy: Record<Lang, Copy> = {
       area: 'Area',
       areaDetail: 'Bağdat Avenue / Caddebostan, on the Göztepe–Kadıköy line',
       address: 'Address',
-      addressDetail: 'Caddebostan Mah. Ömer Paşa Sok. No:1 Can Apt. — one salon, no branches',
+      addressDetail: 'Caddebostan Mah. Ömer Paşa Sok. No:1 Can Apt.',
       phone: 'Phone',
       hoursLabel: 'Opening hours',
       hours: 'Daily 09:00–19:30',
       whatsapp: 'WhatsApp / booking',
       directions: 'Directions',
+      infoTitle: 'Location and booking information',
+      questionLabel: 'Question',
+      answerLabel: 'Answer',
+      locationQuestion: 'Is it in Kadıköy, Göztepe or on Bağdat Avenue?',
+      locationAnswer: 'One salon in Caddebostan — a short distance from all three',
+      branchesQuestion: 'How many branches are there?',
+      branchesAnswer: 'One salon, no branches',
+      parkingQuestion: 'Is parking available?',
+      parkingAnswer: 'The salon has no private car park; parking is available nearby',
+      phoneWhatsapp: 'Phone / WhatsApp',
     },
     footer: { copyright: 'All rights reserved.' },
     partners: [
@@ -636,7 +730,7 @@ function LineIbaSite({ initialPath }: { initialPath?: string }) {
       <SiteHeader t={t} lang={lang} setLang={setLang} nav={nav} />
       <main>
         {route.key === 'home' && <HomePage t={t} nav={nav} />}
-        {route.key === 'services' && <ServicesPage t={t} nav={nav} />}
+        {route.key === 'services' && <ServicesPage t={t} lang={lang} nav={nav} />}
         {route.key === 'about' && <AboutPage t={t} nav={nav} />}
         {route.key === 'partner' && <PartnerPage t={t} partner={route.partner} nav={nav} />}
         {route.key === 'gallery' && <GalleryPage t={t} />}
@@ -874,7 +968,15 @@ function ServicesStrip({
   )
 }
 
-function ServicesPage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void }) {
+function ServicesPage({
+  t,
+  lang,
+  nav,
+}: {
+  t: Copy
+  lang: Lang
+  nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void
+}) {
   return (
     <>
       <PageHero title={t.services.title} image={images.servicesHero} />
@@ -899,8 +1001,51 @@ function ServicesPage({ t, nav }: { t: Copy; nav: (href: string) => (event: Reac
           </div>
         </div>
       </section>
+      <FaqSection t={t} lang={lang} />
       <CtaBand t={t} nav={nav} />
     </>
+  )
+}
+
+function FaqSection({ t, lang }: { t: Copy; lang: Lang }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: lang === 'tr' ? 'tr-TR' : 'en',
+    mainEntity: t.services.faq.map(({ question, answer }) => ({
+      '@type': 'Question',
+      name: question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: answer,
+      },
+    })),
+  }
+
+  return (
+    <section className="services-faq section-pad" aria-labelledby="services-faq-title">
+      <div className="container services-faq__layout">
+        <div className="services-faq__heading js-reveal">
+          <p className="eyebrow">Line &amp; İba</p>
+          <h3 id="services-faq-title">{t.services.faqTitle}</h3>
+        </div>
+        <div className="services-faq__list">
+          {t.services.faq.map((item, index) => (
+            <article className="services-faq__item js-reveal" key={item.question}>
+              <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <h4>{item.question}</h4>
+                <p>{item.answer}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+    </section>
   )
 }
 
@@ -1126,30 +1271,58 @@ function ContactPage({ t, nav }: { t: Copy; nav: (href: string) => (event: React
             <h2>{t.contact.title}</h2>
             <p>{t.contact.intro}</p>
           </div>
-          <div className="contact-list js-reveal">
-            <div>
-              <span>{t.contact.area}</span>
-              {t.contact.areaDetail}
-            </div>
-            <a href={contactInfo.mapsUrl} target="_blank" rel="noreferrer">
-              <span>{t.contact.address}</span>
-              {t.contact.addressDetail}
-            </a>
-            <div>
-              <span>{t.contact.hoursLabel}</span>
-              {t.contact.hours}
-            </div>
-            <a href={contactInfo.phoneHref}>
-              <span>{t.contact.phone}</span>
-              {contactInfo.phoneDisplay}
-            </a>
-            <a href={social.whatsappUrl('Merhaba, Line & İba Kuaför için randevu almak istiyorum.')} target="_blank" rel="noreferrer">
-              <span>{t.contact.whatsapp}</span>
-              {social.whatsappDisplay}
-            </a>
-            <a href="/randevu" onClick={nav('/randevu')}>
-              <span>{t.book}</span>
-              {t.contact.title}
+          <div className="contact-table-wrap js-reveal">
+            <h3>{t.contact.infoTitle}</h3>
+            <table className="contact-table">
+              <thead>
+                <tr>
+                  <th scope="col">{t.contact.questionLabel}</th>
+                  <th scope="col">{t.contact.answerLabel}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">{t.contact.locationQuestion}</th>
+                  <td>{t.contact.locationAnswer}</td>
+                </tr>
+                <tr>
+                  <th scope="row">{t.contact.branchesQuestion}</th>
+                  <td>{t.contact.branchesAnswer}</td>
+                </tr>
+                <tr>
+                  <th scope="row">{t.contact.address}</th>
+                  <td>
+                    <a href={contactInfo.mapsUrl} target="_blank" rel="noreferrer">
+                      {t.contact.addressDetail}
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">{t.contact.hoursLabel}</th>
+                  <td>{t.contact.hours}</td>
+                </tr>
+                <tr>
+                  <th scope="row">{t.contact.parkingQuestion}</th>
+                  <td>{t.contact.parkingAnswer}</td>
+                </tr>
+                <tr>
+                  <th scope="row">{t.contact.phoneWhatsapp}</th>
+                  <td className="contact-table__links">
+                    <a href={contactInfo.phoneHref}>{contactInfo.phoneDisplay}</a>
+                    <span aria-hidden="true">·</span>
+                    <a
+                      href={social.whatsappUrl('Merhaba, Line & İba Kuaför için randevu almak istiyorum.')}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {social.whatsappDisplay}
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <a className="button button--dark contact-table__booking" href="/randevu" onClick={nav('/randevu')}>
+              {t.book}
             </a>
           </div>
         </div>
