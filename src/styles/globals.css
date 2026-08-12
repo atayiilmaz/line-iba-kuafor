@@ -791,6 +791,23 @@ p {
   margin-bottom: 38px;
 }
 
+.partner-biography__entry {
+  display: grid;
+  gap: 18px;
+}
+
+.partner-biography h2 {
+  margin-top: 26px;
+  padding-top: 24px;
+  border-top: 1px solid var(--black);
+  font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1.12;
+}
+
+.partner-biography__entry:first-child h2 {
+  margin-top: 8px;
+}
+
 .partner-biography p {
   color: #444;
   line-height: 1.72;

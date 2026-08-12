@@ -18,6 +18,7 @@ type Partner = {
   image: string
   intro: string
   bio?: string[]
+  bioHeadings?: { at: number; title: string }[]
   experience: string[]
   quote?: string
 }
@@ -341,6 +342,10 @@ const copy: Record<Lang, Copy> = {
           'Benim için kuaförlük yalnızca saç tasarlamak değildir. Her müşterinin tarzını, karakterini ve kendini ifade etme biçimini ortaya çıkaran yaratıcı bir sanat dalıdır. Her dokunuşun bir anlam taşıdığına, her saçın kendine özgü bir hikâyesi olduğuna inanıyorum.',
           'Bugün de aynı heyecan ve tutkuyla, gelişime açık bakış açımı günümüz modasıyla birleştirerek her misafirimin kendisini en iyi hissedeceği görünümü oluşturmayı hedefliyorum. Çünkü benim için salonum yalnızca çalıştığım bir yer değil; tutkumu, sanatımı ve yılların birikimini özgürce yansıttığım bir sahnedir.',
         ],
+        bioHeadings: [
+          { at: 0, title: 'Kariyer Yolculuğu' },
+          { at: 2, title: 'Uzmanlık ve Yaklaşım' },
+        ],
         experience: [
           '2006 · Kuaförlük meslek lisesi mezuniyeti',
           '2006–2018 · Erdem Kıramer ekibi',
@@ -391,6 +396,10 @@ const copy: Record<Lang, Copy> = {
           'Salonumuza adım atan her misafirimiz için renklendirmeden şekillendirmeye kadar saç tasarımının her alanında en doğru dokunuşu yapmaya özen gösterdim. Ancak zaman içinde, yüz anatomisine uygun ve zamansız dokunuşlarla hazırladığım kişiye özel kesimler benim asıl imzam ve tutkum haline geldi. Beni tercih eden misafirlerim de genelde bu kesim tarzımla bilir ve koltuğuma ağırlıklı olarak bu güvenle otururlar. Günün sonunda koltuğumdan kalkan birinin aynaya bakıp gülümsediğini görmek ise benim bu meslekteki en büyük motivasyonum ve mutluluğum.',
           'Bu tutkuyu sadece salon duvarları arasında tutmayıp; yurt içi ve yurt dışındaki sayısız sahne şovunda yer alarak, İBA markasıyla meslektaşlarıma eğitimler vererek ve sektöre yeni yetenekler kazandırarak kendimi her zaman dinamik tutmaya çalıştım.',
           'Senelerin getirdiği bu birikimi, bugün değerli dostlarım Ergün Sarıca ve Ahmet Yılmaz ile birlikte gerçekleştirdiğimiz güçlü bir marka ortaklığıyla Line İBA Bağdat Caddesi çatısı altında birleştirdik. Sizleri de bu yeni hikayemizde ağırlamaktan mutluluk duyuyorum.',
+        ],
+        bioHeadings: [
+          { at: 0, title: '34 Yıllık Kariyer' },
+          { at: 2, title: 'Eğitmenlik ve Line İBA Ortaklığı' },
         ],
         experience: [],
       },
@@ -576,6 +585,10 @@ const copy: Record<Lang, Copy> = {
           'For me, hairdressing is not simply about designing hair. It is a creative art form that reveals each client’s style, character and way of expressing themselves. I believe every touch carries meaning and every head of hair has a unique story.',
           'Today, with the same excitement and passion, I combine an open-minded approach to development with contemporary fashion to create the look in which every guest feels their best. To me, my salon is not merely a workplace; it is a stage where I can freely express my passion, my art and the experience I have accumulated over the years.',
         ],
+        bioHeadings: [
+          { at: 0, title: 'Career Journey' },
+          { at: 2, title: 'Expertise and Approach' },
+        ],
         experience: [
           '2006 · Graduated from vocational high school for hairdressing',
           '2006–2018 · Erdem Kıramer team',
@@ -626,6 +639,10 @@ const copy: Record<Lang, Copy> = {
           'For every guest who stepped into our salon, I took care to make the right choice across every area of hair design, from colouring to styling. Over time, however, bespoke cuts shaped with timeless touches and tailored to facial anatomy became my true signature and passion. The guests who choose me generally know me for this cutting style and sit in my chair with that trust above all. At the end of the day, seeing someone leave my chair, look in the mirror and smile is my greatest motivation and joy in this profession.',
           'I have worked to keep this passion alive beyond the salon walls by taking part in countless stage shows in Türkiye and abroad, training fellow professionals under the İBA brand and bringing new talent into the industry.',
           'Today, I have brought together the experience accumulated over the years under the Line İBA Bağdat Avenue roof through a strong brand partnership with my dear friends Ergün Sarıca and Ahmet Yılmaz. I am delighted to welcome you into this new chapter of our story.',
+        ],
+        bioHeadings: [
+          { at: 0, title: 'A 34-Year Career' },
+          { at: 2, title: 'Education and the Line İBA Partnership' },
         ],
         experience: [],
       },
@@ -1112,7 +1129,15 @@ function PartnerPage({
         <h1 className="js-page-in">{partner.detailTitle ?? partner.name}</h1>
         <p className="partner-role js-page-in">{partner.role}</p>
         {partner.bio
-          ? <div className="partner-biography js-page-in">{partner.bio.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
+          ? <div className="partner-biography js-page-in">{partner.bio.map((paragraph, index) => {
+              const heading = partner.bioHeadings?.find((item) => item.at === index)
+              return (
+                <div className="partner-biography__entry" key={paragraph}>
+                  {heading && <h2>{heading.title}</h2>}
+                  <p>{paragraph}</p>
+                </div>
+              )
+            })}</div>
           : <p className="lead js-page-in">{partner.intro}</p>}
         {partner.quote && <blockquote className="js-page-in">{partner.quote}</blockquote>}
         {partner.experience.length > 0 && (

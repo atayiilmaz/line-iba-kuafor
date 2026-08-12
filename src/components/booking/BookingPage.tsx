@@ -20,7 +20,7 @@ const staff = [
 const text = {
   tr: {
     eyebrow: 'Online Randevu', title: 'Size ayrılmış bir saat.', intro: 'Hizmetinizi, personelinizi ve uygun saati seçin. Randevunuz anında kesinleşsin.',
-    steps: ['Hizmet', 'Personel', 'Tarih & Saat', 'Bilgiler'], chooseService: 'Hangi hizmet için geliyorsunuz?', chooseStaff: 'Kiminle randevu oluşturmak istersiniz?', staffNote: 'Her personelin randevu takvimi ayrıdır.', continue: 'Devam Et', back: 'Geri',
+    steps: ['Hizmet', 'Personel', 'Tarih & Saat', 'Bilgiler'], chooseService: 'Hangi hizmet için geliyorsunuz?', serviceIntro: "Line & İba'da randevunuzu bu sayfadan hizmet seçerek online planlayabilir, ya da 0216 407 27 77 numaralı telefondan veya +90 533 321 22 83 WhatsApp hattından doğrudan ulaşabilirsiniz. Salon her gün 09:00–19:30 arası açıktır.", chooseStaff: 'Kiminle randevu oluşturmak istersiniz?', staffNote: 'Her personelin randevu takvimi ayrıdır.', continue: 'Devam Et', back: 'Geri',
     chooseTime: 'Uygun bir zaman seçin', date: 'Tarih', available: 'Uygun', full: 'Dolu', loading: 'Saatler kontrol ediliyor…', noSlots: 'Bu tarih için uygun saat bulunamadı.',
     details: 'Randevu bilgilerinizi tamamlayın', name: 'Ad Soyad', phone: 'Cep Telefonu', note: 'Notunuz (isteğe bağlı)',
     consent: 'KVKK aydınlatma metnini okudum ve randevu için bilgilerimin işlenmesini kabul ediyorum.', privacy: 'KVKK metni',
@@ -30,7 +30,7 @@ const text = {
   },
   en: {
     eyebrow: 'Online Booking', title: 'An hour reserved for you.', intro: 'Choose your service, stylist and an available time. Your booking is confirmed instantly.',
-    steps: ['Service', 'Stylist', 'Date & Time', 'Details'], chooseService: 'Which service would you like?', chooseStaff: 'Who would you like to book with?', staffNote: 'Each stylist has a separate appointment calendar.', continue: 'Continue', back: 'Back',
+    steps: ['Service', 'Stylist', 'Date & Time', 'Details'], chooseService: 'Which service would you like?', serviceIntro: 'At Line & Iba, you can plan your appointment online by selecting a service on this page, call us directly on 0216 407 27 77 or reach us via WhatsApp on +90 533 321 22 83. The salon is open daily from 09:00 to 19:30.', chooseStaff: 'Who would you like to book with?', staffNote: 'Each stylist has a separate appointment calendar.', continue: 'Continue', back: 'Back',
     chooseTime: 'Choose an available time', date: 'Date', available: 'Available', full: 'Full', loading: 'Checking availability…', noSlots: 'No available times for this date.',
     details: 'Complete your booking details', name: 'Full Name', phone: 'Mobile Phone', note: 'Note (optional)',
     consent: 'I have read the privacy notice and consent to processing my information for this appointment.', privacy: 'Privacy notice',
@@ -160,6 +160,7 @@ export function BookingPage({ lang, navigate }: { lang: Lang; navigate: (href: s
           {step === 1 && <div>
             <p className="booking-panel__number">01 / 04</p>
             <h2>{t.chooseService}</h2>
+            <p className="booking-service-intro">{t.serviceIntro}</p>
             <div className="booking-services">
               {services.map((service) => <button type="button" aria-pressed={serviceCode === service.code} className={serviceCode === service.code ? 'is-selected' : ''} onClick={() => setServiceCode(service.code)} key={service.code}>
                 <span>{service.index}</span><strong>{service[lang]}</strong><i aria-hidden="true">↗</i>
