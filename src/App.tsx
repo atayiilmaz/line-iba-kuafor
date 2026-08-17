@@ -63,6 +63,7 @@ type Copy = {
   gallery: {
     eyebrow: string
     title: string
+    sectionTitle: string
     intro: string
     items: string[]
   }
@@ -184,7 +185,7 @@ const copy: Record<Lang, Copy> = {
       eyebrow: 'Line & İba Kuaför',
       title: 'Güzelliğin ötesinde.',
       subtitle:
-        'Caddebostan’da saç kesimi, renklendirme, gelin başı, tırnak ve makyaj için rafine bir salon deneyimi.',
+        'Line & İba, Caddebostan’da saç kesimi, renklendirme, gelin başı, tırnak ve makyaj hizmetleri sunar.',
       cta: 'Hizmetleri İncele',
       secondary: 'Hikayemiz',
       mark: 'CADDEBOSTAN HAIRDRESSING',
@@ -204,7 +205,7 @@ const copy: Record<Lang, Copy> = {
       eyebrow: 'Seçkin Uygulamalar',
       title: 'En çok tercih edilen hizmetler',
       intro:
-        'Tek ekranda anlaşılır, salonda detaylandırılır. Her işlem öncesi saç analizi ve beklenti konuşması yapılır.',
+        'Line & İba, saç bakımı ve düzleştirme, kesim ve stil, renklendirme, gelin başı ile tırnak ve makyaj hizmetlerini tek ekranda özetler, salonda detaylandırır; her işlem öncesi saç analizi yapar.',
       benefitsLabel: 'Verilen Hizmetler',
       care: {
         title: 'Saç Bakımı & Düzleştirme',
@@ -221,7 +222,8 @@ const copy: Record<Lang, Copy> = {
         },
         {
           title: 'Renklendirme',
-          body: 'Işıltı, tonlama ve doğal geçişlerde kontrollü teknik uygulama.',
+          body:
+            'Line & İba, renklendirmede ışıltı, tonlama ve doğal geçişleri kontrollü teknikle uygular; hedef, gündelik ışıkta iyi görünen bir renktir.',
           benefits: ['Boya', 'Ombre / sombre', 'Bakım destekli açma'],
         },
         {
@@ -231,7 +233,8 @@ const copy: Record<Lang, Copy> = {
         },
         {
           title: 'Tırnak & Makyaj',
-          body: 'Bakımlı eller, net bitişler ve özel gün makyajı için tamamlayıcı servis.',
+          body:
+            'Line & İba, manikür, pedikür ve kalıcı oje uygular; özel gün makyajını ve kirpik uygulamasını tamamlayıcı servis olarak sunar.',
           benefits: ['Manikür', 'Pedikür', 'Kalıcı oje', 'Profesyonel makyaj', 'Kirpik'],
         },
       ],
@@ -288,8 +291,9 @@ const copy: Record<Lang, Copy> = {
     gallery: {
       eyebrow: 'Koleksiyon',
       title: 'Salonumuzdan gerçek anlar.',
+      sectionTitle: 'Caddebostan salonundan çalışma örnekleri',
       intro:
-        'Line & İba’daki uygulamalar, salon atmosferi ve hazırlık süreçlerinden seçilmiş kısa videolar.',
+        'Line & İba, Caddebostan’daki salonunda uyguladığı saç kesimi, renklendirme, gelin başı ve tırnak-makyaj çalışmalarından seçilmiş kısa videoları bu sayfada paylaşır.',
       items: [
         'Uzun katlar & ışıltı',
         'Saç uygulaması',
@@ -380,6 +384,11 @@ const copy: Record<Lang, Copy> = {
           '2020 yılında Ahmet Yılmaz ile LINE CADDE markasını hayata geçirdik. 2024 yılında ise markamıza değer katan, sanatına ve mesleki vizyonuna inandığımız İbrahim Yılmaz’ın İBA markasıyla gerçekleşen birleşme sonucunda salonumuz LINE&İBA adını aldı.',
           'Bugün, mesleğe ve saç sanatına değer katan vizyonumuz doğrultusunda üç ortak olarak LINE&İBA çatısı altında hizmet vermeye; yenilikçi bakış açımız ve eğitim odaklı anlayışımızla sektöre katkı sağlamaya devam ediyoruz.',
         ],
+        bioHeadings: [
+          { at: 0, title: 'Kariyer Başlangıcı ve Eğitim' },
+          { at: 2, title: 'Salon Kaptanlığı ve İlk İşletmeler' },
+          { at: 4, title: 'LINE&İBA’nın Kuruluşu' },
+        ],
         experience: [
           '1989 · Heybeliada’da mesleğe başlangıç',
           'L’Oréal ve Wella kesim, renk ve işletme eğitimleri',
@@ -435,7 +444,7 @@ const copy: Record<Lang, Copy> = {
       eyebrow: 'Line & Iba Hairdressing',
       title: 'Beyond beauty.',
       subtitle:
-        'A refined salon experience in Caddebostan for haircuts, color, bridal hair, nails and makeup.',
+        'Line & Iba offers haircuts, colour, bridal hair, nails and makeup services in Caddebostan.',
       cta: 'View Services',
       secondary: 'Our Story',
       mark: 'CADDEBOSTAN HAIRDRESSING',
@@ -455,7 +464,7 @@ const copy: Record<Lang, Copy> = {
       eyebrow: 'Selected Treatments',
       title: 'Most requested services',
       intro:
-        'Clear online, detailed in the salon. Every service begins with hair analysis and a short expectation consultation.',
+        'Line & Iba summarises hair care and smoothing, cut and style, colour, bridal hair, nails and makeup services on one page and discusses them in detail at the salon; every treatment begins with a hair analysis.',
       benefitsLabel: 'Services Provided',
       care: {
         title: 'Hair Care & Smoothing',
@@ -472,7 +481,8 @@ const copy: Record<Lang, Copy> = {
         },
         {
           title: 'Color',
-          body: 'Controlled technique for highlights, tonal work and soft transitions.',
+          body:
+            'Line & Iba uses controlled techniques for dimension, toning and natural transitions in colour services; the goal is colour that looks good in everyday light.',
           benefits: ['Color', 'Ombre / sombre', 'Care-supported lightening'],
         },
         {
@@ -482,7 +492,8 @@ const copy: Record<Lang, Copy> = {
         },
         {
           title: 'Nails & Makeup',
-          body: 'Complementary services for polished hands, clean finishes and event makeup.',
+          body:
+            'Line & Iba offers manicure, pedicure and permanent polish, with special-event makeup and lash applications available as complementary services.',
           benefits: ['Manicure', 'Pedicure', 'Permanent polish', 'Professional makeup', 'Lashes'],
         },
       ],
@@ -539,8 +550,9 @@ const copy: Record<Lang, Copy> = {
     gallery: {
       eyebrow: 'Collection',
       title: 'Real moments from our salon.',
+      sectionTitle: 'Work from our Caddebostan salon',
       intro:
-        'Short videos from treatments, salon atmosphere and preparation at Line & Iba.',
+        'Line & Iba shares selected short videos of haircuts, colour, bridal hair, nail and makeup work carried out at its Caddebostan salon.',
       items: [
         'Long layers & dimension',
         'Hair application',
@@ -630,6 +642,11 @@ const copy: Record<Lang, Copy> = {
           'In 2016, we launched the Ali Gür Caddebostan franchise salon as a two-partner venture. In 2018, I met Ahmet Yılmaz at the Balkan Festival, where I was taking part for education and demonstration purposes. As our shared vision and outlook on the profession aligned, we formed a new partnership within the salon I had founded and began creating together, taking the brand we built to the next level.',
           'In 2020, Ahmet Yılmaz and I launched the LINE CADDE brand. In 2024, following the union with İbrahim Yılmaz’s İBA brand—whose artistry and professional vision we deeply value—our salon took the name LINE&IBA.',
           'Today, as three partners under the LINE&IBA name, we continue to serve with a vision that adds value to the profession and the art of hair, while contributing to the industry through our innovative perspective and education-focused approach.',
+        ],
+        bioHeadings: [
+          { at: 0, title: 'Career Beginnings and Education' },
+          { at: 2, title: 'Salon Leadership and First Businesses' },
+          { at: 4, title: 'The Founding of LINE&IBA' },
         ],
         experience: [
           '1989 · Began his career in Heybeliada',
@@ -1258,7 +1275,7 @@ function GalleryTeaser({ t }: { t: Copy }) {
       <div className="container">
         <div className="section-heading js-reveal">
           <p className="eyebrow">{t.gallery.eyebrow}</p>
-          <h2>{t.gallery.title}</h2>
+          <h2>{t.gallery.sectionTitle}</h2>
           <p>{t.gallery.intro}</p>
         </div>
         <div className="insta-grid" ref={gridRef}>
@@ -1541,8 +1558,9 @@ function PrivacyPage({ lang }: { lang: Lang }) {
         <h2>{isTr ? 'Saklama ve güvenlik' : 'Retention and security'}</h2>
         <p>{isTr ? 'Randevu bilgileri 12 ay saklanır, ardından kimlik bilgileri anonimleştirilir. Veriler yalnızca yetkili işletme hesapları tarafından görüntülenebilir.' : 'Booking information is retained for 12 months, after which identifying information is anonymized. Only authorized business accounts can access it.'}</p>
         <h2>{isTr ? 'Haklarınız ve iletişim' : 'Your rights and contact'}</h2>
-        <p>{isTr ? `Bilgilerinize ilişkin talepleriniz için ${contactInfo.phoneDisplay} numarasından veya ${social.whatsappDisplay} WhatsApp hattından bize ulaşabilirsiniz.` : `For requests about your personal data, contact us at ${contactInfo.phoneDisplay} or through WhatsApp at ${social.whatsappDisplay}.`}</p>
-        <p className="privacy-note">{isTr ? 'Bu metin canlıya geçmeden önce işletmenin hukuk danışmanı tarafından gözden geçirilmelidir.' : 'This notice should be reviewed by the business’s legal adviser before production launch.'}</p>
+        <p>{isTr ? 'Bilgilerinize ilişkin talepleriniz için bize ulaşabilirsiniz.' : 'You can contact us with requests regarding your personal data.'}</p>
+        <p>{isTr ? `Telefon: ${contactInfo.phoneDisplay}` : `Phone: ${contactInfo.phoneDisplay}`}</p>
+        <p>WhatsApp: {social.whatsappDisplay}</p>
       </div>
     </section>
   )
