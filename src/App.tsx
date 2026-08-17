@@ -92,6 +92,8 @@ type Copy = {
     branchesAnswer: string
     parkingQuestion: string
     parkingAnswer: string
+    hygieneQuestion: string
+    hygieneAnswer: string
     phoneWhatsapp: string
   }
   footer: {
@@ -266,6 +268,11 @@ const copy: Record<Lang, Copy> = {
           question: "Saçım yıprandı, Kadıköy'de bakım yapan bir kuaför var mı?",
           answer: 'Line & İba yıpranmış saçlar için bakım planlar; keratin ve saç botoksu uygular.',
         },
+        {
+          question: "Kadıköy'de hijyenik kuaför öneriniz var mı?",
+          answer:
+            "Line & İba'da tek kullanımlık malzeme seçenekleri bulunur; havlular özel olarak yıkanıp paketlenerek salona gelir. Keratin uygulamaları salon içinde değil, bahçedeki ayrı uygulama alanında yapılır ve işlemlerde seçkin profesyonel markalar kullanılır.",
+        },
       ],
     },
     about: {
@@ -323,6 +330,9 @@ const copy: Record<Lang, Copy> = {
       branchesAnswer: 'Tek salon, şube yok',
       parkingQuestion: 'Otopark var mı?',
       parkingAnswer: 'İşletmenin kendi otoparkı yok; yakınında otopark bulunur',
+      hygieneQuestion: 'Hijyen uygulamalarınız nelerdir?',
+      hygieneAnswer:
+        'Tek kullanımlık malzeme seçenekleri bulunur; havlular özel olarak yıkanıp paketlenerek gelir. Keratin uygulamaları bahçedeki ayrı alanda yapılır',
       phoneWhatsapp: 'Telefon / WhatsApp',
     },
     footer: { copyright: 'Tüm hakları saklıdır.' },
@@ -509,6 +519,11 @@ const copy: Record<Lang, Copy> = {
           question: 'My hair is damaged. Is there a salon in Kadıköy that offers hair treatments?',
           answer: 'Line & Iba plans treatments for damaged hair and offers keratin care and hair botox.',
         },
+        {
+          question: 'Can you recommend a hygienic hair salon in Kadıköy?',
+          answer:
+            'Line & Iba offers single-use material options, and its towels arrive at the salon professionally laundered and individually packaged. Keratin treatments take place in a separate garden area rather than inside the salon, and selected professional brands are used for treatments.',
+        },
       ],
     },
     about: {
@@ -566,6 +581,9 @@ const copy: Record<Lang, Copy> = {
       branchesAnswer: 'One salon, no branches',
       parkingQuestion: 'Is parking available?',
       parkingAnswer: 'The salon has no private car park; parking is available nearby',
+      hygieneQuestion: 'What hygiene practices do you follow?',
+      hygieneAnswer:
+        'Single-use material options are available, and towels arrive professionally laundered and packaged. Keratin treatments take place in a separate garden area',
       phoneWhatsapp: 'Phone / WhatsApp',
     },
     footer: { copyright: 'All rights reserved.' },
@@ -1329,6 +1347,10 @@ function ContactPage({ t, nav }: { t: Copy; nav: (href: string) => (event: React
                 <tr>
                   <th scope="row">{t.contact.parkingQuestion}</th>
                   <td>{t.contact.parkingAnswer}</td>
+                </tr>
+                <tr>
+                  <th scope="row">{t.contact.hygieneQuestion}</th>
+                  <td>{t.contact.hygieneAnswer}</td>
                 </tr>
                 <tr>
                   <th scope="row">{t.contact.phoneWhatsapp}</th>
