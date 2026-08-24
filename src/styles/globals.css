@@ -465,6 +465,21 @@ p {
   margin-top: 18px;
 }
 
+.section-heading__link,
+.service-card__link {
+  color: var(--black);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: #9a9a9a;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 180ms ease;
+}
+
+.section-heading__link:hover,
+.service-card__link:hover {
+  text-decoration-color: var(--black);
+}
+
 .care-service {
   display: grid;
   grid-template-columns: 0.8fr 1.25fr 0.85fr;
@@ -524,6 +539,10 @@ p {
   padding: 28px 24px;
   border: 1px solid #111;
   background: #fff;
+}
+
+.service-card[id] {
+  scroll-margin-top: calc(var(--header-h) + 24px);
 }
 
 .service-card h3 {
@@ -1100,6 +1119,17 @@ p {
   margin-top: 24px;
 }
 
+.contact-rating {
+  display: grid;
+  gap: 6px;
+  margin-top: 24px;
+}
+
+.contact-rating p:last-child {
+  color: var(--black);
+  font-weight: 800;
+}
+
 .cta-band {
   display: grid;
   justify-items: center;
@@ -1117,6 +1147,21 @@ p {
 .cta-band h2 {
   max-width: 760px;
   margin-block: 14px 30px;
+}
+
+.cta-band__text-link {
+  margin: -12px 0 28px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: #777;
+  text-underline-offset: 5px;
+  transition: text-decoration-color 180ms ease;
+}
+
+.cta-band__text-link:hover {
+  text-decoration-color: #fff;
 }
 
 .cta-band div {

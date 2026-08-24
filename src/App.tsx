@@ -47,6 +47,7 @@ type Copy = {
     title: string
     intro: string
     benefitsLabel: string
+    detailLink: string
     care: { title: string; body: string; benefits: string[] }
     items: { title: string; body: string; benefits: string[] }[]
     featuredTitle: string
@@ -65,6 +66,14 @@ type Copy = {
     title: string
     sectionTitle: string
     intro: string
+    purpose: string
+    context: string
+    servicesLead: string
+    servicesLink: string
+    bookingLead: string
+    bookingLink: string
+    detailsSuffix: string
+    homeLink: string
     items: string[]
   }
   instagramFollow: {
@@ -96,6 +105,9 @@ type Copy = {
     hygieneQuestion: string
     hygieneAnswer: string
     phoneWhatsapp: string
+    ratingIntro: string
+    ratingValue: string
+    homeBookingLink: string
   }
   footer: {
     copyright: string
@@ -164,6 +176,8 @@ const galleryVideos = [
   },
 ]
 
+const serviceAnchors = ['kesim-stil', 'renklendirme', 'gelin-basi', 'tirnak-makyaj'] as const
+
 const copy: Record<Lang, Copy> = {
   tr: {
     nav: {
@@ -207,6 +221,7 @@ const copy: Record<Lang, Copy> = {
       intro:
         'Line & İba, saç bakımı ve düzleştirme, kesim ve stil, renklendirme, gelin başı ile tırnak ve makyaj hizmetlerini tek ekranda özetler, salonda detaylandırır; her işlem öncesi saç analizi yapar.',
       benefitsLabel: 'Verilen Hizmetler',
+      detailLink: 'Hizmet detayını inceleyin',
       care: {
         title: 'Saç Bakımı & Düzleştirme',
         body:
@@ -297,7 +312,7 @@ const copy: Record<Lang, Copy> = {
       title: 'Üç ortağın aynı salonda buluşan ustalığı.',
       partnersTitle: 'Üç Ortağın Hikâyesi',
       partnersIntro: [
-        '2020 yılında Ahmet Yılmaz ve Ergün Sarıca, ortak vizyonumuz ve saç sanatına duyduğumuz büyük tutkuyla Line Cadde’yi kurduk. Kurulduğumuz ilk günden itibaren amacımız; sadece kaliteli hizmet sunan bir kuaför salonu olmak değil, yaratıcılığı, estetik anlayışı ve sürekli gelişimi merkeze alan bir marka oluşturmaktı.',
+        "Line & İba, Ahmet Yılmaz ve Ergün Sarıca'nın kurduğu bir Caddebostan kuaför salonudur. Sonradan İbrahim Yılmaz üçüncü ortak olarak katılmıştır. Marka, yaratıcılığı ve estetik anlayışı merkeze alan bir hizmet sunar.",
         'Bu vizyon, 2024 yılında İBA markasının kurucusu İbrahim Yılmaz’ın üçüncü ortak olarak aramıza katılmasıyla daha da güçlendi. Farklı deneyimlerimizi, uzmanlık alanlarımızı ve sanatsal bakış açılarımızı bir araya getirerek, misafirlerimize her zaman en yenilikçi ve en kaliteli hizmeti sunmayı hedefledik.',
         'Bugün LİNE&İBA, yalnızca bir kuaför salonu değil; saç sanatına yön veren, trendleri yakından takip eden ve kendi çizgisini oluşturan, sektörde tanınan ve güven duyulan bir marka olarak hizmet vermeye devam etmektedir.',
       ],
@@ -309,6 +324,16 @@ const copy: Record<Lang, Copy> = {
       sectionTitle: 'Caddebostan salonundan çalışma örnekleri',
       intro:
         'Line & İba, Caddebostan’daki salonunda uyguladığı saç kesimi, renklendirme, gelin başı ve tırnak-makyaj çalışmalarından seçilmiş kısa videoları bu sayfada paylaşır.',
+      purpose:
+        'Line & İba, bu galeriyi randevu öncesi çalışma tarzını görmek isteyen misafirler için hazırlar. Kesim, renklendirme, gelin başı ve tırnak-makyaj örnekleri düzenli güncellenir.',
+      context:
+        'Galerideki videolar, salonda uygulanan farklı kesim, renk, stil ve özel gün hazırlıklarını randevu öncesinde daha yakından ve bir arada incelemenize yardımcı olur.',
+      servicesLead: 'Hizmet detayları için',
+      servicesLink: 'hizmetler sayfasını',
+      bookingLead: 'ziyaret edebilirsiniz. Randevu için',
+      bookingLink: 'randevu sayfasına',
+      detailsSuffix: 'geçebilirsiniz.',
+      homeLink: 'Galeriyi görüntüleyin',
       items: [
         'Uzun katlar & ışıltı',
         'Saç uygulaması',
@@ -353,6 +378,9 @@ const copy: Record<Lang, Copy> = {
       hygieneAnswer:
         'Tek kullanımlık malzeme seçenekleri bulunur; havlular özel olarak yıkanıp paketlenerek gelir. Keratin uygulamaları bahçedeki ayrı alanda yapılır',
       phoneWhatsapp: 'Telefon / WhatsApp',
+      ratingIntro: 'Line & İba, Google değerlendirmelerinde misafir memnuniyetini yansıtan bir puana sahiptir.',
+      ratingValue: 'Puan: 4,9 · Yorum sayısı: 283',
+      homeBookingLink: 'Online randevu alın',
     },
     footer: { copyright: 'Tüm hakları saklıdır.' },
     partners: [
@@ -481,6 +509,7 @@ const copy: Record<Lang, Copy> = {
       intro:
         'Line & Iba summarises hair care and smoothing, cut and style, colour, bridal hair, nails and makeup services on one page and discusses them in detail at the salon; every treatment begins with a hair analysis.',
       benefitsLabel: 'Services Provided',
+      detailLink: 'View service details',
       care: {
         title: 'Hair Care & Smoothing',
         body:
@@ -571,7 +600,7 @@ const copy: Record<Lang, Copy> = {
       title: 'Three partners, one shared craft.',
       partnersTitle: 'The Story of Three Partners',
       partnersIntro: [
-        'In 2020, Ahmet Yılmaz and Ergün Sarıca founded Line Cadde, united by a shared vision and a deep passion for the art of hair. From the very beginning, our aim was not simply to become a salon known for quality service, but to build a brand centred on creativity, aesthetics and continuous development.',
+        'Line & Iba is a Caddebostan hair salon founded by Ahmet Yılmaz and Ergün Sarıca. İbrahim Yılmaz later joined as the third partner. The brand offers a service centred on creativity and an aesthetic approach.',
         'This vision grew even stronger in 2024, when İbrahim Yılmaz, founder of the İBA brand, joined us as our third partner. By bringing together our different experiences, areas of expertise and artistic perspectives, we set out to offer our guests the most innovative and highest-quality service at all times.',
         'Today, LINE&IBA is more than a hair salon. It continues to serve as a recognised and trusted brand in the industry—one that helps shape the art of hair, follows trends closely and creates a distinctive style of its own.',
       ],
@@ -583,6 +612,16 @@ const copy: Record<Lang, Copy> = {
       sectionTitle: 'Work from our Caddebostan salon',
       intro:
         'Line & Iba shares selected short videos of haircuts, colour, bridal hair, nail and makeup work carried out at its Caddebostan salon.',
+      purpose:
+        'Line & Iba prepares this gallery for guests who want to see its working style before booking. Examples of cuts, colour, bridal hair, nails and makeup are updated regularly.',
+      context:
+        'The gallery videos help you review different cuts, colour, styling and special-occasion preparations from the salon together and in greater detail before booking.',
+      servicesLead: 'For service details, visit the',
+      servicesLink: 'services page',
+      bookingLead: 'for more information. To make an appointment, continue to the',
+      bookingLink: 'booking page',
+      detailsSuffix: 'to continue.',
+      homeLink: 'View the gallery',
       items: [
         'Long layers & dimension',
         'Hair application',
@@ -627,6 +666,9 @@ const copy: Record<Lang, Copy> = {
       hygieneAnswer:
         'Single-use material options are available, and towels arrive professionally laundered and packaged. Keratin treatments take place in a separate garden area',
       phoneWhatsapp: 'Phone / WhatsApp',
+      ratingIntro: 'Line & Iba has a Google rating that reflects guest satisfaction.',
+      ratingValue: 'Rating: 4.9 · Review count: 283',
+      homeBookingLink: 'Book online',
     },
     footer: { copyright: 'All rights reserved.' },
     partners: [
@@ -815,7 +857,7 @@ function LineIbaSite({ initialPath }: { initialPath?: string }) {
         {route.key === 'services' && <ServicesPage t={t} lang={lang} nav={nav} />}
         {route.key === 'about' && <AboutPage t={t} nav={nav} />}
         {route.key === 'partner' && <PartnerPage t={t} partner={route.partner} nav={nav} />}
-        {route.key === 'gallery' && <GalleryPage t={t} />}
+        {route.key === 'gallery' && <GalleryPage t={t} nav={nav} />}
         {route.key === 'contact' && <ContactPage t={t} nav={nav} />}
         {route.key === 'booking' && <BookingPage lang={lang} navigate={nav} />}
         {route.key === 'privacy' && <PrivacyPage lang={lang} />}
@@ -990,9 +1032,9 @@ function HomePage({ t, nav }: { t: Copy; nav: (href: string) => (event: React.Mo
       </section>
 
       <ServicesStrip t={t} nav={nav} />
-      <GalleryTeaser t={t} />
+      <GalleryTeaser t={t} nav={nav} />
       <InstagramFollowBanner t={t} />
-      <CtaBand t={t} nav={nav} />
+      <CtaBand t={t} nav={nav} showInternalLink />
     </>
   )
 }
@@ -1027,10 +1069,21 @@ function ServicesStrip({
           </article>
         )}
         <div className="service-grid">
-          {t.services.items.map((item) => (
-            <article className="service-card js-reveal" key={item.title}>
+          {t.services.items.map((item, index) => (
+            <article
+              className="service-card js-reveal"
+              id={showCare ? serviceAnchors[index] : undefined}
+              key={item.title}
+            >
               <h3>{item.title}</h3>
-              <p>{item.body}</p>
+              <p>
+                {item.body}
+                {!showCare && (
+                  <>{' '}<a className="service-card__link" href={`/hizmetler#${serviceAnchors[index]}`}>
+                    {t.services.detailLink}
+                  </a></>
+                )}
+              </p>
               <strong>{t.services.benefitsLabel}</strong>
               <ul>
                 {item.benefits.map((benefit) => (
@@ -1220,17 +1273,31 @@ function PartnerPage({
   )
 }
 
-function GalleryPage({ t }: { t: Copy }) {
+function GalleryPage({
+  t,
+  nav,
+}: {
+  t: Copy
+  nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void
+}) {
   return (
     <>
       <PageHero title={t.gallery.title} image={images.collectionHero} />
-      <GalleryTeaser t={t} />
+      <GalleryTeaser t={t} nav={nav} isGalleryPage />
       <InstagramFollowBanner t={t} />
     </>
   )
 }
 
-function GalleryTeaser({ t }: { t: Copy }) {
+function GalleryTeaser({
+  t,
+  nav,
+  isGalleryPage = false,
+}: {
+  t: Copy
+  nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void
+  isGalleryPage?: boolean
+}) {
   const gridRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -1307,6 +1374,29 @@ function GalleryTeaser({ t }: { t: Copy }) {
           <p className="eyebrow">{t.gallery.eyebrow}</p>
           <h2>{t.gallery.sectionTitle}</h2>
           <p>{t.gallery.intro}</p>
+          {isGalleryPage ? (
+            <>
+              <p>{t.gallery.purpose}</p>
+              <p>{t.gallery.context}</p>
+              <p>
+                {t.gallery.servicesLead}{' '}
+                <a className="section-heading__link" href="/hizmetler" onClick={nav('/hizmetler')}>
+                  {t.gallery.servicesLink}
+                </a>{' '}
+                {t.gallery.bookingLead}{' '}
+                <a className="section-heading__link" href="/randevu" onClick={nav('/randevu')}>
+                  {t.gallery.bookingLink}
+                </a>{' '}
+                {t.gallery.detailsSuffix}
+              </p>
+            </>
+          ) : (
+            <p>
+              <a className="section-heading__link" href="/koleksiyon" onClick={nav('/koleksiyon')}>
+                {t.gallery.homeLink}
+              </a>
+            </p>
+          )}
         </div>
         <div className="insta-grid" ref={gridRef}>
           {galleryVideos.map((video, index) => (
@@ -1415,6 +1505,10 @@ function ContactPage({ t, nav }: { t: Copy; nav: (href: string) => (event: React
                 </tr>
               </tbody>
             </table>
+            <div className="contact-rating">
+              <p>{t.contact.ratingIntro}</p>
+              <p>{t.contact.ratingValue}</p>
+            </div>
             <a className="button button--dark contact-table__booking" href="/randevu" onClick={nav('/randevu')}>
               {t.book}
             </a>
@@ -1445,11 +1539,24 @@ function PageHero({ title, image }: { title: string; image: string }) {
   )
 }
 
-function CtaBand({ t, nav }: { t: Copy; nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void }) {
+function CtaBand({
+  t,
+  nav,
+  showInternalLink = false,
+}: {
+  t: Copy
+  nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void
+  showInternalLink?: boolean
+}) {
   return (
     <section className="cta-band js-reveal">
       <p className="eyebrow">{t.contact.eyebrow}</p>
       <h2>{t.contact.title}</h2>
+      {showInternalLink && (
+        <a className="cta-band__text-link" href="/randevu" onClick={nav('/randevu')}>
+          {t.contact.homeBookingLink}
+        </a>
+      )}
       <div>
         <a className="button button--light" href="/randevu" onClick={nav('/randevu')}>
           {t.book}
