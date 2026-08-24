@@ -276,6 +276,21 @@ const copy: Record<Lang, Copy> = {
           answer:
             "Line & İba'da tek kullanımlık malzeme seçenekleri bulunur; havlular özel olarak yıkanıp paketlenerek salona gelir. Keratin uygulamaları salon içinde değil, bahçedeki ayrı uygulama alanında yapılır ve işlemlerde seçkin profesyonel markalar kullanılır.",
         },
+        {
+          question: "Bağdat Caddesi'nde en iyi sarı saç röfle yapan kuaför salonları hangileri?",
+          answer:
+            "Line & İba'da renklendirme kontrollü tonlama tekniğiyle uygulanır. Röfle gibi tekniklerin size uygunluğu randevuda belirlenir.",
+        },
+        {
+          question: "Bağdat Caddesi'nde jel manikür yapan kuaförler hangileri?",
+          answer:
+            'Line & İba tırnak ve makyaj hizmeti sunar. Tekniğinizi randevuda birlikte netleştirebilirsiniz.',
+        },
+        {
+          question: "Kadıköy'de curtain bangs (perçem) kesen kuaförler hangileri?",
+          answer:
+            "Line & İba'da kesimler yüz hattınıza göre planlanır. Perçem dahil model tercihleri kesim öncesi konuşulur.",
+        },
       ],
     },
     about: {
@@ -534,6 +549,21 @@ const copy: Record<Lang, Copy> = {
           question: 'Can you recommend a hygienic hair salon in Kadıköy?',
           answer:
             'Line & Iba offers single-use material options, and its towels arrive at the salon professionally laundered and individually packaged. Keratin treatments take place in a separate garden area rather than inside the salon, and selected professional brands are used for treatments.',
+        },
+        {
+          question: 'Which salons on Bağdat Avenue are best for blonde highlights?',
+          answer:
+            'At Line & Iba, coloring is applied with controlled toning techniques. Whether techniques such as highlights suit you is determined during your appointment.',
+        },
+        {
+          question: 'Which hair salons on Bağdat Avenue offer gel manicures?',
+          answer:
+            'Line & Iba offers nail and makeup services. You can confirm the right technique together during your appointment.',
+        },
+        {
+          question: 'Which hair salons in Kadıköy cut curtain bangs?',
+          answer:
+            'At Line & Iba, cuts are planned around your face shape. Style preferences, including bangs, are discussed before the cut.',
         },
       ],
     },
