@@ -225,7 +225,7 @@ const copy: Record<Lang, Copy> = {
       care: {
         title: 'Saç Bakımı & Düzleştirme',
         body:
-          'Line & İba Kuaför, yıpranmış ve dalgalı saçlar için saçın mevcut durumuna göre planlanan bakım ve şekillendirme hizmetleri sunar.',
+          'Line & İba Kuaför, yıpranmış ve dalgalı saçlar için saçın mevcut durumuna göre planlanan bakım ve şekillendirme hizmetleri sunar. Salonumuzda Davines, Aveda ve Screen ürünleri profesyonel saç bakımı ve şekillendirme uygulamalarında kullanılır.',
         benefits: ['Keratin bakımı', 'Saç botoksu', 'Mikro kaynak', 'Kalıcı fön / düzleştirme'],
       },
       items: [
@@ -513,7 +513,7 @@ const copy: Record<Lang, Copy> = {
       care: {
         title: 'Hair Care & Smoothing',
         body:
-          'Line & Iba provides hair care and styling services planned around the current condition of damaged, wavy or textured hair.',
+          'Line & Iba provides hair care and styling services planned around the current condition of damaged, wavy or textured hair. Davines, Aveda and Screen products are used in our salon for professional hair care and styling.',
         benefits: ['Keratin care', 'Hair botox', 'Micro extensions', 'Permanent blow-dry / smoothing'],
       },
       items: [

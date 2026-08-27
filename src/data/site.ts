@@ -219,7 +219,7 @@ const tr: SiteContent = {
       {
         key: 'bakim',
         title: 'Saç Bakımı & Düzleştirme',
-        description: 'Saçın mevcut durumuna göre planlanan bakım ve şekillendirme hizmetleri.',
+        description: 'Saçın mevcut durumuna göre planlanan bakım ve şekillendirme hizmetleri. Davines, Aveda ve Screen ürünleri profesyonel saç bakımı ve şekillendirme uygulamalarında kullanılır.',
         items: ['Keratin Bakımı', 'Saç Botoksu', 'Mikro Kaynak', 'Kalıcı Fön / Düzleştirme'],
       },
       {
@@ -396,7 +396,7 @@ const en: SiteContent = {
       {
         key: 'bakim',
         title: 'Hair Care & Smoothing',
-        description: 'Care and styling services planned around the current condition of the hair.',
+        description: 'Care and styling services planned around the current condition of the hair. Davines, Aveda and Screen products are used for professional hair care and styling.',
         items: ['Keratin Care', 'Hair Botox', 'Micro Extensions', 'Permanent Blow-Dry / Smoothing'],
       },
       {
