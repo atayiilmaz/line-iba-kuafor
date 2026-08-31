@@ -46,10 +46,16 @@ type Copy = {
     eyebrow: string
     title: string
     intro: string
+    parking?: string
     benefitsLabel: string
     detailLink: string
     care: { title: string; body: string; benefits: string[] }
-    items: { title: string; body: string; benefits: string[] }[]
+    items: {
+      title: string
+      body: string
+      benefits: string[]
+      collection?: { lead: string; label: string; suffix: string; href: string }
+    }[]
     featuredTitle: string
     featuredBody: string
     faqTitle: string
@@ -220,6 +226,7 @@ const copy: Record<Lang, Copy> = {
       title: 'En çok tercih edilen hizmetler',
       intro:
         'Line & İba, saç bakımı ve düzleştirme, kesim ve stil, renklendirme, gelin başı ile tırnak ve makyaj hizmetlerini tek ekranda özetler, salonda detaylandırır; her işlem öncesi saç analizi yapar.',
+      parking: 'Salonun kendi otoparkı yoktur, yakınında otopark bulunur.',
       benefitsLabel: 'Verilen Hizmetler',
       detailLink: 'Hizmet detayını inceleyin',
       care: {
@@ -245,6 +252,12 @@ const copy: Record<Lang, Copy> = {
           title: 'Gelin Başı',
           body: "Line & İba'da gelin başı hizmeti; gelin saçı provası, gelin topuzu, gelin makyajı ve makyaj uyumunu tek pakette kapsar.",
           benefits: ['Prova planı', 'Gelin topuzu', 'Gelin makyajı', 'Makyaj uyumu'],
+          collection: {
+            lead: 'Gelin başı çalışmalarımızdan örnekleri ',
+            label: 'koleksiyonumuzda',
+            suffix: ' izleyebilirsiniz.',
+            href: 'https://lineiba.com/koleksiyon',
+          },
         },
         {
           title: 'Tırnak & Makyaj',
@@ -508,6 +521,7 @@ const copy: Record<Lang, Copy> = {
       title: 'Most requested services',
       intro:
         'Line & Iba summarises hair care and smoothing, cut and style, colour, bridal hair, nails and makeup services on one page and discusses them in detail at the salon; every treatment begins with a hair analysis.',
+      parking: 'The salon does not have its own car park; parking is available nearby.',
       benefitsLabel: 'Services Provided',
       detailLink: 'View service details',
       care: {
@@ -1054,7 +1068,10 @@ function ServicesStrip({
         <div className="section-heading js-reveal">
           <p className="eyebrow">{t.services.eyebrow}</p>
           <h2>{t.services.title}</h2>
-          <p>{t.services.intro}</p>
+          <p>
+            {t.services.intro}
+            {showCare && t.services.parking && <> {t.services.parking}</>}
+          </p>
         </div>
         {showCare && (
           <article className="care-service js-reveal">
@@ -1078,6 +1095,11 @@ function ServicesStrip({
               <h3>{item.title}</h3>
               <p>
                 {item.body}
+                {showCare && item.collection && (
+                  <>{' '}{item.collection.lead}<a className="service-card__link" href={item.collection.href} onClick={nav('/koleksiyon')}>
+                    {item.collection.label}
+                  </a>{item.collection.suffix}</>
+                )}
                 {!showCare && (
                   <>{' '}<a className="service-card__link" href={`/hizmetler#${serviceAnchors[index]}`}>
                     {t.services.detailLink}
@@ -1112,8 +1134,58 @@ function ServicesPage({
   lang: Lang
   nav: (href: string) => (event: React.MouseEvent<HTMLAnchorElement>) => void
 }) {
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Service',
+        name: 'Renklendirme',
+        serviceType: 'Saç Renklendirme',
+        provider: { '@id': 'https://www.lineiba.com/#hairsalon' },
+        areaServed: 'Caddebostan, Kadıköy',
+        description: 'Işıltı, tonlama ve doğal geçişleri kontrollü teknikle uygulayan renklendirme hizmeti.',
+      },
+      {
+        '@type': 'Service',
+        name: 'Gelin Başı',
+        serviceType: 'Gelin Saçı ve Makyajı',
+        provider: { '@id': 'https://www.lineiba.com/#hairsalon' },
+        areaServed: 'Caddebostan, Kadıköy',
+        description: 'Gelin saçı provası, gelin topuzu, gelin makyajı ve makyaj uyumunu tek pakette kapsayan hizmet.',
+      },
+      {
+        '@type': 'Service',
+        name: 'Tırnak & Makyaj',
+        serviceType: 'Manikür Pedikür',
+        provider: { '@id': 'https://www.lineiba.com/#hairsalon' },
+        areaServed: 'Caddebostan, Kadıköy',
+        description: 'Manikür, pedikür ve kalıcı oje; özel gün makyajı ve kirpik uygulaması tamamlayıcı servis olarak sunulur.',
+      },
+      {
+        '@type': 'Service',
+        name: 'Saç Bakımı & Düzleştirme',
+        serviceType: 'Saç Bakımı',
+        provider: { '@id': 'https://www.lineiba.com/#hairsalon' },
+        areaServed: 'Caddebostan, Kadıköy',
+        description: 'Yıpranmış ve dalgalı saçlar için saçın mevcut durumuna göre planlanan bakım ve şekillendirme hizmeti.',
+      },
+      {
+        '@type': 'Service',
+        name: 'Kesim & Stil',
+        serviceType: 'Saç Kesimi',
+        provider: { '@id': 'https://www.lineiba.com/#hairsalon' },
+        areaServed: 'Caddebostan, Kadıköy',
+        description: 'Form, yüz hattı ve günlük kullanım rutini üzerinden planlanan, kıvırcık ve dalgalı saçların doğal dokusunu koruyan kesim hizmeti.',
+      },
+    ],
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <PageHero title={t.services.title} image={images.servicesHero} />
       <ServicesStrip t={t} nav={nav} showCare />
       <section className="featured-service section-pad">
