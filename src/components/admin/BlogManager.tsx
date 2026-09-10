@@ -85,8 +85,17 @@ export function BlogManager({ client, session }: { client: SupabaseClient; sessi
   const remove = async () => {
     if (!selectedId || !window.confirm('Bu blog yazısı kalıcı olarak silinsin mi?')) return
     setBusy(true); setError('')
-    try { await deleteBlogPost(client, selectedId); createNew(); await refresh() }
-    catch { setError('Yazı silinemedi.') }
+    try {
+      const savedPost = posts.find((post) => post.id === selectedId)
+      await deleteBlogPost(client, selectedId, [
+        savedPost?.cover_image_url,
+        savedPost?.og_image_url,
+        draft.cover_image_url,
+        draft.og_image_url,
+      ])
+      createNew()
+      await refresh()
+    } catch { setError('Yazı ve medya silme işlemi tamamlanamadı. Listeyi yenileyip tekrar deneyin.') }
     finally { setBusy(false) }
   }
 

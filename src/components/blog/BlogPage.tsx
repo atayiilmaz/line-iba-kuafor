@@ -12,47 +12,72 @@ const copy = {
     intro: 'Bakım ritüelleri, renk rehberleri ve salon profesyonellerinden zamansız öneriler.',
     all: 'Tüm Yazılar', read: 'Yazıyı Oku', minutes: 'dk okuma', empty: 'Henüz yayınlanmış bir yazı bulunmuyor.',
     error: 'Yazılar şu anda yüklenemiyor.', back: 'Tüm yazılara dön', notFound: 'Bu yazı bulunamadı.',
-    share: 'Bu rehberi paylaş', appointment: 'Saçınız için kişisel bir plan oluşturalım.', book: 'Randevu Al',
+    share: 'Bu rehberi paylaş', appointment: 'Saçınız için kişisel bir plan oluşturalım.', book: 'Randevu Al', previous: 'Önceki', next: 'Sonraki',
   },
   en: {
     eyebrow: 'Line & İba Journal', title: 'Notes that speak the language of hair.',
     intro: 'Care rituals, colour guides and timeless advice from salon professionals.',
     all: 'All Stories', read: 'Read Story', minutes: 'min read', empty: 'There are no published stories yet.',
     error: 'Stories cannot be loaded right now.', back: 'Back to all stories', notFound: 'This story could not be found.',
-    share: 'Share this guide', appointment: 'Let us create a personal plan for your hair.', book: 'Book Now',
+    share: 'Share this guide', appointment: 'Let us create a personal plan for your hair.', book: 'Book Now', previous: 'Previous', next: 'Next',
   },
 } as const
+
+const BLOG_PAGE_SIZE = 7
 
 export function BlogPage({ lang, nav }: { lang: Lang; nav: NavHandler }) {
   const t = copy[lang]
   const client = useMemo(() => getSupabaseClient(), [])
   const [posts, setPosts] = useState<BlogPost[]>([])
+  const [totalCount, setTotalCount] = useState(0)
+  const [page, setPage] = useState(() => getInitialPage())
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
   useEffect(() => applyMeta({
-    title: lang === 'tr' ? 'Saç Bakımı ve Stil Rehberi | Line & İba Blog' : 'Hair Care & Style Journal | Line & İba',
+    title: `${lang === 'tr' ? 'Saç Bakımı ve Stil Rehberi' : 'Hair Care & Style Journal'}${page > 1 ? ` · ${lang === 'tr' ? 'Sayfa' : 'Page'} ${page}` : ''} | Line & İba Blog`,
     description: lang === 'tr' ? 'Saç bakımı, kesim, renklendirme ve stil hakkında Line & İba Kuaför profesyonellerinden güncel rehberler ve uzman önerileri.' : 'Current guides and professional advice on hair care, cuts, colour and styling from Line & İba.',
-    canonical: 'https://www.lineiba.com/blog',
+    canonical: `https://www.lineiba.com/blog${page > 1 ? `?sayfa=${page}` : ''}`,
     type: 'website',
-  }), [lang])
+  }), [lang, page])
 
   useEffect(() => {
     let active = true
     if (!client) { setLoading(false); setError(true); return }
     setLoading(true); setError(false)
-    void getPublishedPosts(client, lang).then((items) => {
-      if (active) setPosts(items)
+    void getPublishedPosts(client, lang, page, BLOG_PAGE_SIZE).then((result) => {
+      if (!active) return
+      setPosts(result.posts)
+      setTotalCount(result.count)
+      const lastPage = Math.max(1, Math.ceil(result.count / BLOG_PAGE_SIZE))
+      if (page > lastPage) setPage(lastPage)
     }).catch(() => {
       if (active) setError(true)
     }).finally(() => {
       if (active) setLoading(false)
     })
     return () => { active = false }
-  }, [client, lang])
+  }, [client, lang, page])
+
+  useEffect(() => {
+    const onPopState = () => setPage(getInitialPage())
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
 
   const featured = posts.find((post) => post.is_featured) ?? posts[0]
   const remaining = posts.filter((post) => post.id !== featured?.id)
+  const totalPages = Math.max(1, Math.ceil(totalCount / BLOG_PAGE_SIZE))
+
+  const changePage = (nextPage: number) => {
+    if (nextPage === page || nextPage < 1 || nextPage > totalPages) return
+    const url = new URL(window.location.href)
+    if (nextPage === 1) url.searchParams.delete('sayfa')
+    else url.searchParams.set('sayfa', String(nextPage))
+    window.history.pushState(null, '', `${url.pathname}${url.search}`)
+    setPage(nextPage)
+    window.requestAnimationFrame(() => document.getElementById('blog-feed-title')?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+  }
 
   return <div className="blog-page">
     <section className="blog-masthead">
@@ -67,7 +92,7 @@ export function BlogPage({ lang, nav }: { lang: Lang; nav: NavHandler }) {
       <div className="container">
         <div className="blog-feed__head js-reveal">
           <h2 id="blog-feed-title">{t.all}</h2>
-          <span>{String(posts.length).padStart(2, '0')}</span>
+          <span>{String(totalCount).padStart(2, '0')}</span>
         </div>
         {loading && <BlogSkeleton />}
         {!loading && error && <p className="blog-state" role="alert">{t.error}</p>}
@@ -84,13 +109,25 @@ export function BlogPage({ lang, nav }: { lang: Lang; nav: NavHandler }) {
         {remaining.length > 0 && <div className="blog-grid">
           {remaining.map((post, index) => <article className="blog-card blog-data-in" key={post.id}>
             <a className="blog-card__image" href={`/blog/${post.slug}`} onClick={nav(`/blog/${post.slug}`)}><BlogImage post={post} /></a>
-            <div className="blog-card__index">{String(index + 2).padStart(2, '0')}</div>
+            <div className="blog-card__index">{String((page - 1) * BLOG_PAGE_SIZE + index + 2).padStart(2, '0')}</div>
             <PostMeta post={post} lang={lang} minutesLabel={t.minutes} />
             <h3><a href={`/blog/${post.slug}`} onClick={nav(`/blog/${post.slug}`)}>{post.title}</a></h3>
             <p>{post.excerpt}</p>
             <a className="blog-link" href={`/blog/${post.slug}`} onClick={nav(`/blog/${post.slug}`)}>{t.read}<span>↗</span></a>
           </article>)}
         </div>}
+        {!loading && !error && totalPages > 1 && <nav className="blog-pagination" aria-label={lang === 'tr' ? 'Blog sayfaları' : 'Blog pages'}>
+          <button type="button" disabled={page === 1} onClick={() => changePage(page - 1)}>← {t.previous}</button>
+          <div>{Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => <button
+            type="button"
+            className={pageNumber === page ? 'is-active' : ''}
+            aria-current={pageNumber === page ? 'page' : undefined}
+            aria-label={`${lang === 'tr' ? 'Sayfa' : 'Page'} ${pageNumber}`}
+            onClick={() => changePage(pageNumber)}
+            key={pageNumber}
+          >{String(pageNumber).padStart(2, '0')}</button>)}</div>
+          <button type="button" disabled={page === totalPages} onClick={() => changePage(page + 1)}>{t.next} →</button>
+        </nav>}
       </div>
     </section>
   </div>
@@ -212,4 +249,10 @@ async function sharePost(post: BlogPost) {
 
 function BlogSkeleton() {
   return <div className="blog-skeleton" aria-busy="true" aria-label="Yükleniyor"><i /><div><i /><i /><i /></div></div>
+}
+
+function getInitialPage() {
+  if (typeof window === 'undefined') return 1
+  const value = Number(new URLSearchParams(window.location.search).get('sayfa'))
+  return Number.isInteger(value) && value > 0 ? value : 1
 }

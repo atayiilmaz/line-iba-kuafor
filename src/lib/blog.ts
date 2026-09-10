@@ -46,16 +46,19 @@ export function slugify(value: string) {
     .slice(0, 120)
 }
 
-export async function getPublishedPosts(client: SupabaseClient, language: BlogLanguage) {
-  const { data, error } = await client
+export async function getPublishedPosts(client: SupabaseClient, language: BlogLanguage, page = 1, pageSize = 7) {
+  const from = Math.max(0, page - 1) * pageSize
+  const to = from + pageSize - 1
+  const { data, error, count } = await client
     .from('blogs')
-    .select(postColumns)
+    .select(postColumns, { count: 'exact' })
     .eq('status', 'published')
     .eq('language', language)
     .order('is_featured', { ascending: false })
     .order('published_at', { ascending: false })
+    .range(from, to)
   if (error) throw error
-  return (data ?? []) as unknown as BlogPost[]
+  return { posts: (data ?? []) as unknown as BlogPost[], count: count ?? 0 }
 }
 
 export async function getPublishedPost(client: SupabaseClient, slug: string) {
@@ -86,17 +89,42 @@ export async function saveBlogPost(client: SupabaseClient, userId: string, id: s
   return data as unknown as BlogPost
 }
 
-export async function deleteBlogPost(client: SupabaseClient, id: string) {
+export async function deleteBlogPost(client: SupabaseClient, id: string, mediaUrls: Array<string | null | undefined> = []) {
+  const candidatePaths = [...new Set(mediaUrls.map((url) => getManagedMediaPath(client, url)).filter((path): path is string => Boolean(path)))]
+  const { data: otherPosts, error: referenceError } = await client
+    .from('blogs')
+    .select('cover_image_url,og_image_url')
+    .neq('id', id)
+  if (referenceError) throw referenceError
+  const pathsUsedElsewhere = new Set((otherPosts ?? [])
+    .flatMap((post) => [post.cover_image_url, post.og_image_url])
+    .map((url) => getManagedMediaPath(client, url))
+    .filter((path): path is string => Boolean(path)))
+  const paths = candidatePaths.filter((path) => !pathsUsedElsewhere.has(path))
+  if (paths.length) {
+    const { error: storageError } = await client.storage.from('blog-media').remove(paths)
+    if (storageError) throw storageError
+  }
   const { error } = await client.from('blogs').delete().eq('id', id)
   if (error) throw error
 }
 
 export async function uploadBlogImage(client: SupabaseClient, userId: string, file: File) {
-  const extension = file.name.split('.').pop()?.toLowerCase() || 'webp'
+  const extensionByMime: Record<string, string> = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/avif': 'avif' }
+  const extension = extensionByMime[file.type] ?? 'webp'
   const path = `${userId}/${crypto.randomUUID()}.${extension}`
   const { error } = await client.storage.from('blog-media').upload(path, file, { cacheControl: '31536000' })
   if (error) throw error
   return client.storage.from('blog-media').getPublicUrl(path).data.publicUrl
+}
+
+function getManagedMediaPath(client: SupabaseClient, value: string | null | undefined) {
+  if (!value) return null
+  const publicRoot = client.storage.from('blog-media').getPublicUrl('').data.publicUrl.replace(/\/$/, '') + '/'
+  const withoutQuery = value.split('?')[0]
+  if (!withoutQuery.startsWith(publicRoot)) return null
+  const path = decodeURIComponent(withoutQuery.slice(publicRoot.length))
+  return /^[a-f0-9-]{36}\/[a-f0-9-]{36}\.[a-z0-9]{2,5}$/i.test(path) ? path : null
 }
 
 export function sanitizeBlogHtml(html: string) {
