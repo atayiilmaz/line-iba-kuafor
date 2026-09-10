@@ -3,10 +3,11 @@ import { gsap } from 'gsap'
 import { LanguageProvider, useLang } from './lib/i18n'
 import { brand, contactInfo, social, type Lang } from './data/site'
 import { BookingPage } from './components/booking/BookingPage'
+import { BlogDetailPage, BlogPage } from './components/blog/BlogPage'
 
 const AdminPage = lazy(() => import('./components/admin/AdminPage').then((module) => ({ default: module.AdminPage })))
 
-type RouteKey = 'home' | 'services' | 'about' | 'partner' | 'gallery' | 'contact' | 'booking' | 'privacy' | 'admin'
+type RouteKey = 'home' | 'services' | 'about' | 'partner' | 'gallery' | 'blog' | 'blogPost' | 'contact' | 'booking' | 'privacy' | 'admin'
 type PartnerKey = 'ahmet' | 'ergun' | 'ibrahim'
 
 type Partner = {
@@ -192,6 +193,8 @@ const copy: Record<Lang, Copy> = {
       about: 'Hakkımızda',
       partner: 'Ortaklar',
       gallery: 'Koleksiyon',
+      blog: 'Blog',
+      blogPost: 'Blog Yazısı',
       contact: 'İletişim',
       booking: 'Randevu',
       privacy: 'KVKK',
@@ -487,6 +490,8 @@ const copy: Record<Lang, Copy> = {
       about: 'About',
       partner: 'Partners',
       gallery: 'Collection',
+      blog: 'Journal',
+      blogPost: 'Journal Story',
       contact: 'Contact',
       booking: 'Booking',
       privacy: 'Privacy',
@@ -771,7 +776,7 @@ const copy: Record<Lang, Copy> = {
   },
 }
 
-const routeOrder: RouteKey[] = ['home', 'services', 'about', 'gallery', 'contact', 'booking', 'privacy', 'admin']
+const routeOrder: RouteKey[] = ['home', 'services', 'about', 'gallery', 'blog', 'contact', 'booking', 'privacy', 'admin']
 
 function App({ initialPath }: { initialPath?: string }) {
   return (
@@ -872,6 +877,8 @@ function LineIbaSite({ initialPath }: { initialPath?: string }) {
         {route.key === 'about' && <AboutPage t={t} nav={nav} />}
         {route.key === 'partner' && <PartnerPage t={t} partner={route.partner} nav={nav} />}
         {route.key === 'gallery' && <GalleryPage t={t} nav={nav} />}
+        {route.key === 'blog' && <BlogPage lang={lang} nav={nav} />}
+        {route.key === 'blogPost' && <BlogDetailPage slug={route.slug} lang={lang} nav={nav} />}
         {route.key === 'contact' && <ContactPage t={t} nav={nav} />}
         {route.key === 'booking' && <BookingPage lang={lang} navigate={nav} />}
         {route.key === 'privacy' && <PrivacyPage lang={lang} />}
@@ -905,6 +912,7 @@ function SiteHeader({
     ['/hizmetler', t.nav.services],
     ['/hakkimizda', t.nav.about],
     ['/koleksiyon', t.nav.gallery],
+    ['/blog', t.nav.blog],
     ['/iletisim', t.nav.contact],
   ] as const
   const links = [...primaryLinks, ['/randevu', t.book] as const]
@@ -1659,11 +1667,13 @@ function SiteFooter({
           { label: 'Felsefemiz', href: '/hakkimizda' },
           { label: 'Hizmetler', href: '/hizmetler' },
           { label: 'Koleksiyon', href: '/koleksiyon' },
+          { label: 'Blog', href: '/blog' },
         ]
       : [
           { label: 'Philosophy', href: '/hakkimizda' },
           { label: 'Services', href: '/hizmetler' },
           { label: 'Collection', href: '/koleksiyon' },
+          { label: 'Journal', href: '/blog' },
         ]
   const footerContact = [
     { label: t.book, href: '/randevu' },
@@ -1775,17 +1785,19 @@ function PrivacyPage({ lang }: { lang: Lang }) {
   )
 }
 
-function getRoute(path: string, partners: Partner[]): { key: RouteKey; partner: Partner } | { key: Exclude<RouteKey, 'partner'> } {
+function getRoute(path: string, partners: Partner[]): { key: 'partner'; partner: Partner } | { key: 'blogPost'; slug: string } | { key: Exclude<RouteKey, 'partner' | 'blogPost'> } {
   const clean = path.replace(/\/$/, '') || '/'
   const partner = partners.find((item) => clean === `/hakkimizda/${item.slug}`)
   if (partner) return { key: 'partner', partner }
   if (clean === '/hizmetler') return { key: 'services' }
   if (clean === '/hakkimizda') return { key: 'about' }
   if (clean === '/koleksiyon') return { key: 'gallery' }
+  if (clean === '/blog') return { key: 'blog' }
+  if (clean.startsWith('/blog/') && clean.slice(6)) return { key: 'blogPost', slug: clean.slice(6) }
   if (clean === '/iletisim') return { key: 'contact' }
   if (clean === '/randevu') return { key: 'booking' }
   if (clean === '/kvkk') return { key: 'privacy' }
-  if (clean === '/yonetim' || clean === '/yonetim/randevular') return { key: 'admin' }
+  if (clean === '/yonetim' || clean === '/yonetim/randevular' || clean === '/yonetim/blog') return { key: 'admin' }
   if (!routeOrder.includes(clean.slice(1) as RouteKey)) return { key: 'home' }
   return { key: 'home' }
 }

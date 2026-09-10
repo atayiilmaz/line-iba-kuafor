@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState, type FormEvent } from 'react
 import type { Session } from '@supabase/supabase-js'
 import { adminAction, adminBookings, BookingApiError } from '../../lib/booking'
 import { getSupabaseClient } from '../../lib/supabaseClient'
+import { BlogManager } from './BlogManager'
 import './AdminPage.css'
 
 type CalendarEntry = { id: string; start_at: string; staff_code: string; kind: 'appointment' | 'block'; status: 'active' | 'released'; reason: string | null; created_at: string }
@@ -37,6 +38,13 @@ export function AdminPage() {
   const [error, setError] = useState('')
   const [accessDenied, setAccessDenied] = useState(false)
   const [showManual, setShowManual] = useState(false)
+  const [section, setSection] = useState<'appointments' | 'blogs'>(() => typeof window !== 'undefined' && window.location.pathname === '/yonetim/blog' ? 'blogs' : 'appointments')
+
+  const openSection = (next: 'appointments' | 'blogs') => (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault()
+    window.history.pushState(null, '', next === 'blogs' ? '/yonetim/blog' : '/yonetim/randevular')
+    setSection(next)
+  }
 
   useEffect(() => {
     if (!client) { setChecking(false); return }
@@ -122,6 +130,15 @@ export function AdminPage() {
 
   if (!data) return <AdminLoading label="Yetki ve randevular kontrol ediliyor" />
 
+  if (section === 'blogs') return <main className="admin-page">
+    <header className="admin-head">
+      <div><p className="eyebrow">Line &amp; İba Kuaför</p><h1>Blog</h1><p>{data.admin.display_name || session.user.email}</p></div>
+      <div><a className="button" href="/blog">Blogu Gör</a><button className="button button--dark" onClick={() => void client.auth.signOut()}>Çıkış</button></div>
+    </header>
+    <AdminSectionNav section={section} openSection={openSection} />
+    <BlogManager client={client} session={session} />
+  </main>
+
   const appointmentByEntry = new Map(data?.appointments.map((appointment) => [appointment.calendar_entry_id, appointment]) ?? [])
   const notificationByAppointment = new Map(data?.notifications.map((notification) => [notification.appointment_id, notification]) ?? [])
   const activeEntries = data?.entries.filter((entry) => entry.status === 'active') ?? []
@@ -131,6 +148,7 @@ export function AdminPage() {
       <div><p className="eyebrow">Line &amp; İba Kuaför</p><h1>Randevular</h1><p>{data?.admin.display_name || session.user.email}</p></div>
       <div><a className="button" href="/">Siteyi Gör</a><button className="button button--dark" onClick={() => void client.auth.signOut()}>Çıkış</button></div>
     </header>
+    <AdminSectionNav section={section} openSection={openSection} />
     <section className="admin-toolbar">
       <label className="admin-field"><span>Takvim Günü</span><input type="date" value={date} onChange={(event) => { setData(null); setDate(event.target.value) }} /></label>
       <button className="button" onClick={() => void refresh()} disabled={loading}>{loading ? 'Yükleniyor…' : 'Yenile'}</button>
@@ -173,6 +191,13 @@ export function AdminPage() {
       </aside>
     </section>
   </main>
+}
+
+function AdminSectionNav({ section, openSection }: { section: 'appointments' | 'blogs'; openSection: (next: 'appointments' | 'blogs') => (event: React.MouseEvent<HTMLAnchorElement>) => void }) {
+  return <nav className="admin-section-nav" aria-label="Yönetim bölümleri">
+    <a className={section === 'appointments' ? 'is-active' : ''} href="/yonetim/randevular" onClick={openSection('appointments')}>Randevular</a>
+    <a className={section === 'blogs' ? 'is-active' : ''} href="/yonetim/blog" onClick={openSection('blogs')}>Blog Yönetimi</a>
+  </nav>
 }
 
 function AdminLoading({ label }: { label: string }) {

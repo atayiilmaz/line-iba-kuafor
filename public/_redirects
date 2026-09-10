@@ -4,6 +4,8 @@
 /hakkimizda/ergun-sarica           /hakkimizda/ergun-sarica/index.html           200
 /hakkimizda/ibrahim-yilmaz         /hakkimizda/ibrahim-yilmaz/index.html         200
 /koleksiyon                        /koleksiyon/index.html                        200
+/blog                              /blog/index.html                              200
+/blog/*                            /index.html                                   200
 /iletisim                          /iletisim/index.html                          200
 /randevu                           /randevu/index.html                           200
 /kvkk                              /kvkk/index.html                              200

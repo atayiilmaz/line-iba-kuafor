@@ -25,6 +25,8 @@
     { "source": "/hakkimizda/ergun-sarica", "destination": "/hakkimizda/ergun-sarica/index.html" },
     { "source": "/hakkimizda/ibrahim-yilmaz", "destination": "/hakkimizda/ibrahim-yilmaz/index.html" },
     { "source": "/koleksiyon", "destination": "/koleksiyon/index.html" },
+    { "source": "/blog", "destination": "/blog/index.html" },
+    { "source": "/blog/(.*)", "destination": "/index.html" },
     { "source": "/iletisim", "destination": "/iletisim/index.html" },
     { "source": "/randevu", "destination": "/randevu/index.html" },
     { "source": "/kvkk", "destination": "/kvkk/index.html" },
