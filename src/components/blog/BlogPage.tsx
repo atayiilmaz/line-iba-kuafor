@@ -44,13 +44,19 @@ export function BlogPage({ lang, nav }: { lang: Lang; nav: NavHandler }) {
   useEffect(() => {
     let active = true
     if (!client) { setLoading(false); setError(true); return }
-    setLoading(true); setError(false)
+    setLoading(true); setError(false); setPosts([])
     void getPublishedPosts(client, lang, page, BLOG_PAGE_SIZE).then((result) => {
       if (!active) return
       setPosts(result.posts)
       setTotalCount(result.count)
       const lastPage = Math.max(1, Math.ceil(result.count / BLOG_PAGE_SIZE))
-      if (page > lastPage) setPage(lastPage)
+      if (page > lastPage) {
+        const url = new URL(window.location.href)
+        if (lastPage === 1) url.searchParams.delete('sayfa')
+        else url.searchParams.set('sayfa', String(lastPage))
+        window.history.replaceState(null, '', `${url.pathname}${url.search}`)
+        setPage(lastPage)
+      }
     }).catch(() => {
       if (active) setError(true)
     }).finally(() => {

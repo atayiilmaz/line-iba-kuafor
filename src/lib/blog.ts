@@ -57,7 +57,16 @@ export async function getPublishedPosts(client: SupabaseClient, language: BlogLa
     .order('is_featured', { ascending: false })
     .order('published_at', { ascending: false })
     .range(from, to)
-  if (error) throw error
+  if (error) {
+    if (error.code !== 'PGRST103') throw error
+    const { count: exactCount, error: countError } = await client
+      .from('blogs')
+      .select('id', { count: 'exact', head: true })
+      .eq('status', 'published')
+      .eq('language', language)
+    if (countError) throw countError
+    return { posts: [], count: exactCount ?? 0 }
+  }
   return { posts: (data ?? []) as unknown as BlogPost[], count: count ?? 0 }
 }
 
