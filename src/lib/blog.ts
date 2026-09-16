@@ -139,13 +139,17 @@ function getManagedMediaPath(client: SupabaseClient, value: string | null | unde
 export function sanitizeBlogHtml(html: string) {
   if (typeof document === 'undefined') return html.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
   const parsed = new DOMParser().parseFromString(html, 'text/html')
-  const allowed = new Set(['P', 'BR', 'H2', 'H3', 'H4', 'STRONG', 'EM', 'U', 'S', 'UL', 'OL', 'LI', 'BLOCKQUOTE', 'A'])
+  const allowed = new Set(['P', 'BR', 'H2', 'H3', 'H4', 'STRONG', 'EM', 'U', 'S', 'UL', 'OL', 'LI', 'BLOCKQUOTE', 'A', 'IMG'])
   for (const element of Array.from(parsed.body.querySelectorAll('*'))) {
     if (!allowed.has(element.tagName)) {
       element.replaceWith(...Array.from(element.childNodes))
       continue
     }
     const href = element.tagName === 'A' ? element.getAttribute('href') : null
+    const imageAttributes = element.tagName === 'IMG' ? {
+      src: element.getAttribute('src'),
+      alt: element.getAttribute('alt') ?? '',
+    } : null
     for (const attribute of Array.from(element.attributes)) element.removeAttribute(attribute.name)
     if (element.tagName === 'A' && href && /^(https?:|mailto:|tel:|\/)/i.test(href)) {
       element.setAttribute('href', href)
@@ -153,6 +157,14 @@ export function sanitizeBlogHtml(html: string) {
         element.setAttribute('target', '_blank')
         element.setAttribute('rel', 'noopener noreferrer')
       }
+    }
+    if (imageAttributes?.src && /^(https?:\/\/www\.lineiba\.com\/assets\/|\/assets\/)/i.test(imageAttributes.src)) {
+      element.setAttribute('src', imageAttributes.src)
+      element.setAttribute('alt', imageAttributes.alt)
+      element.setAttribute('loading', 'lazy')
+      element.setAttribute('decoding', 'async')
+    } else if (element.tagName === 'IMG') {
+      element.remove()
     }
   }
   return parsed.body.innerHTML
